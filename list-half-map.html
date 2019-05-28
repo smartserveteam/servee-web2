@@ -170,20 +170,25 @@
                     <div class="col-lg-7 col-md-12">
                         <div class="form-group filter-group">
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <!-- <div class="col-md-6 col-12">
                                     <input type="text" class="form-control filter-input" id="search-filter" name="search-bar" placeholder="I'm Looking for......">
+                                </div> -->
+                                <div class="col-md-6  col-12">
+                                    <select class="filter-input" id="option-select" style="display: none;">
+                                        <option>Warsaw</option>
+                                        <option>New York</option>
+                                        <option>Paris</option>
+                                        <option>London</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6  col-12">
-                                    <input type="text" class="form-control filter-input" id="location-filter" name="search-bar" placeholder="Location">
-                                </div>
-                                <div class="col-md-12  col-12">
                                     <select class="filter-input" id="option-select" style="display: none;">
-                                        <option>Select Categories</option>
-                                        <option>Art's</option>
-                                        <option>Health</option>
-                                        <option>Hotels</option>
-                                        <option>Real Estate</option>
-                                        <option>Rentals</option>
+                                        <option>Plumbers</option>
+                                        <option>Movers</option>
+                                        <option>Home Cleaners</option>
+                                        <option>Electricians</option>
+                                        <option>Wedding Planners</option>
+                                        <option>Fitness Coaches</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6  col-12">
@@ -194,17 +199,11 @@
                                                     <div class="filter-checkbox">
                                                         <p>Sort By Features</p>
                                                         <li><input id="check-a" type="checkbox" name="check">
-                                                            <label for="check-a">Open Now</label></li>
+                                                            <label for="check-a">Available Now</label></li>
                                                         <li> <input id="check-b" type="checkbox" name="check">
                                                             <label for="check-b">Near me</label></li>
                                                         <li><input id="check-c" type="checkbox" name="check">
                                                             <label for="check-c">Child Friendly</label></li>
-                                                        <li><input id="check-d" type="checkbox" name="check">
-                                                            <label for="check-d">Free Parking</label></li>
-                                                        <li><input id="check-f" type="checkbox" name="check">
-                                                            <label for="check-f">Events</label></li>
-                                                        <li><input id="check-e" type="checkbox" name="check">
-                                                            <label for="check-e">Free Wifi</label></li>
                                                     </div>
                                                     <div class="filter-checkbox">
                                                         <p>Sort By Ratings</p>
@@ -249,7 +248,7 @@
                                                             </div>
                                                         </label>
                                                     </div>
-                                                    <div class="filter-checkbox">
+                                                    <!-- <div class="filter-checkbox">
                                                         <p>Sort By tags</p>
                                                         <input id="check-ab" type="checkbox" name="check">
                                                         <label for="check-ab">Hotel</label>
@@ -259,7 +258,7 @@
                                                         <label for="check-cd">sports</label>
                                                         <input id="check-df" type="checkbox" name="check">
                                                         <label for="check-df">travel </label>
-                                                    </div>
+                                                    </div> -->
                                                 </ul>
                                             </li>
                                         </ul>
@@ -299,7 +298,7 @@
                                                     <span class="save-btn"><i class="icofont-heart"></i></span>
                                                 </div>
                                                 <div class="trending-title-box">
-                                                    <h4>Four Seasons Resort</h4>
+                                                    <h4>Hydraulic Warszawa</h4>
                                                     <div class="customer-review">
                                                         <div class="rating-summary float-left">
                                                             <div class="rating-result" title="60%">
@@ -307,7 +306,7 @@
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
-                                                                    <li><i class="ion-android-star-half"></i></li>
+                                                                    <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star-half"></i></li>
                                                                 </ul>
                                                             </div>
@@ -318,19 +317,20 @@
                                                     </div>
                                                     <ul class="trending-address">
                                                         <li><i class="ion-ios-location"></i>
-                                                            <p>4210 Khale Street,Florence,USA</p>
+                                                            <p>Borowej Góry 7, Warszawa Bemowo</p>
+                                                        </li>
                                                         </li>
                                                         <li><i class="ion-ios-telephone"></i>
-                                                            <p>+843-600-2040</p>
+                                                            <p>+48 537 461 306</p>
                                                         </li>
                                                         <li><i class="ion-android-globe"></i>
-                                                            <p>www.laresorta.com</p>
+                                                            <p><a href="http://www.pogotowie-hydrauliczne24.pl" target="_blank">www.pogotowie-hydrauliczne24.pl</a></p>
                                                         </li>
                                                     </ul>
                                                     <div class="trending-bottom mar-top-15 pad-bot-30">
                                                         <div class="trend-left float-left">
-                                                            <span class="round-bg pink"><i class="icofont-hotel"></i></span>
-                                                            <p><a href="#">Hotel</a></p>
+                                                            <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                            <p><a href="#">Plumbers</a></p>
 
                                                         </div>
                                                         <div class="trend-right float-right">
@@ -345,12 +345,12 @@
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="trending-place-item">
                                                 <div class="trending-img">
-                                                    <img src="images/category/places/cafe.jpg" alt="#">
+                                                    <img src="images/category/places/plumber.jpg" alt="#">
                                                     <span class="trending-rating-pink">9</span>
                                                     <span class="save-btn"><i class="icofont-heart"></i></span>
                                                 </div>
                                                 <div class="trending-title-box">
-                                                    <h4>Cafe Intermezzo</h4>
+                                                    <h4>Plumber Warsaw Ochota</h4>
                                                     <div class="customer-review">
                                                         <div class="rating-summary float-left">
                                                             <div class="rating-result" title="60%">
@@ -358,7 +358,7 @@
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
-                                                                    <li><i class="ion-android-star-half"></i></li>
+                                                                    <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star-half"></i></li>
                                                                 </ul>
                                                             </div>
@@ -382,8 +382,8 @@
 
                                                     <div class="trending-bottom mar-top-15 pad-bot-30">
                                                         <div class="trend-left float-left">
-                                                            <span class="round-bg green"><i class="icofont-tea"></i></span>
-                                                            <p><a href="#">Cafe</a></p>
+                                                            <span class="round-bg green"><i class="icofont-tools-alt-2"></i></span>
+                                                            <p><a href="#">Plumbers</a></p>
                                                         </div>
 
                                                         <div class="trend-right float-right">
@@ -403,7 +403,7 @@
                                                     <span class="save-btn"><i class="icofont-heart"></i></span>
                                                 </div>
                                                 <div class="trending-title-box">
-                                                    <h4>Lagoon Theme Park</h4>
+                                                    <h4>Pogotowie Hydrauliczne</h4>
                                                     <div class="customer-review">
                                                         <div class="rating-summary float-left">
                                                             <div class="rating-result" title="60%">
@@ -411,7 +411,7 @@
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
-                                                                    <li><i class="ion-android-star-half"></i></li>
+                                                                    <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star-half"></i></li>
                                                                 </ul>
                                                             </div>
@@ -435,8 +435,8 @@
 
                                                     <div class="trending-bottom mar-top-15 pad-bot-30">
                                                         <div class="trend-left float-left">
-                                                            <span class="round-bg red"><i class="icofont-travelling"></i></span>
-                                                            <p><a href="#">Travel</a></p>
+                                                            <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                            <p><a href="#">Plumbers</a></p>
                                                         </div>
                                                         <div class="trend-right float-right">
                                                             <div class="trend-open"><i class="ion-clock"></i>
@@ -455,7 +455,7 @@
                                                     <span class="save-btn"><i class="icofont-heart"></i></span>
                                                 </div>
                                                 <div class="trending-title-box">
-                                                    <h4>The Katikies</h4>
+                                                    <h4>Pomoc Hydrauliczna</h4>
                                                     <div class="customer-review">
                                                         <div class="rating-summary float-left">
                                                             <div class="rating-result" title="60%">
@@ -463,7 +463,7 @@
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
-                                                                    <li><i class="ion-android-star-half"></i></li>
+                                                                    <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star-half"></i></li>
                                                                 </ul>
                                                             </div>
@@ -487,8 +487,8 @@
 
                                                     <div class="trending-bottom mar-top-15 pad-bot-30">
                                                         <div class="trend-left float-left">
-                                                            <span class="round-bg pink"><i class="icofont-hotel"></i></span>
-                                                            <p><a href="#">Hotel</a></p>
+                                                            <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                            <p><a href="#">Plumbers</a></p>
 
                                                         </div>
                                                         <div class="trend-right float-right">
@@ -508,7 +508,7 @@
                                                     <span class="save-btn"><i class="icofont-heart"></i></span>
                                                 </div>
                                                 <div class="trending-title-box">
-                                                    <h4>Genji Restaurant</h4>
+                                                    <h4>Hydraulik Warzsawa Wola</h4>
                                                     <div class="customer-review">
                                                         <div class="rating-summary float-left">
                                                             <div class="rating-result" title="60%">
@@ -538,8 +538,8 @@
                                                     </ul>
                                                     <div class="trending-bottom mar-top-15 pad-bot-30">
                                                         <div class="trend-left float-left">
-                                                            <span class="round-bg green"><i class="icofont-fast-food"></i></span>
-                                                            <p><a href="#">Restaurant</a></p>
+                                                            <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                            <p><a href="#">Plumbers</a></p>
                                                         </div>
                                                         <div class="trend-right float-right">
                                                             <div class="trend-open"><i class="ion-clock"></i>
@@ -558,16 +558,16 @@
                                                     <span class="save-btn"><i class="icofont-heart"></i></span>
                                                 </div>
                                                 <div class="trending-title-box">
-                                                    <h4>The Straling</h4>
+                                                    <h4>Udrażnianie Rur Warszawa</h4>
                                                     <div class="customer-review">
                                                         <div class="rating-summary float-left">
                                                             <div class="rating-result" title="60%">
                                                                 <ul class="product-rating">
                                                                     <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star"></i></li>
-                                                                    <li><i class="ion-android-star"></i></li>
                                                                     <li><i class="ion-android-star-half"></i></li>
-                                                                    <li><i class="ion-android-star-half"></i></li>
+                                                                    <li><i class="ion-android-star-outline"></i></li>
+                                                                    <li><i class="ion-android-star-outline"></i></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -588,8 +588,8 @@
                                                     </ul>
                                                     <div class="trending-bottom mar-top-15 pad-bot-30">
                                                         <div class="trend-left float-left">
-                                                            <span class="round-bg green"><i class="ion-ios-cart"></i></span>
-                                                            <p><a href="#">Shop</a></p>
+                                                            <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                            <p><a href="#">Plumbers</a></p>
                                                         </div>
                                                         <div class="trend-right float-right">
                                                             <div class="trend-closed">
@@ -613,7 +613,7 @@
                                         </div>
                                         <div class="col-md-6 no-pad-lr">
                                             <div class="trending-title-box">
-                                                <h4>Four Seasons Resort</h4>
+                                                <h4>Hydraulic Warszawa</h4>
                                                 <div class="customer-review">
                                                     <div class="rating-summary float-left">
                                                         <div class="rating-result" title="60%">
@@ -621,7 +621,7 @@
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
-                                                                <li><i class="ion-android-star-half"></i></li>
+                                                                <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star-half"></i></li>
                                                             </ul>
                                                         </div>
@@ -632,19 +632,20 @@
                                                 </div>
                                                 <ul class="trending-address">
                                                     <li><i class="ion-ios-location"></i>
-                                                        <p>4210 Khale Street,Florence,USA</p>
+                                                        <p>Borowej Góry 7, Warszawa Bemowo</p>
+                                                    </li>
                                                     </li>
                                                     <li><i class="ion-ios-telephone"></i>
-                                                        <p>+843-600-2040</p>
+                                                        <p>+48 537 461 306</p>
                                                     </li>
                                                     <li><i class="ion-android-globe"></i>
-                                                        <p>www.laresorta.com</p>
+                                                        <p><a href="http://www.pogotowie-hydrauliczne24.pl" target="_blank">www.pogotowie-hydrauliczne24.pl</a></p>
                                                     </li>
                                                 </ul>
                                                 <div class="trending-bottom mar-top-15 pad-bot-30">
                                                     <div class="trend-left float-left">
-                                                        <span class="round-bg pink"><i class="icofont-hotel"></i></span>
-                                                        <p><a href="#">Hotel</a></p>
+                                                        <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                        <p><a href="#">Plumbers</a></p>
 
                                                     </div>
                                                     <div class="trend-right float-right">
@@ -659,14 +660,14 @@
                                     <div class="row trending-place-item">
                                         <div class="col-md-6 no-pad-lr">
                                             <div class="trending-img">
-                                                <img src="images/category/places/cafe.jpg" alt="#">
+                                                <img src="images/category/places/plumber.jpg" alt="#">
                                                 <span class="trending-rating-pink">9</span>
                                                 <span class="save-btn"><i class="icofont-heart"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 no-pad-lr">
                                             <div class="trending-title-box">
-                                                <h4>Cafe Intermezzo</h4>
+                                                <h4>Plumber Warsaw Ochota</h4>
                                                 <div class="customer-review">
                                                     <div class="rating-summary float-left">
                                                         <div class="rating-result" title="60%">
@@ -674,7 +675,7 @@
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
-                                                                <li><i class="ion-android-star-half"></i></li>
+                                                                <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star-half"></i></li>
                                                             </ul>
                                                         </div>
@@ -698,8 +699,8 @@
 
                                                 <div class="trending-bottom mar-top-15 pad-bot-30">
                                                     <div class="trend-left float-left">
-                                                        <span class="round-bg green"><i class="icofont-tea"></i></span>
-                                                        <p><a href="#">Cafe</a></p>
+                                                        <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                        <p><a href="#">Plumbers</a></p>
                                                     </div>
 
                                                     <div class="trend-right float-right">
@@ -721,7 +722,7 @@
                                         </div>
                                         <div class="col-md-6 no-pad-lr">
                                             <div class="trending-title-box">
-                                                <h4>Lagoon Theme Park</h4>
+                                                <h4>Pogotowie Hydrauliczne</h4>
                                                 <div class="customer-review">
                                                     <div class="rating-summary float-left">
                                                         <div class="rating-result" title="60%">
@@ -729,7 +730,7 @@
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
-                                                                <li><i class="ion-android-star-half"></i></li>
+                                                                <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star-half"></i></li>
                                                             </ul>
                                                         </div>
@@ -753,8 +754,8 @@
 
                                                 <div class="trending-bottom mar-top-15 pad-bot-30">
                                                     <div class="trend-left float-left">
-                                                        <span class="round-bg red"><i class="icofont-travelling"></i></span>
-                                                        <p><a href="#">Travel</a></p>
+                                                        <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                        <p><a href="#">Plumbers</a></p>
                                                     </div>
                                                     <div class="trend-right float-right">
                                                         <div class="trend-open"><i class="ion-clock"></i>
@@ -775,7 +776,7 @@
                                         </div>
                                         <div class="col-md-6 no-pad-lr">
                                             <div class="trending-title-box">
-                                                <h4>The Katikies</h4>
+                                                <h4>Pomoc Hydrauliczna</h4>
                                                 <div class="customer-review">
                                                     <div class="rating-summary float-left">
                                                         <div class="rating-result" title="60%">
@@ -783,7 +784,7 @@
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star"></i></li>
-                                                                <li><i class="ion-android-star-half"></i></li>
+                                                                <li><i class="ion-android-star"></i></li>
                                                                 <li><i class="ion-android-star-half"></i></li>
                                                             </ul>
                                                         </div>
@@ -807,8 +808,8 @@
 
                                                 <div class="trending-bottom mar-top-15 pad-bot-30">
                                                     <div class="trend-left float-left">
-                                                        <span class="round-bg pink"><i class="icofont-hotel"></i></span>
-                                                        <p><a href="#">Hotel</a></p>
+                                                        <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                        <p><a href="#">Plumbers</a></p>
 
                                                     </div>
                                                     <div class="trend-right float-right">
