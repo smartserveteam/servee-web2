@@ -10,21 +10,28 @@
     <link rel="icon" type="image/png" href="#" />
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
-    <!-- Plugins CSS-->
+    <!-- Plugins CSS -->
     <link href="css/plugin.css" rel="stylesheet" />
     <!-- style CSS -->
     <link href="css/style.css" rel="stylesheet" />
-    <!--Demo CSS-->
-    <link href="demo/css/demo.css" rel="stylesheet" />
-
+    <!--color switcher css-->
+    <link rel="stylesheet" href="css/switcher/skin-purple.css" media="screen" id="style-colors" />
     <!-- Document Title -->
-    <title>Listagram - Directory Listing HTML Template</title>
+    <title>Servee.io</title>
 </head>
 
 <body>
-
+    <!--Preloader starts-->
+    <div class="preloader js-preloader">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    <!--Preloader ends-->
     <!--Page Wrapper starts-->
-    <div class="page-wrapper">
+    <div class="page-wrapper fixed-footer">
         <!--header starts-->
         <header class="header transparent scroll-hide">
             <!--Main Menu starts-->
@@ -85,7 +92,6 @@
                                                             <li><a href="single-listing-three.html">Single Listing three</a></li>
                                                             <li><a href="single-listing-four.html">Single Listing four</a></li>
                                                             <li><a href="single-listing-five.html">Single Listing five</a></li>
-
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -125,20 +131,22 @@
                                                     <li><a href="user-profile.html">User profile</a></li>
                                                     <li><a href="faq.html">FAQ</a></li>
                                                     <li><a href="invoice.html">invoice</a></li>
-
                                                 </ul>
                                             </li>
-
+                                            <li class="d-lg-none"><a class="btn v1" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a></li>
                                         </ul>
                                     </div>
                                 </nav>
                                 <div class="d-lg-none sm-right">
                                     <a href="#" class="mobile-bar js-menu-toggle">
-                                        <span class="ion-android-menu"></span>
+                                        <span class="ion-navicon"></span>
                                     </a>
                                 </div>
                                 <div class="add-list float-right">
-                                    <a class="btn v3 white" href="add-listing.html">Purchase Theme</a>
+                                    <a class="btn v6" href="index_pro.html">Businesses</a>
+                                </div>
+                                <div class="add-list float-right mar-right-5">
+                                    <a class="btn v6" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -159,504 +167,1215 @@
         </header>
         <!--Header ends-->
         <!--Hero section starts-->
-        <div class="hero v1 section-padding demo">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center mar-top-20">
-                        <div class="demo-header">
-                            <div class="middle-v t-center">
-                                <h2><span>Most Advanced &amp; Powerful</span><br> Directory Listing HTML Template</h2>
-                                <a href="home-v1.html" class="btn v3 white">Explore</a>
-                            </div>
+        <div class="video-area v1">
+            <div class="video-container">
+                <div class="overlay op-5"></div>
+                <div id="video-wrapper" style="background-image: url(images/header/video-bg.jpg)"> </div>
+                <!-- <a class="player" data-property="{videoURL:'https://youtu.be/GDGB68VD5DE'}"></a> -->
+                <a class="player" data-property="{videoURL:'https://youtu.be/HZOhgIrPH4s'}"></a>
+                <div class="container video-content">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h1 class="hero-title v2">
+                                What do you need?
+                            </h1>
+                            <p class="hero-desc v2">
+                                You can’t imagine what is waiting for you around your city
+                            </p>
+                        </div>
+                        <div class="col-md-12 text-center mar-top-20">
+                            <form class="hero__form v2 mar-bot-30" action="list-half-map.html">
+                                <div class="row">
+                                    <!-- <div class="col-lg-4 col-md-12">
+                                        <input class="hero__form-input custom-select" type="text" name="place-event" id="place-event" placeholder="What are you looking for?">
+                                    </div> -->
+                                    <div class="col-lg-4 col-md-12 mar-left-10 mar-right-50">
+                                        <select class="hero__form-input  custom-select">
+                                            <option>Select Location </option>
+                                            <option>Warsaw</option>
+                                            <option>New York</option>
+                                            <option>California</option>
+                                            <option>Washington</option>
+                                            <option>New Jersey</option>
+                                            <option>Los Angeles</option>
+                                            <option>Florida</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <select id="categories" class="hero__form-input  custom-select">
+                                            <option>Select Categories</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="submit_btn text-right md-left">
+                                            <button class="btn v3  mar-right-5" type="submit"><i class="ion-ios-search" aria-hidden="true"></i> Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="demo-img">
-                <ul>
-                    <li><img class="vert-img" src="demo/images/demo_1.jpg" alt="..."></li>
-                    <li><img class="vert-img" src="demo/images/demo_3.jpg" alt="..."></li>
-                    <li><img class="vert-img" src="demo/images/demo_2.jpg" alt="..."></li>
-                </ul>
             </div>
         </div>
         <!--Hero section ends-->
-        <!--Promo starts-->
-        <div class="demo-counter">
-            <div class="container">
-                <div class="row pb-0">
-                    <div class="col-lg-10 offset-lg-1 col-md-12 counter-wrapper">
-                        <div class="counter-circle">
-                        </div>
-                        <div class="counter-group">
-                            <div class="counter-single color-one  bdr-ripple-ani-btn green">
-                                <h6 class="counter">5</h6>
-                                <span>Home Pages</span>
-                            </div>
-                            <div class="counter-single color-two  bdr-ripple-ani-btn orange">
-                                <h6 class="counter">37</h6>
-
-                                <span>Pages Layout</span>
-                            </div>
-                            <div class="counter-single color-three  bdr-ripple-ani-btn blue">
-                                <h6 class="counter">45</h6>
-
-                                <span>UI Elements</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Promo ends-->
-        <!--demo page starts-->
-        <div class="demo-page-section">
+        <!--Promo Category starts-->
+        <div class="hero-catagory mar-top-30 section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center">
-                        <div class="section-title black">
-                            <h2>Home Pages</h2>
-                            <p>Choose a HomePage to create a stunning &amp; impressive Directory Listing site.More than 5 versions are available. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 text-center">
-                        <div class="single-home-page">
-                            <div class="demo-1">
-                                <a href="home-v1.html" target="_blank">
-                                    <img src="demo/images/home-v1.jpg" alt="..."></a>
-                            </div>
-                            <a href="home-v1.html" target="_blank" class="link-hov style2">Home v1</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="single-home-page">
-                            <div class="demo-1">
-                                <a href="home-v2.html" target="_blank">
-                                    <img src="demo/images/home-v2.jpg" alt="..."></a>
-                            </div>
-                            <a href="home-v2.html" target="_blank" class="link-hov style2">Home v2</a>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="single-home-page">
-                            <div class="demo-1">
-                                <a href="home-v3.html" target="_blank">
-                                    <img src="demo/images/home-v3.jpg" alt="..."></a>
-                            </div>
-                            <a href="home-v3.html" target="_blank" class="link-hov style2">Home v3</a>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="single-home-page">
-                            <div class="demo-1">
-                                <a href="home-v4.html" target="_blank">
-                                    <img src="demo/images/home-v4.jpg" alt="..."></a>
-                            </div>
-                            <a href="home-v4.html" target="_blank" class="link-hov style2">Home v4</a>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="single-home-page">
-                            <div class="demo-1">
-                                <a href="home-v5.html" target="_blank">
-                                    <img src="demo/images/home-v5.jpg" alt="..."></a>
-                            </div>
-                            <a href="home-v5.html" target="_blank" class="link-hov style2">Home v5</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="single-home-page">
-                            <div class="demo-1">
-                                <a href="#" target="_blank">
-                                    <img src="demo/images/dashboard.jpg" alt="..."></a>
-                                    <div class="coming-soon">Coming Soon</div>
-                            </div>
-                            <a href="" target="_blank" class="link-hov style2">Dashboard</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--demo page ends-->
-        <!--page section starts-->
-        <div class="list-details-section section-padding add_list pb-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2 text-center">
-                        <div class="section-title black">
-                            <h2>Inner Pages</h2>
-                            <p>Choose a Innerpage to start navigating Listagram. Build a strong & impressive websites using Listagram premade templates. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul class="nav nav-tabs list-details-tab mar-bot-20">
-                            <li class="nav-item active">
-                                <a data-toggle="tab" href="#filter-listing">Listing Filter Page</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a data-toggle="tab" href="#single-listing">Single Listing Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a data-toggle="tab" href="#others">Others</a>
-                            </li>
-                        </ul>
+                        <h2 class="section-title v1">Popular Services</h2>
                     </div>
                     <div class="col-md-12">
-                        <div class="tab-content mar-tb-30 add_list_content">
-                            <div class="tab-pane fade show active" id="filter-listing">
-                                <div class="row">
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="list-fullwidth.html" target="_blank"><img src="demo/images/list-fullwidth.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="list-fullwidth.html" target="_blank" class="link-hov style2">List fullwidth</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="list-fullwidth-map.html" target="_blank"><img src="demo/images/list-fullwidth-map.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="list-fullwidth-map.html" target="_blank" class="link-hov style2">List fullwidth map</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="list-left-sidebar.html" target="_blank"><img src="demo/images/list-left-sidebar.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="list-left-sidebar.html" target="_blank" class="link-hov style2">List left sidebar</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="list-right-sidebar.html" target="_blank"><img src="demo/images/list-right-sidebar.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="list-right-sidebar.html" target="_blank" class="link-hov style2">List right sidebar</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="list-half-map.html" target="_blank"><img src="demo/images/list-half-map.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="list-half-map.html" target="_blank" class="link-hov style2">List half map</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="grid-fullwidth.html" target="_blank"><img src="demo/images/grid-fullwidth.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="grid-fullwidth.html" target="_blank" class="link-hov style2">Grid fullwidth</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="grid-fullwidth-map.html" target="_blank"><img src="demo/images/grid-fullwidth-map.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="grid-fullwidth-map.html" target="_blank" class="link-hov style2">Grid fullwidth map</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="grid-left-sidebar.html" target="_blank"><img src="demo/images/grid-left-sidebar.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="grid-left-sidebar.html" target="_blank" class="link-hov style2">Grid left sidebar</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="grid-right-sidebar.html" target="_blank"><img src="demo/images/grid-right-sidebar.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="grid-right-sidebar.html" target="_blank" class="link-hov style2">Grid right sidebar</a>
-                                    </div>
-                                    <div class="col-md-4 text-center">
-                                        <div class="demo-list-page">
-                                            <a href="grid-half-map.html" target="_blank"><img src="demo/images/grid-half-map.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="grid-half-map.html" target="_blank" class="link-hov style2">Grid half map</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="single-listing">
-                                <div class="row">
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="single-listing-one.html" target="_blank"><img src="demo/images/single-list-one.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="single-listing-one.html" target="_blank" class="link-hov style2">Single listing one</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="single-listing-two.html" target="_blank"><img src="demo/images/single-list-two.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="single-listing-two.html" target="_blank" class="link-hov style2">Single listing two</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="single-listing-three.html" target="_blank"><img src="demo/images/single-list-three.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="single-listing-three.html" target="_blank" class="link-hov style2">Single listing three</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="single-listing-four.html" target="_blank"><img src="demo/images/single-list-four.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="single-listing-four.html" target="_blank" class="link-hov style2">Single listing four</a>
-                                    </div>
-                                    <div class="col-md-4 text-center">
-                                        <div class="demo-list-page">
-                                            <a href="single-listing-five.html" target="_blank"><img src="demo/images/single-list-five.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="single-listing-five.html" target="_blank" class="link-hov style2">Single listing five</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="others">
-                                <div class="row">
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="about.html"><img src="demo/images/about.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="about.html" target="_blank" class="link-hov style2">About us</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="contact.html"><img src="demo/images/xyz.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="contact.html" target="_blank" class="link-hov style2">Contact us</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="add-listing.html"><img src="demo/images/add-listing.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="add-listing.html" target="_blank" class="link-hov style2">Add Listing</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="booking.html"> <img src="demo/images/booking.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="booking.html" target="_blank" class="link-hov style2">Booking Page</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="booking-confirmation.html"><img src="demo/images/booking-confirm.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="booking-confirmation.html" target="_blank" class="link-hov style2">Booking Confirmation</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="user-profile.html"><img src="demo/images/user-profile.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="user-profile.html" target="_blank" class="link-hov style2">User profile</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="faq.html"><img src="demo/images/faq.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="faq.html" target="_blank" class="link-hov style2">FAQ</a>
-                                    </div>
-                                    <div class="col-md-4 text-center mar-bot-50">
-                                        <div class="demo-list-page">
-                                            <a href="404-page.html"><img src="demo/images/404.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="404-page.html" target="_blank" class="link-hov style2">Error page</a>
-                                    </div>
-                                    <div class="col-md-4 text-center">
-                                        <div class="demo-list-page">
-                                            <a href="login.html"><img src="demo/images/login.jpg" alt="..."></a>
-                                        </div>
-                                        <a href="login.html" target="_blank" class="link-hov style2">Login</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="hero-catagory-wrapper v1">
+                            <a href="#" class="hero-category-content v1">
+                                <i class="icofont-home"></i>
+                                <p class="name">Home Cleaning</p>
+                                <p class="d-name">22 Providers</p>
+                            </a>
+                            <a href="#" class="hero-category-content v1">
+                                <i class="icofont-tools-alt-2"></i> <br>
+                                <p class="name">Plumbers</p>
+                                <p class="d-name">15 Providers</p>
+                            </a>
+                            <a href="#" class="hero-category-content v1">
+                                <i class="icofont-cut"></i> <br>
+                                <p class="name">Beauty & spa</p>
+                                <p class="d-name">8 Providers</p>
+                            </a>
+                            <a href="#" class="hero-category-content v1">
+                                <i class="icofont-fix-tools"></i><br>
+                                <p class="name">Electricians</p>
+                                <p class="d-name">30 Providers</p>
+                            </a>
+                            <a href="#" class="hero-category-content v1">
+                                <i class="icofont-medal-sport"></i> <br>
+                                <p class="name">Fitness</p>
+                                <p class="d-name">10 Providers</p>
+                            </a>
+                            <a href="#" class="hero-category-content v1">
+                                <i class="icofont-washing-machine"></i> <br>
+                                <p class="name">Appliance Repair</p>
+                                <p class="d-name">28 Providers</p>
+                            </a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <!--page section end-->
-        <!--page section starts-->
-        <div class="list-details-section section-padding add_list">
+        <!--Promo Category ends-->
+        <!--Popular Category starts-->
+        <div class="popular-catagory pad-bot-50 mar-top-20 section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center">
-                        <div class="section-title black">
-                            <h2>Blogging in style</h2>
-                            <p>Listagram comes with beautiful listing and grid layout, a minimal and elegent way to make your blog.</p>
-                        </div>
+                        <h2 class="section-title v1">Explore Other Services</h2>
                     </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="popular-catagory-content">
 
-                    <div class="col-md-4 text-center mar-bot-50">
-                        <div class="demo-list-page">
-                            <a href="news-left-sidebar.html" target="_blank"><img src="demo/images/news-left-sidebar.jpg" alt="..."></a>
-                        </div>
-                        <a href="news-left-sidebar.html" target="_blank" class="link-hov style2">News left sidebar</a>
+                                <div class="popular-catagory-img">
+                                    <img src="./images/category/cat-1.jpg" alt="movers" class="img_fluid">
+                                </div>
+                                <div class="cat-content">
+                                    <h4 class="title">Movers</h4>
+                                    <span>23 Providers</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="col-md-4 text-center mar-bot-50">
-                        <div class="demo-list-page">
-                            <a href="news-right-sidebar.html" target="_blank"><img src="demo/images/news-right-sidebar.jpg" alt="..."></a>
-                        </div>
-                        <a href="news-right-sidebar.html" target="_blank" class="link-hov style2">News right sidebar</a>
+                    <div class="col-md-8">
+                        <a href="#">
+                            <div class="popular-catagory-content">
+                                <div class="popular-catagory-img">
+                                    <img src="images/category/cat-2.jpg" alt="carpenters" class="img_fluid">
+                                </div>
+                                <div class="cat-content">
+                                    <h4 class="title">Carpenters</h4>
+                                    <span>15 Providers</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="col-md-4 text-center mar-bot-50">
-                        <div class="demo-list-page">
-                            <a href="news-without-sidebar.html" target="_blank"><img src="demo/images/news-without-sidebar.jpg" alt="..."></a>
-                        </div>
-                        <a href="news-without-sidebar.html" target="_blank" class="link-hov style2">News without sidebar</a>
-
+                    <div class="col-md-8">
+                        <a href="#">
+                            <div class="popular-catagory-content">
+                                <div class="popular-catagory-img">
+                                    <img src="images/category/cat-3.jpg" alt="pest control" class="img_fluid">
+                                </div>
+                                <div class="cat-content">
+                                    <h4 class="title">Pest Control</h4>
+                                    <span>34 Providers</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="col-md-4 text-center mar-bot-50">
-                        <div class="demo-list-page">
-                            <a href="single-news-one.html" target="_blank" class="link-hov style2"><img src="demo/images/single-news-one.jpg" alt="..."></a>
-                        </div>
-                        <a href="single-news-one.html" target="_blank" class="link-hov style2">News details left sidebar</a>
-
-                    </div>
-                    <div class="col-md-4 text-center mar-bot-50">
-                        <div class="demo-list-page">
-                            <a href="single-news-two.html" target="_blank"><img src="demo/images/single-news-two.jpg" alt="..."></a>
-                        </div>
-                        <a href="single-news-two.html" target="_blank" class="link-hov style2">News details right sidebar</a>
-                    </div>
-                    <div class="col-md-4 text-center mar-bot-50">
-                        <div class="demo-list-page">
-                            <a href="single-news-three.html" target="_blank"><img src="demo/images/single-news-three.jpg" alt="..."></a>
-                        </div>
-                        <a href="single-news-three.html" target="_blank" class="link-hov style2">News Details without sidebar</a>
-
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="popular-catagory-content">
+                                <div class="popular-catagory-img">
+                                    <img src="images/category/cat-4.jpg" alt="dietician" class="img_fluid">
+                                </div>
+                                <div class="cat-content">
+                                    <h4 class="title">Dietician</h4>
+                                    <span>20 Providers</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!--page section end-->
-        <!--Features section starts-->
-        <!--<div class="promo-featured-section section-padding">-->
-        <!--    <div class="container">-->
-        <!--        <div class="row">-->
-        <!--            <div class="col-md-8 offset-md-2 text-center">-->
-        <!--                <div class="section-title white">-->
-        <!--                    <h2>Core Features</h2>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="row">-->
-        <!--            <div class="col-md-10 offset-md-1  col-xs-12 col-xs-offset-0">-->
-        <!--                <div class="row promo-featured-container">-->
-        <!--                    <div class="col-md-3 col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center text-center">-->
-        <!--                            <img src="demo/images/icon/bootstrap.png" alt="image">-->
-        <!--                            <p>Bootstrap V4</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center">-->
-        <!--                            <img src="demo/images/icon/swiper.png" alt="image">-->
-        <!--                            <p>Swiper Slider</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3 col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center text-center">-->
-        <!--                            <img src="demo/images/icon/html5.png" alt="image">-->
-        <!--                            <p>HTML5</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3 col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center text-center">-->
-        <!--                            <img src="demo/images/icon/css3.png" alt="image">-->
-        <!--                            <p>CSS3</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3 col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center text-center">-->
-        <!--                            <img src="demo/images/icon/jquery.png" alt="image">-->
-        <!--                            <p>jQuery</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center">-->
-        <!--                            <img src="demo/images/icon/responsive.png" alt="image">-->
-        <!--                            <p>Fully Responsive</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center">-->
-        <!--                            <img src="demo/images/icon/code.png" alt="image">-->
-        <!--                            <p>Clean Code</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
+        <!--Popular Category ends-->
+        <!--Trending Place starts-->
+        <div class="trending-places section-padding pad-bot-130">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h2 class="section-title v1">Trending Providers</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="swiper-container trending-place-wrap">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/places/place-1.jpg" alt="#">
+                                        <span class="trending-rating-green">7</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4>Hydraulic Services Warsaw</h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>Borowej Góry 7, Warszawa Bemowo</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+48 537 461 306</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p><a href="http://www.pogotowie-hydrauliczne24.pl" target="_blank">www.pogotowie-hydrauliczne24.pl</a></p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg pink"><i class="icofont-tools-alt-2"></i></span>
+                                                <p><a href="#">Plumbers</a></p>
 
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center">-->
-        <!--                            <img src="demo/images/icon/ajax.png" alt="image">-->
-        <!--                            <p>Ajax Contact form</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item text-center">-->
-        <!--                            <img src="demo/images/icon/google-font.png" alt="image">-->
-        <!--                            <p>Google font</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item">-->
-        <!--                            <img src="demo/images/icon/lightbox.jpg" alt="image">-->
-        <!--                            <p>Lightbox</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item">-->
-        <!--                            <img src="demo/images/icon/paralox.png" alt="image">-->
-        <!--                            <p>Parallax</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3 col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item">-->
-        <!--                            <img src="demo/images/icon/speed.png" alt="image">-->
-        <!--                            <p>Speed optimized</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item">-->
-        <!--                            <img src="demo/images/icon/w3c.png" alt="image">-->
-        <!--                            <p>W3C Validation</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-md-3  col-sm-4 col-xs-6">-->
-        <!--                        <div class="single-promo-featured-item">-->
-        <!--                            <img src="demo/images/icon/docs.png" alt="image">-->
-        <!--                            <p>Detailed Documentation</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--</div>-->
-        <!--Features section start-->
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open"><i class="ion-clock"></i>
+                                                    Open <p>24h hours</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/places/wedding-planner.jpg" alt="#">
+                                        <span class="trending-rating-orange">9</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4>Beautifulday Wedding Planners Warszawa</h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">5 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p> Wincentego Rzymowskiego 49/74, 02-697 Warszawa</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+48 607 398 120</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p><a href="https://beautifulday.pl/" target="_blank">beautifulday.pl</a></p>
+                                            </li>
 
+                                        </ul>
+
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg green"><i class="icofont-ui-calendar"></i></span>
+                                                <p><a href="#">Wedding Planners</a></p>
+                                            </div>
+
+                                            <div class="trend-right float-right">
+                                                <div class="trend-closed">
+                                                    Open <p>till 4:30 PM</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/places/home-decor.jpg" alt="#">
+                                        <span class="trending-rating-pink">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4>Home Decor</h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>Białołęcka 233A, 03-253 Warszawa</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+48 780 058 077</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p><a href="https://kup-meble.pl/" target="_blank">kup-meble.pl</a></p>
+                                            </li>
+
+                                        </ul>
+
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg red"><i class="icofont-home"></i></span>
+                                                <p><a href="#">Home Decoration</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open"><i class="ion-clock"></i>
+                                                    Open <p>till 10.00pm</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/places/computer-repair.jpg" alt="#">
+                                        <span class="trending-rating-green">8</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4>Laptop Repair Center</h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>Opaczewska 43/8, 02-201 Warszawa</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+48 22 392 86 72</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p><a href="https://www.centrumnaprawlaptopow.pl/" target="_blank">www.centrumnaprawlaptopow.pl</a></p>
+                                            </li>
+
+                                        </ul>
+
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg pink"><i class="icofont-computer"></i></span>
+                                                <p><a href="#">Computer Repair</a></p>
+
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open"><i class="ion-clock"></i>
+                                                    Open <p>till 9.00pm</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/places/photographer.jpg" alt="#">
+                                        <span class="trending-rating-orange">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4>Marta Ponsko Photography</h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>Aleja Rzeczypospolitej 20, 02-972 Warszawa</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+48 792 991 891</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p><a href="http://www.martaponsko.pl/" target="_blank">www.martaponsko.pl</a></p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg green"><i class="icofont-camera"></i></span>
+                                                <p><a href="#">Photographers</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open"><i class="ion-clock"></i>
+                                                    Open <p>till 6.00pm</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/places/housekeeping.jpg" alt="#">
+                                        <span class="trending-rating-green">8</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4>Spic and Span Home & Office Cleaning</h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">15 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>Bracka 25 Marzyciele i Rzemieślnicy. III, Warszawa</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+48 22 389 57 77</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p><a href="https://spicandspan.pl/" target="_blank">spicandspan.pl</a></p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg green"><i class="ion-home"></i></span>
+                                                <p><a href="#">Housekeeping</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-closed">
+                                                    closed
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trending-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Trending Place ends-->
+        <!--Coupon starts-->
+        <!-- <div class="coupon-section section-padding">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h2 class="section-title v1"> Coupons &amp; Deals</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="swiper-container coupon-wrap">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide coupon-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="coupon-img">
+                                                <img class="img-fluid" src="images/category/coupon/3.jpg" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="coupon-desc float-right">
+                                                <h4>30% Discount</h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id porta leo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="coupon-owner mar-top-20">
+                                                <a href="store.html">Favola Restaurant</a>
+                                                <a href="#" class="rating">
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-left">
+                                                <a class="btn v1" data-toggle="modal" data-target="#coupon_wrap">
+                                                    Get Coupon
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide coupon-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="coupon-img">
+                                                <img class="img-fluid" src="images/category/coupon/5.jpg" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="coupon-desc float-right">
+                                                <h4>20% Off</h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id porta leo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="coupon-owner mar-top-20">
+                                                <a href="store.html">Orion Spa</a>
+                                                <a href="#" class="rating">
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-left">
+                                                <a class="btn v1" data-toggle="modal" data-target="#coupon_wrap">
+                                                    Get Coupon
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="swiper-slide coupon-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="coupon-img">
+                                                <img class="img-fluid" src="images/category/coupon/4.jpg" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="coupon-desc float-right">
+                                                <h4>25% Discount</h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id porta leo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="coupon-owner mar-top-20">
+                                                <a href="store.html">Hotel La Muro</a>
+                                                <a href="#" class="rating">
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-left">
+                                                <a class="btn v1" data-toggle="modal" data-target="#coupon_wrap">
+                                                    Get Coupon
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide coupon-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="coupon-img">
+                                                <img class="img-fluid" src="images/category/coupon/1.jpg" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="coupon-desc float-right">
+                                                <h4>50% OFF</h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id porta leo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="coupon-owner mar-top-20">
+                                                <a href="store.html">Penguin Shop</a>
+                                                <a href="#" class="rating">
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                    <i class="ion-android-star-half"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-left">
+                                                <a class="btn v1" data-toggle="modal" data-target="#coupon_wrap">
+                                                    Get Coupon
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="slider-btn v1 coupon-next"><i class="ion-arrow-right-c"></i></div>
+                        <div class="slider-btn v1 coupon-prev"><i class="ion-arrow-left-c"></i></div>
+                        <div class="modal fade" id="coupon_wrap">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel">Get a Coupon</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-ios-close-empty"></i></span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="modal-coupon-code">
+                                            <div class="store-content">
+                                                <div class="text">
+                                                    Stores :
+                                                    <span> La Poma ,</span>
+                                                    <span>Gucci</span>
+                                                </div>
+                                                <div class="store-content">Cashback : <span>25% cashback </span></div>
+                                                <div class="store-content">Valid till : <span>25-5-2019 </span></div>
+                                                <div class="cashback-text">
+                                                    <p>Cashback will be added in your wallet in next 5 Minute of your purchase.</p>
+                                                </div>
+                                            </div>
+                                            <div class="coupon-code">
+                                                <h5>
+                                                    Coupon Code: <span class="coupon-code-wrapper">
+                                                        <i class="fa fa-scissors"></i>
+                                                        12345
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="coupon-bottom">
+                                        <div class="float-left"><a href="single-listing-one.html" class="btn v1">Go to Deal</a></div>
+                                        <button type="button" class="btn v1 float-right" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--Coupon ends-->
+        <!--Call to action starts-->
+        <div class="call-to-action pad-tb-70" style="background-image: url(images/bg/memphis-colorful.png)">
+            <div class="overlay op-7 green"></div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="action-title">
+                            <h2>Join Our Amazing Community</h2>
+                            <p>
+                                Do you want to be listed on servee? Click on the Register Now button to get started!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="call-to-action text-right sm-left">
+                            <a class="btn v9" href="#">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Call to action ends-->
+        <!--Trending events starts-->
+        <!-- <div class="trending-places section-padding pad-bot-130">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h2 class="section-title v1">What's happening?</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="swiper-container trending-place-wrap">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/event/muay.jpg" alt="#">
+                                        <span class="trending-rating-orange">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4><a href="single-listing-one.html">Muay Thai Live Show</a></h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>1690 Brown Avenue,Barline</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+864-940-3419</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p>www.thaishow.com</p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg green"><i class="icofont-movie"></i></span>
+                                                <p><a href="#">Movie</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open mar-top-5"><i class="ion-clock"></i> 2.30 pm</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/event/photo1.jpg" alt="#">
+                                        <span class="trending-rating-pink">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4><a href="single-listing-one.html">Carolina photo exibition</a></h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">10 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>32 down Ave, North Carolina,USA</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+251 7336 8898</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p>www.photoexpo.com</p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg pink"><i class="icofont-camera"></i></span>
+                                                <p><a href="#">Photography</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open mar-top-5"><i class="ion-clock"></i>5.00 pm</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/event/coffee.jpg" alt="#">
+                                        <span class="trending-rating-green">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4><a href="single-listing-one.html">European coffee expo </a></h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">7 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>1301 Avenue, Brooklyn, NY 11230</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+44 20 7336 8898</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p>www.burgerandlobster.com</p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg red"><i class="icofont-tea"></i></span>
+                                                <p><a href="#">Eat &amp; Drink</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open mar-top-5"><i class="ion-clock"></i> 10.30 am</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/event/3.jpg" alt="#">
+                                        <span class="trending-rating-pink">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4><a href="single-listing-one.html">Bolton music fair </a></h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>20 Hogh Street, Bolton, France</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+33 20 7336 8898</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p>www.bookmusic.com</p>
+                                            </li>
+                                        </ul>
+
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg green"><i class="icofont-music-alt"></i></span>
+                                                <p><a href="#">Music</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-open mar-top-5"><i class="ion-clock"></i> 5.00 pm</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide trending-place-item">
+                                    <div class="trending-img">
+                                        <img src="images/category/event/sea6.jpg" alt="#">
+                                        <span class="trending-rating-green">6.5</span>
+                                        <span class="save-btn"><i class="icofont-heart"></i></span>
+                                    </div>
+                                    <div class="trending-title-box">
+                                        <h4><a href="single-listing-one.html">Miami seafood show</a></h4>
+                                        <div class="customer-review">
+                                            <div class="rating-summary float-left">
+                                                <div class="rating-result" title="60%">
+                                                    <ul class="product-rating">
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                        <li><i class="ion-android-star-half"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-summury float-right">
+                                                <p><a href="#">3 Reviews</a></p>
+                                            </div>
+                                        </div>
+                                        <ul class="trending-address">
+                                            <li><i class="ion-ios-location"></i>
+                                                <p>400 NW North River Dr, Miami, USA</p>
+                                            </li>
+                                            <li><i class="ion-ios-telephone"></i>
+                                                <p>+00 20 536 551</p>
+                                            </li>
+                                            <li><i class="ion-android-globe"></i>
+                                                <p>www.opentable.com</p>
+                                            </li>
+                                        </ul>
+                                        <div class="trending-bottom mar-top-15 pad-bot-30">
+                                            <div class="trend-left float-left">
+                                                <span class="round-bg green"><i class="icofont-restaurant"></i></span>
+                                                <p><a href="#">Eat &amp; Drink</a></p>
+                                            </div>
+                                            <div class="trend-right float-right">
+                                                <div class="trend-right float-right">
+                                                    <div class="trend-open mar-top-5"><i class="ion-clock"></i> 9.00 am</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trending-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--Trending events ends-->
+        <!--Testimonial Section start-->
+        <div class="hero-client-section pad-bot-70 section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h2 class="section-title v1">People Talking About Us</h2>
+                    </div>
+                    <div class="col-md-12 mar-bot-70">
+                        <div class="testimonial-wrapper swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide single-testimonial-item">
+                                    <div class="testimonial-img text-center">
+                                        <img src="images/clients/client_1.jpg" alt="...">
+                                    </div>
+                                    <div class="testimonial-content text-center">
+                                        <ul class="product-rating">
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                        </ul>
+                                        <h5>Frank Jane</h5>
+                                        <span>Technician, NSR Equipments</span>
+                                        <p>Reasonably prices, no overcharging, satisfactory services and punctual people. What more do you ask for!!</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide single-testimonial-item">
+                                    <div class="testimonial-img text-center">
+                                        <img src="images/clients/client_3.jpg" alt="...">
+                                    </div>
+                                    <div class="testimonial-content text-center">
+                                        <ul class="product-rating">
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                        </ul>
+                                        <h5>Amanda Gordon</h5>
+                                        <span>Lives in Warsaw, Poland</span>
+                                        <p>Used Servee to hire movers, came highly recommended.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide single-testimonial-item">
+                                    <div class="testimonial-img text-center">
+                                        <img src="images/clients/client_2.jpg" alt="...">
+                                    </div>
+                                    <div class="testimonial-content text-center">
+                                        <ul class="product-rating">
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                        </ul>
+                                        <h5>Lee Priest</h5>
+                                        <span>MD, Cornia Inc</span>
+                                        <p>Great service! Works on a very systematic process and consists of good technicians.</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide single-testimonial-item">
+                                    <div class="testimonial-img text-center">
+                                        <img src="images/clients/client_4.jpg" alt="...">
+                                    </div>
+                                    <div class="testimonial-content text-center">
+                                        <ul class="product-rating">
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                            <li><i class="ion-android-star-half"></i></li>
+                                        </ul>
+                                        <h5>Mark Henry</h5>
+                                        <span>CEO, Alpha Inc</span>
+                                        <p>Highly recommended! I logged the issue, the technician arrived on time, found the root cause & replaced the faulty component.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Testimonial Section ends-->
+        <!--Partner section starts-->
+        <div class="partner-section style1 pad-top-60 pad-bot-110">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h2 class="section-title v1">Our Partners</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="swiper-container partner-wrap">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide single-partner">
+                                    <img src="images/partners/1.png" alt="...">
+                                </div>
+                                <div class="swiper-slide single-partner">
+                                    <img src="images/partners/2.png" alt="...">
+                                </div>
+                                <div class="swiper-slide single-partner">
+                                    <img src="images/partners/3.png" alt="...">
+                                </div>
+                                <div class="swiper-slide single-partner">
+                                    <img src="images/partners/4.png" alt="...">
+                                </div>
+                                <div class="swiper-slide single-partner">
+                                    <img src="images/partners/5.png" alt="...">
+                                </div>
+                                <div class="swiper-slide single-partner">
+                                    <img src="images/partners/6.png" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-btn v1 partner-next"><i class="ion-arrow-right-c"></i></div>
+                        <div class="slider-btn v1 partner-prev"><i class="ion-arrow-left-c"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Partner section ends-->
+        <!--mobile app start-->
+        <div class="app-section section-padding pad-top-70" style="background-image: url(images/bg/bg2.png)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="app-content">
+                            <h2>Looking for the Best Professionals? <span>Get the App!</span></h2>
+                            <ul>
+                                <li><i class="ion-android-checkbox-outline" aria-hidden="true"></i> Find nearby listings</li>
+                                <li><i class="ion-android-checkbox-outline" aria-hidden="true"></i> Easy service enquiry</li>
+                                <li><i class="ion-android-checkbox-outline" aria-hidden="true"></i> Listing reviews and ratings</li>
+                                <li><i class="ion-android-checkbox-outline" aria-hidden="true"></i> Manage your listing, enquiry and reviews</li>
+                            </ul>
+                            <div class="device-logo mar-top-40 xs-center">
+                                <a href="#"><img src="images/others/android.png" alt="..."> </a>
+                                <a href="#"><img src="images/others/apple.png" alt="..."> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="app-img text-center">
+                            <img src="images/others/app-image-1.png" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--mobile app ends-->
         <!-- Scroll to top starts-->
         <span class="scrolltotop"><i class="ion-arrow-up-c"></i></span>
         <!-- Scroll to top ends-->
     </div>
     <!--Page Wrapper ends-->
     <!--Footer Starts-->
-    <div class="promo-featured-section footer-cta section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2 text-center">
-                    <h2>Purchase Listagram &amp; make a difference</h2>
-                    <a href="#" class="btn v3" target="_blank">Purchase Theme</a>
+    <div class="footer-wrapper no-pad-tb footer-fixed">
+        <div class="footer-top-area section-padding" style="background-image: url(images/bg/pattern.png)">
+            <div class="overlay op-9 green"></div>
+            <div class="container">
+                <div class="row nav-folderized">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-logo">
+                            <a href="index.html"> <img src="images/logo-white.png" alt="logo"></a>
+                            <div class="company-desc">
+                                <p>
+                                    Servee thrives to find verified and qualified professionals for individuals and businesses reviewed by others on social media networks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title">Helpful Links</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Login</a></li>
+                                <li><a class="link-hov style1" href="#">My Account</a></li>
+                                <li><a class="link-hov style1" href="#">Add Listing</a></li>
+                                <li><a class="link-hov style1" href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title">Category</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Home Services</a></li>
+                                <li><a class="link-hov style1" href="#">Appliance Repair</a></li>
+                                <li><a class="link-hov style1" href="#">Wedding Planners</a></li>
+                                <li><a class="link-hov style1" href="#">Plumbers</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title">Contact us</h2>
+                            <ul class="list footer-list">
+                                <li>
+                                    <div class="contact-info">
+                                        <div class="icon">
+                                            <i class="ion-ios-location"></i>
+                                        </div>
+                                        <div class="text">Some Address, Warszawa, Poland</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-info">
+                                        <div class="icon">
+                                            <i class="ion-email"></i>
+                                        </div>
+                                        <div class="text"><a href="#">info@servee.io</a></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-info">
+                                        <div class="icon">
+                                            <i class="ion-ios-telephone"></i>
+                                        </div>
+                                        <div class="text">+48 078 767 595</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="social-buttons style2">
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+                                <li><a href="#"><i class="ion-social-youtube"></i></a></li>
+                                <li><a href="#"><i class="ion-social-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <p>&copy; 2019 listagram. All Rights Reserved.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!--Footer ends-->
+    
     <!--Scripts starts-->
     <!--plugin js-->
     <script src="js/plugin.js"></script>
-    <!--main js-->
+    <!--google maps-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
+    <!--Main js-->
     <script src="js/main.js"></script>
     <!--Scripts ends-->
-
 </body>
 
 </html>
