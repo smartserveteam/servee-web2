@@ -200,13 +200,10 @@
                                 <a data-toggle="tab" href="#gallery">Gallery</a>
                             </li>
                             <li class="nav-item">
-                                <a data-toggle="tab" href="#location">Location /Contacts<span class="text-grey"></span></a>
-                            </li>
-                            <li class="nav-item">
                                 <a data-toggle="tab" href="#open_time">Business Hours</a>
                             </li>
                             <li class="nav-item">
-                                <a data-toggle="tab" href="#rooms">Pricing</a>
+                                <a data-toggle="tab" href="#pricing">Pricing</a>
                             </li>
                             <li class="nav-item">
                                 <a data-toggle="tab" href="#social_network">Social Networks <span class="text-grey"></span></a>
@@ -232,14 +229,26 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Keywords</label>
-                                            <input type="text" class="form-control filter-input" placeholder="Keywords should be separated by commas">
+                                            <label>Address</label>
+                                            <input id="address" type="text" class="form-control filter-input" placeholder="Keywords should be separated by commas">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" class="form-control filter-input" placeholder="Your address">
+                                            <label>City</label>
+                                            <input id="city" type="text" class="form-control filter-input" placeholder="Your address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Postal Code</label>
+                                            <input id="postalCode" type="text" class="form-control filter-input" placeholder="Keywords should be separated by commas">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <select id="country" class="select2 form-control"></select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -250,7 +259,35 @@
                                             </div>
                                         </form>
                                     </div>
-
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>
+                                                Longitude (Drag marker on the map)</label>
+                                            <input type="text" class="form-control filter-input" placeholder="Map Longitude">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>
+                                                Latitude (Drag marker on the map) </label>
+                                            <input type="text" class="form-control filter-input" placeholder="Map Latitude">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 no-padding">
+                                        <div id="map"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mar-top-15">
+                                            <label>Website </label>
+                                            <input type="text" class="form-control filter-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mar-top-15">
+                                            <label>Phone </label>
+                                            <input type="text" class="form-control filter-input">
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Features</label>
@@ -304,75 +341,7 @@
                                     <a href="#" class="btn v8 mar-top-20">Add Images</a>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="location">
-                                <h4><i class="ion-ios-location"></i> Location/Contacts :</h4>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Select City</label>
-                                            <div class="nice-select filter-input" tabindex="0"><span class="current">Select City</span>
-                                                <ul class="list">
-                                                    <li class="option selected focus">New York</li>
-                                                    <li class="option">Chicago</li>
-                                                    <li class="option">Las Vegas</li>
-                                                    <li class="option">Los Angeles</li>
-                                                    <li class="option">Austin</li>
-                                                    <li class="option">Downturn</li>
-                                                    <li class="option">DownturnSan Diago</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" class="form-control filter-input" placeholder="ex. 250, Fifth Avenue...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            <input type="text" class="form-control filter-input" placeholder="ex. New York">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Zip Code</label>
-                                            <input type="text" class="form-control filter-input" placeholder="ex. 5858">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>
-                                                Longitude (Drag marker on the map)</label>
-                                            <input type="text" class="form-control filter-input" placeholder="Map Longitude">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>
-                                                Latitude (Drag marker on the map) </label>
-                                            <input type="text" class="form-control filter-input" placeholder="Map Latitude">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 no-padding">
-                                        <div id="map"></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mar-top-15">
-                                            <label>Website </label>
-                                            <input type="text" class="form-control filter-input">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mar-top-15">
-                                            <label>Phone </label>
-                                            <input type="text" class="form-control filter-input">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="rooms">
+                            <div class="tab-pane fade" id="pricing">
                                 <h4><i class="ion-ios-location"></i> Pricing</h4>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -939,7 +908,7 @@
                                     <div class="col-md-6 text-left">
                                         <div class="res-box mar-top-10">
                                             <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-                                            <label for="remember">I have read and I accept <a href="terms.html">terms &amp; conditions</a></label>
+                                            <label for="remember">I have read and I accept the <a href="terms.html">terms &amp; conditions</a></label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-right sm-left">
@@ -1078,7 +1047,7 @@
             console.log("jqXHR:", jqXHR);
 
             // Transform output
-            var arr = [];
+            let arr = [];
             $.each(data, (index, value) => {
                 arr.push({
                     text: value.name,
@@ -1089,6 +1058,39 @@
             // Load categories onto dropdown
             $('#categories').select2({
                 placeholder: "Select one or more categories",
+                data: arr
+            });
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            console.error("jqXHR:", jqXHR);
+            console.error("Text Status:", textStatus);
+            console.error("Error Thrown:", errorThrown);
+        });
+
+        // Load countries
+        $.ajax({
+            method: "GET",
+            url: "https://raw.githubusercontent.com/mledoze/countries/master/dist/countries.json",
+            dataType: "json",
+            cache: true
+        })
+        .done((data, textStatus, jqXHR) => {
+            console.log("Text Status:", textStatus);
+            console.log("Data:", data);
+            console.log("jqXHR:", jqXHR);
+
+            // Transform output
+            let arr = [];
+            $.each(data, (index, value) => {
+                arr.push({
+                    text: value.name.common,
+                    id: value.cca2
+                });
+            });
+
+            // Load countries onto dropdown
+            $('#country').select2({
+                placeholder: "Select a country",
                 data: arr
             });
         })
