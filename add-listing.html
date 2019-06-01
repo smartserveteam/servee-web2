@@ -211,7 +211,7 @@
                         </ul>
                         <div class="tab-content mar-tb-30 add_list_content">
                             <div class="tab-pane fade show active" id="general_info">
-                                <h4> <i class="ion-ios-information"></i> General Information :</h4>
+                                <h4> <i class="ion-ios-information"></i> General Information</h4>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -258,23 +258,6 @@
                                                 <textarea class="form-control" id="list_info" rows="4" placeholder="Enter your text here"></textarea>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>
-                                                Longitude (Drag marker on the map)</label>
-                                            <input type="text" class="form-control filter-input" placeholder="Map Longitude">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>
-                                                Latitude (Drag marker on the map) </label>
-                                            <input type="text" class="form-control filter-input" placeholder="Map Latitude">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 no-padding">
-                                        <div id="map"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mar-top-15">
@@ -370,28 +353,12 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <form class="photo-upload">
-                                                <div class="form-group">
-                                                    <div class="add-listing__input-file-box">
-                                                        <input class="add-listing__input-file" type="file" name="file" id="file">
-                                                        <div class="add-listing__input-file-wrap">
-                                                            <i class="ion-ios-cloud-upload"></i>
-                                                            <p>Click here to upload your images</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="btn v8 mar-top-15">Add Images</a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Features</label>
+                                            <label>Includes</label>
                                             <div class="filter-checkbox">
                                                 <input id="check-m" type="checkbox" name="check">
-                                                <label for="check-m">Tools Provided</label>
+                                                <label for="check-m">Tools</label>
                                                 <input id="check-n" type="checkbox" name="check">
-                                                <label for="check-n">Requires Access To Premises</label>
+                                                <label for="check-n">Insurance</label>
                                                 <input id="check-o" type="checkbox" name="check">
                                                 <label for="check-o">Available 24/7</label>
                                                 <input id="check-p" type="checkbox" name="check">
@@ -419,7 +386,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="open_time">
-                                <h4><i class="ion-clock"></i> Opening/Business Hours :</h4>
+                                <h4><i class="ion-clock"></i> Opening/Business Hours</h4>
                                 <div class="row mar-bot-30">
                                     <div class="col-md-2">
                                         <label class="fix_spacing">Monday</label>
@@ -820,72 +787,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4><i class="ion-clock"></i> Event Date :</h4>
-                                    </div>
-                                </div>
-                                <div class="row mar-bot-30">
-                                    <div class="col-sm-4 col-12">
-                                        <div id="datepicker-from" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" placeholder="Select date">
-                                            <span class="input-group-addon"><i class="icofont-ui-calendar"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-12">
-                                        <div class="nice-select filter-input" tabindex="0"><span class="current">Opening Time</span>
-                                            <ul class="list">
-                                                <li class="option selected focus">7.00 am</li>
-                                                <li class="option">8.00 am</li>
-                                                <li class="option">9.00 am</li>
-                                                <li class="option">10.00 am</li>
-                                                <li class="option">11.00 am</li>
-                                                <li class="option">12.00 am</li>
-                                                <li class="option">1.00 pm</li>
-                                                <li class="option">2.00 pm</li>
-                                                <li class="option">3.00 pm</li>
-                                                <li class="option">4.00 pm</li>
-                                                <li class="option">5.00 pm</li>
-                                                <li class="option">6.00 pm</li>
-                                                <li class="option">7.00 pm</li>
-                                                <li class="option">8.00 pm</li>
-                                                <li class="option">9.00 pm</li>
-                                                <li class="option">10.00 pm</li>
-                                                <li class="option">11.00 pm</li>
-                                                <li class="option">12.00 pm</li>
-                                                <li class="option">00.00 am</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-12">
-                                        <div class="nice-select filter-input" tabindex="0"><span class="current">Opening Time</span>
-                                            <ul class="list">
-                                                <li class="option selected focus">7.00 am</li>
-                                                <li class="option">8.00 am</li>
-                                                <li class="option">9.00 am</li>
-                                                <li class="option">10.00 am</li>
-                                                <li class="option">11.00 am</li>
-                                                <li class="option">12.00 am</li>
-                                                <li class="option">1.00 pm</li>
-                                                <li class="option">2.00 pm</li>
-                                                <li class="option">3.00 pm</li>
-                                                <li class="option">4.00 pm</li>
-                                                <li class="option">5.00 pm</li>
-                                                <li class="option">6.00 pm</li>
-                                                <li class="option">7.00 pm</li>
-                                                <li class="option">8.00 pm</li>
-                                                <li class="option">9.00 pm</li>
-                                                <li class="option">10.00 pm</li>
-                                                <li class="option">11.00 pm</li>
-                                                <li class="option">12.00 pm</li>
-                                                <li class="option">00.00 am</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="tab-pane fade" id="social_network">
-                                <h4><i class="icofont-ui-social-link"></i>Social Networks:</h4>
+                                <h4><i class="icofont-ui-social-link"></i>Social Networks</h4>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -1023,8 +927,6 @@
     <!--Scripts starts-->
     <!--plugin js-->
     <script src="js/plugin.js"></script>
-    <!--google maps-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
     <!--select2-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.full.min.js"></script>
     <!--Main js-->
@@ -1042,10 +944,6 @@
             cache: false
         })
         .done((data, textStatus, jqXHR) => {
-            console.log("Text Status:", textStatus);
-            console.log("Data:", data);
-            console.log("jqXHR:", jqXHR);
-
             // Transform output
             let arr = [];
             $.each(data, (index, value) => {
@@ -1075,10 +973,6 @@
             cache: true
         })
         .done((data, textStatus, jqXHR) => {
-            console.log("Text Status:", textStatus);
-            console.log("Data:", data);
-            console.log("jqXHR:", jqXHR);
-
             // Transform output
             let arr = [];
             $.each(data, (index, value) => {
