@@ -88,11 +88,261 @@ var ytp=ytp||{};function onYouTubeIframeAPIReady(){ytp.YTAPIReady||(ytp.YTAPIRea
 !function(a,b){"function"==typeof define&&define.amd?define(["jquery"],b):"object"==typeof exports?module.exports=b(require("jquery")):a.lightbox=b(a.jQuery)}(this,function(a){function b(b){this.album=[],this.currentImageIndex=void 0,this.init(),this.options=a.extend({},this.constructor.defaults),this.option(b)}return b.defaults={albumLabel:"Image %1 of %2",alwaysShowNavOnTouchDevices:!1,fadeDuration:600,fitImagesInViewport:!0,imageFadeDuration:600,positionFromTop:50,resizeDuration:700,showImageNumberLabel:!0,wrapAround:!1,disableScrolling:!1,sanitizeTitle:!1},b.prototype.option=function(b){a.extend(this.options,b)},b.prototype.imageCountLabel=function(a,b){return this.options.albumLabel.replace(/%1/g,a).replace(/%2/g,b)},b.prototype.init=function(){var b=this;a(document).ready(function(){b.enable(),b.build()})},b.prototype.enable=function(){var b=this;a("body").on("click","a[rel^=lightbox], area[rel^=lightbox], a[data-lightbox], area[data-lightbox]",function(c){return b.start(a(c.currentTarget)),!1})},b.prototype.build=function(){if(!(a("#lightbox").length>0)){var b=this;a('<div id="lightboxOverlay" class="lightboxOverlay"></div><div id="lightbox" class="lightbox"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /><div class="lb-nav"><a class="lb-prev" href="" ></a><a class="lb-next" href="" ></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div>').appendTo(a("body")),this.$lightbox=a("#lightbox"),this.$overlay=a("#lightboxOverlay"),this.$outerContainer=this.$lightbox.find(".lb-outerContainer"),this.$container=this.$lightbox.find(".lb-container"),this.$image=this.$lightbox.find(".lb-image"),this.$nav=this.$lightbox.find(".lb-nav"),this.containerPadding={top:parseInt(this.$container.css("padding-top"),10),right:parseInt(this.$container.css("padding-right"),10),bottom:parseInt(this.$container.css("padding-bottom"),10),left:parseInt(this.$container.css("padding-left"),10)},this.imageBorderWidth={top:parseInt(this.$image.css("border-top-width"),10),right:parseInt(this.$image.css("border-right-width"),10),bottom:parseInt(this.$image.css("border-bottom-width"),10),left:parseInt(this.$image.css("border-left-width"),10)},this.$overlay.hide().on("click",function(){return b.end(),!1}),this.$lightbox.hide().on("click",function(c){return"lightbox"===a(c.target).attr("id")&&b.end(),!1}),this.$outerContainer.on("click",function(c){return"lightbox"===a(c.target).attr("id")&&b.end(),!1}),this.$lightbox.find(".lb-prev").on("click",function(){return 0===b.currentImageIndex?b.changeImage(b.album.length-1):b.changeImage(b.currentImageIndex-1),!1}),this.$lightbox.find(".lb-next").on("click",function(){return b.currentImageIndex===b.album.length-1?b.changeImage(0):b.changeImage(b.currentImageIndex+1),!1}),this.$nav.on("mousedown",function(a){3===a.which&&(b.$nav.css("pointer-events","none"),b.$lightbox.one("contextmenu",function(){setTimeout(function(){this.$nav.css("pointer-events","auto")}.bind(b),0)}))}),this.$lightbox.find(".lb-loader, .lb-close").on("click",function(){return b.end(),!1})}},b.prototype.start=function(b){function c(a){d.album.push({alt:a.attr("data-alt"),link:a.attr("href"),title:a.attr("data-title")||a.attr("title")})}var d=this,e=a(window);e.on("resize",a.proxy(this.sizeOverlay,this)),a("select, object, embed").css({visibility:"hidden"}),this.sizeOverlay(),this.album=[];var f,g=0,h=b.attr("data-lightbox");if(h){f=a(b.prop("tagName")+'[data-lightbox="'+h+'"]');for(var i=0;i<f.length;i=++i)c(a(f[i])),f[i]===b[0]&&(g=i)}else if("lightbox"===b.attr("rel"))c(b);else{f=a(b.prop("tagName")+'[rel="'+b.attr("rel")+'"]');for(var j=0;j<f.length;j=++j)c(a(f[j])),f[j]===b[0]&&(g=j)}var k=e.scrollTop()+this.options.positionFromTop,l=e.scrollLeft();this.$lightbox.css({top:k+"px",left:l+"px"}).fadeIn(this.options.fadeDuration),this.options.disableScrolling&&a("html").addClass("lb-disable-scrolling"),this.changeImage(g)},b.prototype.changeImage=function(b){var c=this;this.disableKeyboardNav();var d=this.$lightbox.find(".lb-image");this.$overlay.fadeIn(this.options.fadeDuration),a(".lb-loader").fadeIn("slow"),this.$lightbox.find(".lb-image, .lb-nav, .lb-prev, .lb-next, .lb-dataContainer, .lb-numbers, .lb-caption").hide(),this.$outerContainer.addClass("animating");var e=new Image;e.onload=function(){var f,g,h,i,j,k;d.attr({alt:c.album[b].alt,src:c.album[b].link}),a(e),d.width(e.width),d.height(e.height),c.options.fitImagesInViewport&&(k=a(window).width(),j=a(window).height(),i=k-c.containerPadding.left-c.containerPadding.right-c.imageBorderWidth.left-c.imageBorderWidth.right-20,h=j-c.containerPadding.top-c.containerPadding.bottom-c.imageBorderWidth.top-c.imageBorderWidth.bottom-120,c.options.maxWidth&&c.options.maxWidth<i&&(i=c.options.maxWidth),c.options.maxHeight&&c.options.maxHeight<i&&(h=c.options.maxHeight),(e.width>i||e.height>h)&&(e.width/i>e.height/h?(g=i,f=parseInt(e.height/(e.width/g),10),d.width(g),d.height(f)):(f=h,g=parseInt(e.width/(e.height/f),10),d.width(g),d.height(f)))),c.sizeContainer(d.width(),d.height())},e.src=this.album[b].link,this.currentImageIndex=b},b.prototype.sizeOverlay=function(){this.$overlay.width(a(document).width()).height(a(document).height())},b.prototype.sizeContainer=function(a,b){function c(){d.$lightbox.find(".lb-dataContainer").width(g),d.$lightbox.find(".lb-prevLink").height(h),d.$lightbox.find(".lb-nextLink").height(h),d.showImage()}var d=this,e=this.$outerContainer.outerWidth(),f=this.$outerContainer.outerHeight(),g=a+this.containerPadding.left+this.containerPadding.right+this.imageBorderWidth.left+this.imageBorderWidth.right,h=b+this.containerPadding.top+this.containerPadding.bottom+this.imageBorderWidth.top+this.imageBorderWidth.bottom;e!==g||f!==h?this.$outerContainer.animate({width:g,height:h},this.options.resizeDuration,"swing",function(){c()}):c()},b.prototype.showImage=function(){this.$lightbox.find(".lb-loader").stop(!0).hide(),this.$lightbox.find(".lb-image").fadeIn(this.options.imageFadeDuration),this.updateNav(),this.updateDetails(),this.preloadNeighboringImages(),this.enableKeyboardNav()},b.prototype.updateNav=function(){var a=!1;try{document.createEvent("TouchEvent"),a=!!this.options.alwaysShowNavOnTouchDevices}catch(a){}this.$lightbox.find(".lb-nav").show(),this.album.length>1&&(this.options.wrapAround?(a&&this.$lightbox.find(".lb-prev, .lb-next").css("opacity","1"),this.$lightbox.find(".lb-prev, .lb-next").show()):(this.currentImageIndex>0&&(this.$lightbox.find(".lb-prev").show(),a&&this.$lightbox.find(".lb-prev").css("opacity","1")),this.currentImageIndex<this.album.length-1&&(this.$lightbox.find(".lb-next").show(),a&&this.$lightbox.find(".lb-next").css("opacity","1"))))},b.prototype.updateDetails=function(){var b=this;if(void 0!==this.album[this.currentImageIndex].title&&""!==this.album[this.currentImageIndex].title){var c=this.$lightbox.find(".lb-caption");this.options.sanitizeTitle?c.text(this.album[this.currentImageIndex].title):c.html(this.album[this.currentImageIndex].title),c.fadeIn("fast").find("a").on("click",function(b){void 0!==a(this).attr("target")?window.open(a(this).attr("href"),a(this).attr("target")):location.href=a(this).attr("href")})}if(this.album.length>1&&this.options.showImageNumberLabel){var d=this.imageCountLabel(this.currentImageIndex+1,this.album.length);this.$lightbox.find(".lb-number").text(d).fadeIn("fast")}else this.$lightbox.find(".lb-number").hide();this.$outerContainer.removeClass("animating"),this.$lightbox.find(".lb-dataContainer").fadeIn(this.options.resizeDuration,function(){return b.sizeOverlay()})},b.prototype.preloadNeighboringImages=function(){if(this.album.length>this.currentImageIndex+1){(new Image).src=this.album[this.currentImageIndex+1].link}if(this.currentImageIndex>0){(new Image).src=this.album[this.currentImageIndex-1].link}},b.prototype.enableKeyboardNav=function(){a(document).on("keyup.keyboard",a.proxy(this.keyboardAction,this))},b.prototype.disableKeyboardNav=function(){a(document).off(".keyboard")},b.prototype.keyboardAction=function(a){var b=a.keyCode,c=String.fromCharCode(b).toLowerCase();27===b||c.match(/x|o|c/)?this.end():"p"===c||37===b?0!==this.currentImageIndex?this.changeImage(this.currentImageIndex-1):this.options.wrapAround&&this.album.length>1&&this.changeImage(this.album.length-1):"n"!==c&&39!==b||(this.currentImageIndex!==this.album.length-1?this.changeImage(this.currentImageIndex+1):this.options.wrapAround&&this.album.length>1&&this.changeImage(0))},b.prototype.end=function(){this.disableKeyboardNav(),a(window).off("resize",this.sizeOverlay),this.$lightbox.fadeOut(this.options.fadeDuration),this.$overlay.fadeOut(this.options.fadeDuration),a("select, object, embed").css({visibility:"visible"}),this.options.disableScrolling&&a("html").removeClass("lb-disable-scrolling")},new b});
 
 /*-------jquery nice select js-------------*/
-/*
-  jQuery Nice Select - v1.0
- */
-!function(e){e.fn.niceSelect=function(t){function s(t){t.after(e("<div></div>").addClass("nice-select").addClass(t.attr("class")||"").addClass(t.attr("disabled")?"disabled":"").attr("tabindex",t.attr("disabled")?null:"0").html('<span class="current"></span><ul class="list"></ul>'));var s=t.next(),n=t.find("option"),i=t.find("option:selected");s.find(".current").html(i.data("display")||i.text()),n.each(function(t){var n=e(this),i=n.data("display");s.find("ul").append(e("<li></li>").attr("data-value",n.val()).attr("data-display",i||null).addClass("option"+(n.is(":selected")?" selected":"")+(n.is(":disabled")?" disabled":"")).html(n.text()))})}if("string"==typeof t)return"update"==t?this.each(function(){var t=e(this),n=e(this).next(".nice-select"),i=n.hasClass("open");n.length&&(n.remove(),s(t),i&&t.next().trigger("click"))}):"destroy"==t?(this.each(function(){var t=e(this),s=e(this).next(".nice-select");s.length&&(s.remove(),t.css("display",""))}),0==e(".nice-select").length&&e(document).off(".nice_select")):console.log('Method "'+t+'" does not exist.'),this;this.hide(),this.each(function(){var t=e(this);t.next().hasClass("nice-select")||s(t)}),e(document).off(".nice_select"),e(document).on("click.nice_select",".nice-select",function(t){var s=e(this);e(".nice-select").not(s).removeClass("open"),s.toggleClass("open"),s.hasClass("open")?(s.find(".option"),s.find(".focus").removeClass("focus"),s.find(".selected").addClass("focus")):s.focus()}),e(document).on("click.nice_select",function(t){0===e(t.target).closest(".nice-select").length&&e(".nice-select").removeClass("open").find(".option")}),e(document).on("click.nice_select",".nice-select .option:not(.disabled)",function(t){var s=e(this),n=s.closest(".nice-select");n.find(".selected").removeClass("selected"),s.addClass("selected");var i=s.data("display")||s.text();n.find(".current").text(i),n.prev("select").val(s.data("value")).trigger("change")}),e(document).on("keydown.nice_select",".nice-select",function(t){var s=e(this),n=e(s.find(".focus")||s.find(".list .option.selected"));if(32==t.keyCode||13==t.keyCode)return s.hasClass("open")?n.trigger("click"):s.trigger("click"),!1;if(40==t.keyCode){if(s.hasClass("open")){var i=n.nextAll(".option:not(.disabled)").first();i.length>0&&(s.find(".focus").removeClass("focus"),i.addClass("focus"))}else s.trigger("click");return!1}if(38==t.keyCode){if(s.hasClass("open")){var l=n.prevAll(".option:not(.disabled)").first();l.length>0&&(s.find(".focus").removeClass("focus"),l.addClass("focus"))}else s.trigger("click");return!1}if(27==t.keyCode)s.hasClass("open")&&s.trigger("click");else if(9==t.keyCode&&s.hasClass("open"))return!1});var n=document.createElement("a").style;return n.cssText="pointer-events:auto","auto"!==n.pointerEvents&&e("html").addClass("no-csspointerevents"),this}}(jQuery);
+/*  jQuery Nice Select - v1.1.0
+https://github.com/hernansartorio/jquery-nice-select
+Made by Hernán Sartorio  */
 
+(function($) {
+
+    $.fn.niceSelect = function(method) {
+
+        // Methods
+        if (typeof method == 'string') {
+            if (method == 'update') {
+                this.each(function() {
+                    var $select = $(this);
+                    var $dropdown = $(this).next('.nice-select');
+                    var open = $dropdown.hasClass('open');
+
+                    if ($dropdown.length) {
+                        $dropdown.remove();
+                        create_nice_select($select);
+
+                        if (open) {
+                            $select.next().trigger('click');
+                        }
+                    }
+                });
+            } else if (method == 'destroy') {
+                this.each(function() {
+                    var $select = $(this);
+                    var $dropdown = $(this).next('.nice-select');
+
+                    if ($dropdown.length) {
+                        $dropdown.remove();
+                        $select.css('display', '');
+                    }
+                });
+                if ($('.nice-select').length == 0) {
+                    $(document).off('.nice_select');
+                }
+            } else {
+                console.log('Method "' + method + '" does not exist.')
+            }
+            return this;
+        }
+
+        // Hide native select
+        this.hide();
+
+        // Create custom markup
+        this.each(function() {
+            var $select = $(this);
+
+            if (!$select.next().hasClass('nice-select')) {
+                create_nice_select($select);
+            }
+        });
+
+        function create_nice_select($select) {
+            $select.after($('<div></div>')
+                .addClass('nice-select')
+                .addClass($select.attr('class') || '')
+                .addClass($select.attr('disabled') ? 'disabled' : '')
+                .addClass($select.attr('multiple') ? 'has-multiple' : '')
+                .attr('tabindex', $select.attr('disabled') ? null : '0')
+                .html($select.attr('multiple') ? '<span class="multiple-options"></span><div class="nice-select-search-box"><input type="text" class="nice-select-search" placeholder="Search..."/></div><ul class="list"></ul>' : '<span class="current"></span><div class="nice-select-search-box"><input type="text" class="nice-select-search" placeholder="Search..."/></div><ul class="list"></ul>')
+            );
+
+            var $dropdown = $select.next();
+            var $options = $select.find('option');
+            if ($select.attr('multiple')) {
+                var $selected = $select.find('option:selected');
+                var $selected_html = '';
+                $selected.each(function() {
+                    $selected_option = $(this);
+                    $selected_text = $selected_option.data('display') ||  $selected_option.text();
+                    $selected_html += '<span class="current">' + $selected_text + '</span>';
+                });
+                $select_placeholder = $select.data('placeholder') || $select.attr('placeholder');
+                $select_placeholder = $select_placeholder == '' ? 'Select' : $select_placeholder;
+                $selected_html = $selected_html == '' ? $select_placeholder : $selected_html;
+                $dropdown.find('.multiple-options').html($selected_html);
+            } else {
+                var $selected = $select.find('option:selected');
+                $dropdown.find('.current').html($selected.data('display') ||  $selected.text());
+            }
+
+
+            $options.each(function(i) {
+                var $option = $(this);
+                var display = $option.data('display');
+
+                $dropdown.find('ul').append($('<li></li>')
+                    .attr('data-value', $option.val())
+                    .attr('data-display', (display || null))
+                    .addClass('option' +
+                        ($option.is(':selected') ? ' selected' : '') +
+                        ($option.is(':disabled') ? ' disabled' : ''))
+                    .html($option.text())
+                );
+            });
+        }
+
+        /* Event listeners */
+
+        // Unbind existing events in case that the plugin has been initialized before
+        $(document).off('.nice_select');
+
+        // Open/close
+        $(document).on('click.nice_select', '.nice-select', function(event) {
+            var $dropdown = $(this);
+
+            $('.nice-select').not($dropdown).removeClass('open');
+            $dropdown.toggleClass('open');
+
+            if ($dropdown.hasClass('open')) {
+                $dropdown.find('.option');
+                $dropdown.find('.nice-select-search').val('');
+                $dropdown.find('.nice-select-search').focus();
+                $dropdown.find('.focus').removeClass('focus');
+                $dropdown.find('.selected').addClass('focus');
+                $dropdown.find('ul li').show();
+            } else {
+                $dropdown.focus();
+            }
+        });
+
+        $(document).on('click', '.nice-select-search-box', function(event) {
+            event.stopPropagation();
+            return false;
+        });
+        $(document).on('keyup.nice-select-search', '.nice-select', function() {
+            var $self = $(this);
+            var $text = $self.find('.nice-select-search').val();
+            var $options = $self.find('ul li');
+            if ($text == '')
+                $options.show();
+            else if ($self.hasClass('open')) {
+                $text = $text.toLowerCase();
+                var $matchReg = new RegExp($text);
+                if (0 < $options.length) {
+                    $options.each(function() {
+                        var $this = $(this);
+                        var $optionText = $this.text().toLowerCase();
+                        var $matchCheck = $matchReg.test($optionText);
+                        $matchCheck ? $this.show() : $this.hide();
+                    })
+                } else {
+                    $options.show();
+                }
+            }
+            $self.find('.option'),
+                $self.find('.focus').removeClass('focus'),
+                $self.find('.selected').addClass('focus');
+        })
+
+        // Close when clicking outside
+        $(document).on('click.nice_select', function(event) {
+            if ($(event.target).closest('.nice-select').length === 0) {
+                $('.nice-select').removeClass('open').find('.option');
+            }
+        });
+
+        // Option click
+        $(document).on('click.nice_select', '.nice-select .option:not(.disabled)', function(event) {
+            var $option = $(this);
+            var $dropdown = $option.closest('.nice-select');
+            if ($dropdown.hasClass('has-multiple')) {
+                if ($option.hasClass('selected')) {
+                    $option.removeClass('selected');
+                } else {
+                    $option.addClass('selected');
+                }
+                $selected_html = '';
+                $selected_values = [];
+                $dropdown.find('.selected').each(function() {
+                    $selected_option = $(this);
+                    var text = $selected_option.data('display') ||  $selected_option.text()
+                    $selected_html += '<span class="current">' + text + '</span>';
+                    $selected_values.push($selected_option.data('value'));
+                });
+                $select_placeholder = $dropdown.prev('select').data('placeholder') || $dropdown.prev('select').attr('placeholder');
+                $select_placeholder = $select_placeholder == '' ? 'Select' : $select_placeholder;
+                $selected_html = $selected_html == '' ? $select_placeholder : $selected_html;
+                $dropdown.find('.multiple-options').html($selected_html);
+                $dropdown.prev('select').val($selected_values).trigger('change');
+            } else {
+                $dropdown.find('.selected').removeClass('selected');
+                $option.addClass('selected');
+                var text = $option.data('display') || $option.text();
+                $dropdown.find('.current').text(text);
+                $dropdown.prev('select').val($option.data('value')).trigger('change');
+            }
+        });
+
+        // Keyboard events
+        $(document).on('keydown.nice_select', '.nice-select', function(event) {
+            var $dropdown = $(this);
+            var $focused_option = $($dropdown.find('.focus') || $dropdown.find('.list .option.selected'));
+
+            // Space or Enter
+            if (event.keyCode == 32 || event.keyCode == 13) {
+                if ($dropdown.hasClass('open')) {
+                    $focused_option.trigger('click');
+                } else {
+                    $dropdown.trigger('click');
+                }
+                return false;
+                // Down
+            } else if (event.keyCode == 40) {
+                if (!$dropdown.hasClass('open')) {
+                    $dropdown.trigger('click');
+                } else {
+                    var $next = $focused_option.nextAll('.option:not(.disabled)').first();
+                    if ($next.length > 0) {
+                        $dropdown.find('.focus').removeClass('focus');
+                        $next.addClass('focus');
+                    }
+                }
+                return false;
+                // Up
+            } else if (event.keyCode == 38) {
+                if (!$dropdown.hasClass('open')) {
+                    $dropdown.trigger('click');
+                } else {
+                    var $prev = $focused_option.prevAll('.option:not(.disabled)').first();
+                    if ($prev.length > 0) {
+                        $dropdown.find('.focus').removeClass('focus');
+                        $prev.addClass('focus');
+                    }
+                }
+                return false;
+                // Esc
+            } else if (event.keyCode == 27) {
+                if ($dropdown.hasClass('open')) {
+                    $dropdown.trigger('click');
+                }
+                // Tab
+            } else if (event.keyCode == 9) {
+                if ($dropdown.hasClass('open')) {
+                    return false;
+                }
+            }
+        });
+
+        // Detect CSS pointer-events support, for IE <= 10. From Modernizr.
+        var style = document.createElement('a').style;
+        style.cssText = 'pointer-events:auto';
+        if (style.pointerEvents !== 'auto') {
+            $('html').addClass('no-csspointerevents');
+        }
+
+        return this;
+
+    };
+
+}(jQuery));
 
 /*----------------Countdown js----------*/
 !function(a){"use strict";"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){"use strict";function b(a){if(a instanceof Date)return a;if(String(a).match(g))return String(a).match(/^[0-9]*$/)&&(a=Number(a)),String(a).match(/\-/)&&(a=String(a).replace(/\-/g,"/")),new Date(a);throw new Error("Couldn't cast `"+a+"` to a date object.")}function c(a){var b=a.toString().replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1");return new RegExp(b)}function d(a){return function(b){var d=b.match(/%(-|!)?[A-Z]{1}(:[^;]+;)?/gi);if(d)for(var f=0,g=d.length;f<g;++f){var h=d[f].match(/%(-|!)?([a-zA-Z]{1})(:[^;]+;)?/),j=c(h[0]),k=h[1]||"",l=h[3]||"",m=null;h=h[2],i.hasOwnProperty(h)&&(m=i[h],m=Number(a[m])),null!==m&&("!"===k&&(m=e(l,m)),""===k&&m<10&&(m="0"+m.toString()),b=b.replace(j,m.toString()))}return b=b.replace(/%%/,"%")}}function e(a,b){var c="s",d="";return a&&(a=a.replace(/(:|;|\s)/gi,"").split(/\,/),1===a.length?c=a[0]:(d=a[0],c=a[1])),Math.abs(b)>1?c:d}var f=[],g=[],h={precision:100,elapse:!1,defer:!1};g.push(/^[0-9]*$/.source),g.push(/([0-9]{1,2}\/){2}[0-9]{4}( [0-9]{1,2}(:[0-9]{2}){2})?/.source),g.push(/[0-9]{4}([\/\-][0-9]{1,2}){2}( [0-9]{1,2}(:[0-9]{2}){2})?/.source),g=new RegExp(g.join("|"));var i={Y:"years",m:"months",n:"daysToMonth",d:"daysToWeek",w:"weeks",W:"weeksToMonth",H:"hours",M:"minutes",S:"seconds",D:"totalDays",I:"totalHours",N:"totalMinutes",T:"totalSeconds"},j=function(b,c,d){this.el=b,this.$el=a(b),this.interval=null,this.offset={},this.options=a.extend({},h),this.instanceNumber=f.length,f.push(this),this.$el.data("countdown-instance",this.instanceNumber),d&&("function"==typeof d?(this.$el.on("update.countdown",d),this.$el.on("stoped.countdown",d),this.$el.on("finish.countdown",d)):this.options=a.extend({},h,d)),this.setFinalDate(c),this.options.defer===!1&&this.start()};a.extend(j.prototype,{start:function(){null!==this.interval&&clearInterval(this.interval);var a=this;this.update(),this.interval=setInterval(function(){a.update.call(a)},this.options.precision)},stop:function(){clearInterval(this.interval),this.interval=null,this.dispatchEvent("stoped")},toggle:function(){this.interval?this.stop():this.start()},pause:function(){this.stop()},resume:function(){this.start()},remove:function(){this.stop.call(this),f[this.instanceNumber]=null,delete this.$el.data().countdownInstance},setFinalDate:function(a){this.finalDate=b(a)},update:function(){if(0===this.$el.closest("html").length)return void this.remove();var b,c=void 0!==a._data(this.el,"events"),d=new Date;b=this.finalDate.getTime()-d.getTime(),b=Math.ceil(b/1e3),b=!this.options.elapse&&b<0?0:Math.abs(b),this.totalSecsLeft!==b&&c&&(this.totalSecsLeft=b,this.elapsed=d>=this.finalDate,this.offset={seconds:this.totalSecsLeft%60,minutes:Math.floor(this.totalSecsLeft/60)%60,hours:Math.floor(this.totalSecsLeft/60/60)%24,days:Math.floor(this.totalSecsLeft/60/60/24)%7,daysToWeek:Math.floor(this.totalSecsLeft/60/60/24)%7,daysToMonth:Math.floor(this.totalSecsLeft/60/60/24%30.4368),weeks:Math.floor(this.totalSecsLeft/60/60/24/7),weeksToMonth:Math.floor(this.totalSecsLeft/60/60/24/7)%4,months:Math.floor(this.totalSecsLeft/60/60/24/30.4368),years:Math.abs(this.finalDate.getFullYear()-d.getFullYear()),totalDays:Math.floor(this.totalSecsLeft/60/60/24),totalHours:Math.floor(this.totalSecsLeft/60/60),totalMinutes:Math.floor(this.totalSecsLeft/60),totalSeconds:this.totalSecsLeft},this.options.elapse||0!==this.totalSecsLeft?this.dispatchEvent("update"):(this.stop(),this.dispatchEvent("finish")))},dispatchEvent:function(b){var c=a.Event(b+".countdown");c.finalDate=this.finalDate,c.elapsed=this.elapsed,c.offset=a.extend({},this.offset),c.strftime=d(this.offset),this.$el.trigger(c)}}),a.fn.countdown=function(){var b=Array.prototype.slice.call(arguments,0);return this.each(function(){var c=a(this).data("countdown-instance");if(void 0!==c){var d=f[c],e=b[0];j.prototype.hasOwnProperty(e)?d[e].apply(d,b.slice(1)):null===String(e).match(/^[$A-Z_][0-9A-Z_$]*$/i)?(d.setFinalDate.call(d,e),d.start()):a.error("Method %s does not exist on jQuery.countdown".replace(/\%s/gi,e))}else new j(this,b[0],b[1])})}});

@@ -673,7 +673,7 @@
     /*---------------------------------
                Nice select
     -----------------------------------*/
-    $('select').niceSelect();
+    //$('select').niceSelect();
 
     /*-------------------------------------
               Quantity Slider
@@ -690,36 +690,6 @@
         if (quantity > 0) {
             $(this).parent().siblings("input.input-number").val(quantity - 1);
         }
-    });
-
-    /*---------------------------------
-              Load Categories
-     ----------------------------------*/
-
-    const apiBasePath = "https://api.comply-online.com/api/v1";
-    $.ajax({
-        method: "GET",
-        url: `${apiBasePath}/categories`,
-        dataType: "json",
-        // beforeSend: (jqXHR, settings) => {
-        // jqXHR.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
-        // },
-        cache: false
-    })
-    .done((data, textStatus, jqXHR) => {
-        console.log("Text Status:", textStatus);
-        console.log("Data:", data);
-        console.log("jqXHR:", jqXHR);
-        for (const item of data) {
-            $("#categories").append($("<option/>", { text: item.name, value: item.id }));
-            //$("#cards").append(createCard(item));
-        }
-        $('select').niceSelect('update');
-    })
-    .fail((jqXHR, textStatus, errorThrown) => {
-        console.error("jqXHR:", jqXHR);
-        console.error("Text Status:", textStatus);
-        console.error("Error Thrown:", errorThrown);
     });
 
 }(jQuery));

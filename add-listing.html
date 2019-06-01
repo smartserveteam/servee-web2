@@ -16,8 +16,10 @@
     <link href="css/style.css" rel="stylesheet" />
     <!--color switcher css-->
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
+    <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
     <!-- Document Title -->
-    <title>listagram - Directory Listing HTML Template</title>
+    <title>Servee.io</title>
 </head>
 
 <body>
@@ -223,15 +225,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Category</label>
-                                            <div class="nice-select filter-input" tabindex="0"><span class="current">Select Categories</span>
-                                                <ul class="list">
-                                                    <li class="option selected focus">Plumbers</li>
-                                                    <li class="option">Electricians</li>
-                                                    <li class="option">Wedding Planners</li>
-                                                    <li class="option">Accountants</li>
-                                                    <li class="option">Call Center Agent</li>
-                                                    <li class="option">Fitness Coach</li>
-                                                </ul>
+                                            <div tabindex="0">
+                                                <select id="categories" class="select2 form-control" multiple="multiple"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -1061,8 +1056,49 @@
     <script src="js/plugin.js"></script>
     <!--google maps-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
+    <!--select2-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.full.min.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
+    <!-- this page's script -->
+    <script>
+
+        const apiBasePath = "https://api.comply-online.com/api/v1";
+
+        // Load categories
+        $.ajax({
+            method: "GET",
+            url: `${apiBasePath}/categories`,
+            dataType: "json",
+            cache: false
+        })
+        .done((data, textStatus, jqXHR) => {
+            console.log("Text Status:", textStatus);
+            console.log("Data:", data);
+            console.log("jqXHR:", jqXHR);
+
+            // Transform output
+            var arr = [];
+            $.each(data, (index, value) => {
+                arr.push({
+                    text: value.name,
+                    id: value.id
+                });
+            });
+
+            // Load categories onto dropdown
+            $('#categories').select2({
+                placeholder: "Select one or more categories",
+                data: arr
+            });
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            console.error("jqXHR:", jqXHR);
+            console.error("Text Status:", textStatus);
+            console.error("Error Thrown:", errorThrown);
+        });
+
+    </script>
     <!--Scripts ends-->
 </body>
 
