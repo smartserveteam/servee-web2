@@ -17,7 +17,7 @@
     <!--color switcher css-->
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
     <!-- Document Title -->
-    <title>listagram - Directory Listing HTML Template</title>
+    <title>Servee.io</title>
 </head>
 
 <body>
@@ -218,8 +218,8 @@
                                             <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
                                         </div>
                                         <div class="res-box text-left">
-                                            <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-                                            <label for="remember">I've read and accept terms &amp; conditions</label>
+                                            <input type="checkbox" tabindex="3" class="" name="accept" id="accept">
+                                            <label for="acttp">I have read and accept the terms &amp; conditions</label>
                                         </div>
                                         <div class="res-box text-center mar-top-30">
                                             <button type="submit" class="btn v3"><i class="ion-android-checkmark-circle"></i>Sign Up</button>
@@ -356,6 +356,42 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
+    <!-- This page's script -->
+    <script>
+    
+    const apiBasePath = "https://api.comply-online.com/api/v1";
+
+    $("#login-form").submit(event => {
+        event.preventDefault();
+        $.ajax({
+          method: "POST",
+          url: `${apiBasePath}/oauth/login`,
+          contentType: "application/json",
+          dataType: "json",
+          cache: false,
+          data: JSON.stringify({
+            email: $("#email").val(),
+            password: $("#password").val()
+          })
+        })
+          .done((data, textStatus, jqXHR) => {
+            console.log("Text Status:", textStatus);
+            console.log("Data:", data);
+            console.log("jqXHR:", jqXHR);
+            console.log("Token:", data.token);
+            $("#token").text(`Token: ${data.token}`);
+            localStorage.setItem("token", data.token);
+            console.log("Decoded:", parseJwt(data.token));
+            $(location).attr("href", "index.html");
+          })
+          .fail((jqXHR, textStatus, errorThrown) => {
+            console.error("jqXHR:", jqXHR);
+            console.error("Text Status:", textStatus);
+            console.error("Error Thrown:", errorThrown);
+          });
+      });
+
+    </script>
     <!--Scripts ends-->
 </body>
 
