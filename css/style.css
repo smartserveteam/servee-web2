@@ -6246,7 +6246,7 @@ ul.business-hours li span {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     background: #fff;
-    display: inline-block;
+    display: block;
 
 }
 
