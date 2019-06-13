@@ -151,7 +151,7 @@
                                             </div>
                                         </div> -->
                                             <div
-                                                class="alert alert-danger alert-dismissible collapse"
+                                                class="alert alert-danger collapse"
                                                 id="alert-login-error"
                                                 role="alert"
                                             >
@@ -596,11 +596,11 @@
                     dataType: "json",
                     cache: false,
                     data: JSON.stringify({
-                        email: $("#login-form #email").val(),
+                        email: $("#register-form #email").val(),
                         password: $("#password").val(),
                     }),
                 })
-                    .done((data, textStatus, jqXHR) => {
+                    .done(async(data, textStatus, jqXHR) => {
                         console.log("Text Status:", textStatus)
                         console.log("Data:", data)
                         console.log("jqXHR:", jqXHR)
