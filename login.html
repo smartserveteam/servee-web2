@@ -605,8 +605,7 @@
                         console.log("Data:", data)
                         console.log("jqXHR:", jqXHR)
                         if (jqXHR.status == 201) {
-                            //TODO Show alert to show that user was created
-                            //$(location).attr("href", "login.html");
+                            $(location).attr("href", "registration-confirmation.html");
                         }
                     })
                     .fail((jqXHR, textStatus, errorThrown) => {
