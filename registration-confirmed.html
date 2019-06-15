@@ -243,7 +243,7 @@
             }
         };
 
-        var emailAddress = getUrlParameter("email");
+        var userId = getUrlParameter("id");
 
         $.ajax({
             method: "POST",
@@ -252,24 +252,25 @@
             dataType: "json",
             cache: false,
             data: JSON.stringify({
-                email: emailAddress
+                id: userId
             }),
         })
             .done((data, textStatus, jqXHR) => {
                 console.debug("Text Status:", textStatus)
                 console.debug("Data:", data)
                 console.debug("jqXHR:", jqXHR)
-                $(location).attr("href", "login.html");
+                if (jqXHR.status == 200) {
+                    $(location).attr("href", "login.html");
+                } else {
+                    //TODO Show error message
+                }
                 //TODO Add message to confirm registration?
             })
             .fail((jqXHR, textStatus, errorThrown) => {
                 console.error("jqXHR:", jqXHR)
                 console.error("Text Status:", textStatus)
                 console.error("Error Thrown:", errorThrown)
-                $("#alert-login-message").text(
-                    jqXHR.responseJSON.message
-                )
-                $("#alert-login-error").show()
+                //TODO Show error message
             });
 
     </script>
