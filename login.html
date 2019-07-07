@@ -1,87 +1,141 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
+    <head>
+        <!-- Metas -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="LionCoders" />
+        <!-- Links -->
+        <link rel="icon" type="image/png" href="#" />
+        <!-- google fonts-->
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800"
+            rel="stylesheet"
+        />
+        <!-- Plugins CSS -->
+        <link href="css/plugin.css" rel="stylesheet" />
+        <!-- style CSS -->
+        <link href="css/style.css" rel="stylesheet" />
+        <!--color switcher css-->
+        <link
+            rel="stylesheet"
+            href="css/switcher/skin-aqua.css"
+            media="screen"
+            id="style-colors"
+        />
+        <!-- Document Title -->
+        <title>Servee.io</title>
+    </head>
 
-<head>
-    <!-- Metas -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="LionCoders" />
-    <!-- Links -->
-    <link rel="icon" type="image/png" href="#" />
-    <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
-    <!-- Plugins CSS -->
-    <link href="css/plugin.css" rel="stylesheet" />
-    <!-- style CSS -->
-    <link href="css/style.css" rel="stylesheet" />
-    <!--color switcher css-->
-    <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
-    <!-- Document Title -->
-    <title>Servee.io</title>
-</head>
-
-<body>
-    <!--Page Wrapper starts-->
-    <div class="page-wrapper">
-        <!--header starts-->
-        <header class="transparent scroll-hide">
-            <!--Main Menu starts-->
-            <div class="site-navbar-wrap v2">
-                <div class="container">
-                    <div class="site-navbar">
-                        <div class="row align-items-center">
-                            <div class="col-md-4 col-6">
-                                <a class="navbar-brand" href="/"><img src="images/logo-black.png" alt="logo"
-                                        class="img-fluid"></a>
+    <body>
+        <!--Page Wrapper starts-->
+        <div class="page-wrapper">
+            <!--header starts-->
+            <header class="transparent scroll-hide">
+                <!--Main Menu starts-->
+                <div class="site-navbar-wrap v2">
+                    <div class="container">
+                        <div class="site-navbar">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 col-6">
+                                    <a class="navbar-brand" href="/"
+                                        ><img
+                                            src="images/logo-black.png"
+                                            alt="logo"
+                                            class="img-fluid"
+                                    /></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--mobile-menu starts -->
-                    <div class="site-mobile-menu">
-                        <div class="site-mobile-menu-header">
-                            <div class="site-mobile-menu-close  js-menu-toggle">
-                                <span class="ion-ios-close-empty"></span>
+                        <!--mobile-menu starts -->
+                        <div class="site-mobile-menu">
+                            <div class="site-mobile-menu-header">
+                                <div
+                                    class="site-mobile-menu-close  js-menu-toggle"
+                                >
+                                    <span class="ion-ios-close-empty"></span>
+                                </div>
                             </div>
+                            <div class="site-mobile-menu-body"></div>
                         </div>
-                        <div class="site-mobile-menu-body"></div>
+                        <!--mobile-menu ends-->
                     </div>
-                    <!--mobile-menu ends-->
                 </div>
-            </div>
-            <!--Main Menu ends-->
-        </header>
-        <!--Header ends-->
-        <!--User Login section starts-->
-        <div class="user-login-section section-padding bg-fixed"
-            style="background-image: url(images/header/hero-5.jpg)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1  text-center">
-                        <div class="login-wrapper">
-                            <ul class="ui-list nav nav-tabs justify-content-center mar-bot-30" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#login" role="tab"
-                                        aria-selected="true">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#register" role="tab"
-                                        aria-selected="false">Register</a>
-                                </li>
-                            </ul>
-                            <div class="ui-dash tab-content">
-                                <div class="tab-pane fade show active" id="login" role="tabpanel">
-                                    <p>Don't have an account? Click on Register above to create one
-                                    </p>
-                                    <form id="login-form" action="#" method="post">
-                                        <div class="form-group">
-                                            <input type="text" name="email" id="email" tabindex="1" class="form-control"
-                                                placeholder="email" value="" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" id="password" tabindex="2"
-                                                class="form-control" placeholder="Password">
-                                        </div>
-                                        <div class="row mar-top-20">
+                <!--Main Menu ends-->
+            </header>
+            <!--Header ends-->
+            <!--User Login section starts-->
+            <div
+                class="user-login-section section-padding bg-fixed"
+                style="background-image: url(images/header/hero-5.jpg)"
+            >
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1  text-center">
+                            <div class="login-wrapper">
+                                <ul
+                                    class="ui-list nav nav-tabs justify-content-center mar-bot-30"
+                                    role="tablist"
+                                >
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link active"
+                                            data-toggle="tab"
+                                            href="#login"
+                                            role="tab"
+                                            aria-selected="true"
+                                            >Login</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            data-toggle="tab"
+                                            href="#register"
+                                            role="tab"
+                                            aria-selected="false"
+                                            >Register</a
+                                        >
+                                    </li>
+                                </ul>
+                                <div class="ui-dash tab-content">
+                                    <div
+                                        class="tab-pane fade show active"
+                                        id="login"
+                                        role="tabpanel"
+                                    >
+                                        <p>
+                                            Don't have an account? Click on
+                                            Register above to create one
+                                        </p>
+                                        <form
+                                            id="login-form"
+                                            action="#"
+                                            method="post"
+                                        >
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    name="email"
+                                                    id="email"
+                                                    tabindex="1"
+                                                    class="form-control"
+                                                    placeholder="email"
+                                                    value=""
+                                                    required
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    id="password"
+                                                    tabindex="2"
+                                                    class="form-control"
+                                                    placeholder="Password"
+                                                />
+                                            </div>
+                                            <!-- <div class="row mar-top-20">
                                             <div class="col-md-6 col-12 text-left">
                                                 <div class="res-box">
                                                     <input type="checkbox" tabindex="3" class="" name="remember"
@@ -162,6 +216,11 @@
                     </div>
                 </div>
             </div>
+            <!--User login section ends-->
+            <!--Login section ends-->
+            <!-- Scroll to top starts-->
+            <span class="scrolltotop"><i class="ion-arrow-up-c"></i></span>
+            <!-- Scroll to top ends-->
         </div>
         <!--User login section ends-->
         <!-- Code Confirmation Modal -->
@@ -212,93 +271,162 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="footer-content nav">
-                            <h2 class="title">Helpful Links</h2>
-                            <ul class="list">
-                                <li><a class="link-hov style2" href="#">Login</a></li>
-                                <li><a class="link-hov style2" href="#">My Account</a></li>
-                                <li><a class="link-hov style2" href="#">Add Listing</a></li>
-                                <li><a class="link-hov style2" href="#">Privacy policy</a></li>
-                            </ul>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="footer-content nav">
+                                <h2 class="title">Helpful Links</h2>
+                                <ul class="list">
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Login</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >My Account</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Add Listing</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Privacy policy</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="footer-content nav">
+                                <h2 class="title">Category</h2>
+                                <ul class="list">
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Shop</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Travel</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Sport</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="link-hov style2" href="#"
+                                            >Restaurant</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="footer-content nav">
+                                <h2 class="title">Contact us</h2>
+                                <ul class="list footer-list">
+                                    <li>
+                                        <div class="contact-info">
+                                            <div class="icon">
+                                                <i class="ion-ios-location"></i>
+                                            </div>
+                                            <div class="text">
+                                                13th North Ave, Florida, USA
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="contact-info">
+                                            <div class="icon">
+                                                <i class="ion-email"></i>
+                                            </div>
+                                            <div class="text">
+                                                <a href="#"
+                                                    >info@listagram.com</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="contact-info">
+                                            <div class="icon">
+                                                <i
+                                                    class="ion-ios-telephone"
+                                                ></i>
+                                            </div>
+                                            <div class="text">
+                                                +44 078 767 595
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="social-buttons style2">
+                                    <li>
+                                        <a href="#"
+                                            ><i class="ion-social-facebook"></i
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><i class="ion-social-twitter"></i
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><i class="ion-social-pinterest"></i
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><i class="ion-social-youtube"></i
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><i class="ion-social-dribbble"></i
+                                        ></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="footer-content nav">
-                            <h2 class="title">Category</h2>
-                            <ul class="list">
-                                <li><a class="link-hov style2" href="#">Shop</a></li>
-                                <li><a class="link-hov style2" href="#">Travel</a></li>
-                                <li><a class="link-hov style2" href="#">Sport</a></li>
-                                <li><a class="link-hov style2" href="#">Restaurant</a></li>
-
-                            </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="payment-method">
+                                <img
+                                    src="images/payment/payment-1.png"
+                                    alt="..."
+                                />
+                                <img
+                                    src="images/payment/payment-2.png"
+                                    alt="..."
+                                />
+                                <img
+                                    src="images/payment/payment-3.png"
+                                    alt="..."
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="footer-content nav">
-                            <h2 class="title">Contact us</h2>
-                            <ul class="list footer-list">
-                                <li>
-                                    <div class="contact-info">
-                                        <div class="icon">
-                                            <i class="ion-ios-location"></i>
-                                        </div>
-                                        <div class="text">13th North Ave, Florida, USA</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="contact-info">
-                                        <div class="icon">
-                                            <i class="ion-email"></i>
-                                        </div>
-                                        <div class="text"><a href="#">info@listagram.com</a></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="contact-info">
-                                        <div class="icon">
-                                            <i class="ion-ios-telephone"></i>
-                                        </div>
-                                        <div class="text">+44 078 767 595</div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="social-buttons style2">
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                                <li><a href="#"><i class="ion-social-youtube"></i></a></li>
-                                <li><a href="#"><i class="ion-social-dribbble"></i></a></li>
+                        <div class="col-md-6 text-right sm-left">
+                            <ul class="additional-link">
+                                <li><a href="#">Terms &amp; Condition</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="login.html">Login</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="payment-method">
-                            <img src="images/payment/payment-1.png" alt="...">
-                            <img src="images/payment/payment-2.png" alt="...">
-                            <img src="images/payment/payment-3.png" alt="...">
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-right sm-left">
-                        <ul class="additional-link">
-                            <li><a href="#">Terms &amp; Condition</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="login.html">Login</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Footer ends-->
+        <!--Footer ends-->
 
     <!--Scripts starts-->
     <!--plugin js-->
@@ -452,18 +580,21 @@
             });
         });
 
-        function parseJwt(token) {
-            var base64Url = token.split(".")[1];
-            var base64 = decodeURIComponent(
-                atob(base64Url)
-                    .split("")
-                    .map(function (c) {
-                        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-                    })
-                    .join("")
-            );
-            return JSON.parse(base64);
-        }
+            function parseJwt(token) {
+                var base64Url = token.split(".")[1]
+                var base64 = decodeURIComponent(
+                    atob(base64Url)
+                        .split("")
+                        .map(function(c) {
+                            return (
+                                "%" +
+                                ("00" + c.charCodeAt(0).toString(16)).slice(-2)
+                            )
+                        })
+                        .join("")
+                )
+                return JSON.parse(base64)
+            }
 
         //#endregion
 
@@ -555,4 +686,70 @@
     <!--Scripts ends-->
 </body>
 
+            $("#register-form #email").on("keyup", () => {
+                checkSignUp()
+            })
+
+            $("#register-form #password").on("keyup", () => {
+                checkSignUp()
+            })
+
+            $("#register-form #confirm-password").on("keyup", () => {
+                checkSignUp()
+            })
+
+            $("#register-form #accept").change(() => {
+                checkSignUp()
+            })
+
+            function checkSignUp() {
+                readyToSignUp =
+                    $("#register-form #email").val().length > 0 &&
+                    $("#register-form #password").val().length > 0 &&
+                    $("#register-form #confirm-password").val().length > 0 &&
+                    $("#register-form #password").val() ==
+                        $("#register-form #confirm-password").val() &&
+                    $("#register-form #accept").prop("checked") == true
+                $("#register-form #register-submit").prop(
+                    "disabled",
+                    !readyToSignUp
+                )
+            }
+
+            // Register form submit
+            $("#register-form").submit(event => {
+                event.preventDefault()
+                $("#alert-register-error").hide()
+                $.ajax({
+                    method: "POST",
+                    url: `${apiBasePath}/oauth/register`,
+                    contentType: "application/json",
+                    dataType: "json",
+                    cache: false,
+                    data: JSON.stringify({
+                        email: $("#register-form #email").val(),
+                        password: $("#register-form #password").val(),
+                    }),
+                })
+                    .done(async(data, textStatus, jqXHR) => {
+                        console.log("Text Status:", textStatus)
+                        console.log("Data:", data)
+                        console.log("jqXHR:", jqXHR)
+                        if (jqXHR.status == 201) {
+                            $(location).attr("href", "registration-confirmation.html");
+                        }
+                    })
+                    .fail((jqXHR, textStatus, errorThrown) => {
+                        console.error("jqXHR:", jqXHR)
+                        console.error("Text Status:", textStatus)
+                        console.error("Error Thrown:", errorThrown)
+                        $("#alert-register-message").text(
+                            jqXHR.responseJSON.message
+                        )
+                        $("#alert-register-error").show()
+                    })
+            })
+        </script>
+        <!--Scripts ends-->
+    </body>
 </html>

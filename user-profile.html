@@ -4,12 +4,12 @@
 <head>
     <!-- Metas -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="LionCoders" />
     <!-- Links -->
     <link rel="icon" type="image/png" href="#" />
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet" />
     <!-- Plugins CSS -->
     <link href="css/plugin.css" rel="stylesheet" />
     <!-- style CSS -->
@@ -17,7 +17,7 @@
     <!--color switcher css-->
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
     <!-- Document Title -->
-    <title>listagram - Directory Listing HTML Template</title>
+    <title>Servee.io</title>
 </head>
 
 <body>
@@ -40,10 +40,10 @@
                     <div class="site-navbar">
                         <div class="row align-items-center">
                             <div class="col-md-4 col-6">
-                                <a class="navbar-brand" href="/"><img src="images/logo-black.png" alt="logo" class="img-fluid"></a>
+                                <a class="navbar-brand" href="/"><img src="images/logo-black.png" alt="logo" class="img-fluid" /></a>
                             </div>
                             <div class="col-md-8 col-6">
-                                <nav class="site-navigation float-left">
+                                <!-- <nav class="site-navigation float-left">
                                     <div class="container">
                                         <ul class="site-menu js-clone-nav d-none d-lg-block">
                                             <li class="has-children">
@@ -136,15 +136,15 @@
                                             <li class="d-lg-none"><a class="btn v1" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a></li>
                                         </ul>
                                     </div>
-                                </nav>
+                                </nav> -->
                                 <div class="d-lg-none sm-right">
                                     <a href="#" class="mobile-bar js-menu-toggle">
                                         <span class="ion-navicon"></span>
                                     </a>
                                 </div>
-                                <div class="add-list float-right">
+                                <!-- <div class="add-list float-right">
                                     <a class="btn v8" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -170,28 +170,29 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="user-titlebar">
                             <div class="user-avatar">
-                                <img src="images/clients/reviewer-1.png" alt="">
+                                <img src="images/clients/reviewer-1.png" alt="" />
                             </div>
                             <div class="user-name">
-                                <h4>Christine Evans</h4>
-                                <div class="list-ratings">
+                                <h4 id="name"></h4>
+                                <div>Created <span id="createdAt"></span></div>
+                                <!-- <div class="list-ratings">
                                     <span class="ion-android-star"></span>
                                     <span class="ion-android-star"></span>
                                     <span class="ion-android-star"></span>
                                     <span class="ion-android-star"></span>
                                     <span class="ion-android-star-half"></span>
                                     <a href="#">(31 Reviews)</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                    <!-- <div class="col-lg-6 col-md-12">
                         <div class="user-follow text-right md-left">
                             <p><span>29</span> Followers</p>
                             <p><span>13</span> Following</p>
                             <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -204,7 +205,7 @@
                         <div class="user_info_menu">
                             <ul class="nav nav-tabs list-details-tab" id="lionTab" role="tablist">
                                 <li class="nav-item active">
-                                    <a data-toggle="tab" href="#my-list">My Lists</a>
+                                    <a data-toggle="tab" href="#my-list">My Quotes</a>
                                 </li>
                                 <li class="nav-item">
                                     <a data-toggle="tab" href="#my-reviews">Reviews <span class="text-grey"></span></a>
@@ -219,102 +220,100 @@
                         </div>
 
                         <div class="tab-content mar-top-30" id="lionTabContent">
-                            <div class="tab-pane fade active show" id="my-list">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="similar-item mar-bot-40">
-                                            <img src="images/single-listing/park-hyatt.jpg" alt="...">
-                                            <div class="similar-title-box">
-                                                <h5><a href="#">Park Hyatt</a></h5>
-                                                <p><span class="price-amt">$89</span>/Avg</p>
-                                            </div>
-                                            <div class="customer-review">
-                                                <div class="rating-summary">
-                                                    <div class="rating-result" title="60%">
-                                                        <ul class="product-rating">
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p><i class="ion-ios-location"></i> 31st North St, Sydney, Australia</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="similar-item mar-bot-40">
-                                            <img src="images/single-listing/hilton.jpg" class="img-fluid" alt="...">
-                                            <div class="similar-title-box">
-                                                <h5><a href="#">Hilton Moorea</a></h5>
-                                                <p><span class="price-amt">$109</span>/Avg</p>
-                                            </div>
-                                            <div class="customer-review">
-                                                <div class="rating-summary">
-                                                    <div class="rating-result" title="60%">
-                                                        <ul class="product-rating">
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p><i class="ion-ios-location"></i> Hilton Ave, Miami, USA</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="similar-item mar-bot-40">
-                                            <img src="images/single-listing/lagoon-resort.jpg" class="img-fluid" alt="...">
-                                            <div class="similar-title-box">
-                                                <h5><a href="#">Lagoon Resort &amp; Spa</a></h5>
-                                                <p><span class="price-amt">$75</span>/Avg</p>
-                                            </div>
-                                            <div class="customer-review">
-                                                <div class="rating-summary">
-                                                    <div class="rating-result" title="60%">
-                                                        <ul class="product-rating">
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p><i class="ion-ios-location"></i> 75 Prince St, NY, USA</p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="similar-item mar-bot-40">
-                                            <img src="images/single-listing/westin.jpg" class="img-fluid" alt="...">
-                                            <div class="similar-title-box">
-                                                <h5><a href="#">The Westin Excelsior</a></h5>
-                                                <p><span class="price-amt">$89</span>/Avg</p>
-                                            </div>
-                                            <div class="customer-review">
-                                                <div class="rating-summary">
-                                                    <div class="rating-result" title="60%">
-                                                        <ul class="product-rating">
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                            <li><i class="ion-android-star-half"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p><i class="ion-ios-location"></i>21st Queens park,London UK</p>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                            <div class="tab-pane fade active show">
+                                <div class="row" id="quotes">
+                                    <!-- <div class="col-md-6">
+                      <div class="similar-item mar-bot-40">
+                        <img src="images/single-listing/park-hyatt.jpg" alt="..." />
+                        <div class="similar-title-box">
+                          <h5><a href="#">Park Hyatt</a></h5>
+                          <p><span class="price-amt">$89</span>/Avg</p>
+                        </div>
+                        <div class="customer-review">
+                          <div class="rating-summary">
+                            <div class="rating-result" title="60%">
+                              <ul class="product-rating">
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <p><i class="ion-ios-location"></i> 31st North St, Sydney, Australia</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="similar-item mar-bot-40">
+                        <img src="images/single-listing/hilton.jpg" class="img-fluid" alt="..." />
+                        <div class="similar-title-box">
+                          <h5><a href="#">Hilton Moorea</a></h5>
+                          <p><span class="price-amt">$109</span>/Avg</p>
+                        </div>
+                        <div class="customer-review">
+                          <div class="rating-summary">
+                            <div class="rating-result" title="60%">
+                              <ul class="product-rating">
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <p><i class="ion-ios-location"></i> Hilton Ave, Miami, USA</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="similar-item mar-bot-40">
+                        <img src="images/single-listing/lagoon-resort.jpg" class="img-fluid" alt="..." />
+                        <div class="similar-title-box">
+                          <h5><a href="#">Lagoon Resort &amp; Spa</a></h5>
+                          <p><span class="price-amt">$75</span>/Avg</p>
+                        </div>
+                        <div class="customer-review">
+                          <div class="rating-summary">
+                            <div class="rating-result" title="60%">
+                              <ul class="product-rating">
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <p><i class="ion-ios-location"></i> 75 Prince St, NY, USA</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="similar-item mar-bot-40">
+                        <img src="images/single-listing/westin.jpg" class="img-fluid" alt="..." />
+                        <div class="similar-title-box">
+                          <h5><a href="#">The Westin Excelsior</a></h5>
+                          <p><span class="price-amt">$89</span>/Avg</p>
+                        </div>
+                        <div class="customer-review">
+                          <div class="rating-summary">
+                            <div class="rating-result" title="60%">
+                              <ul class="product-rating">
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                                <li><i class="ion-android-star-half"></i></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <p><i class="ion-ios-location"></i>21st Queens park,London UK</p>
+                        </div>
+                      </div>
+                    </div> -->
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="my-reviews">
@@ -322,7 +321,7 @@
                                     <div class="review-header">
                                         <div class="review-item__post">
                                             <div class="review-item__post-image">
-                                                <img class="review-item__image" src="images/reviews/burger.jpg" alt="...">
+                                                <img class="review-item__image" src="images/reviews/burger.jpg" alt="..." />
                                             </div>
                                             <div class="review-item__post-content">
                                                 <h2 class="review-item__post-title">
@@ -357,8 +356,8 @@
                                         Yammy Burger in Thailand.
                                     </h3>
                                     <p class="review-item__description">
-                                        I love the Burger here but it is so rare that I get to come here. Tasty Burger is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly.
-
+                                        I love the Burger here but it is so rare that I get to come here. Tasty Burger is the best type of whole in the wall restaurant. The staff are really nice,
+                                        and you should be seated quickly.
                                     </p>
                                     <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review <span>2</span></a>
                                     <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
@@ -367,7 +366,7 @@
                                     <div class="review-header">
                                         <div class="review-item__post">
                                             <div class="review-item__post-image">
-                                                <img class="review-item__image" src="images/reviews/noodles.jpg" alt="...">
+                                                <img class="review-item__image" src="images/reviews/noodles.jpg" alt="..." />
                                             </div>
                                             <div class="review-item__post-content">
                                                 <h2 class="review-item__post-title">
@@ -402,8 +401,8 @@
                                         Best Noodles in Thailand.
                                     </h3>
                                     <p class="review-item__description">
-                                        I love the noodles here but it is so rare that I get to come here. Tasty Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly.
-
+                                        I love the noodles here but it is so rare that I get to come here. Tasty Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff are
+                                        really nice, and you should be seated quickly.
                                     </p>
 
                                     <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review <span>2</span></a>
@@ -413,7 +412,7 @@
                                     <div class="review-header">
                                         <div class="review-item__post">
                                             <div class="review-item__post-image">
-                                                <img class="review-item__image" src="images/reviews/coffee.jpg" alt="...">
+                                                <img class="review-item__image" src="images/reviews/coffee.jpg" alt="..." />
                                             </div>
                                             <div class="review-item__post-content">
                                                 <h2 class="review-item__post-title">
@@ -448,8 +447,8 @@
                                         Best Caffe in London.
                                     </h3>
                                     <p class="review-item__description">
-                                        I love the Coffee here but it is so rare that I get to come here. Tasty Coffee is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly.
-
+                                        I love the Coffee here but it is so rare that I get to come here. Tasty Coffee is the best type of whole in the wall restaurant. The staff are really nice,
+                                        and you should be seated quickly.
                                     </p>
                                     <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review <span>2</span></a>
                                     <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
@@ -462,7 +461,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-4.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-4.png" class="img-fluid" alt="#" />
                                                         <h6>Shon Adams</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -488,7 +487,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#" />
                                                         <h6>Lee Priest</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -514,7 +513,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#" />
                                                         <h6>Frank Jane</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -540,7 +539,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#" />
                                                         <h6>Christine Evans</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -570,7 +569,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#" />
                                                         <h6>Frank Jane</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -596,7 +595,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#" />
                                                         <h6>Christine Evans</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -630,7 +629,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#" />
                                                         <h6>Frank Jane</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -656,7 +655,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#" />
                                                         <h6>Christine Evans</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -682,7 +681,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#" />
                                                         <h6>Lee Priest</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -708,7 +707,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-4.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-4.png" class="img-fluid" alt="#" />
                                                         <h6>Shon Adams</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -738,7 +737,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#" />
                                                         <h6>Frank Jane</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -764,7 +763,7 @@
                                             <div class="col-md-6">
                                                 <div class="sidebar-widget follow">
                                                     <div class="follow-img">
-                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                        <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#" />
                                                         <h6>Christine Evans</h6>
                                                         <span>New York</span>
                                                     </div>
@@ -800,16 +799,15 @@
 
                                 <div class="address">
                                     <span class="ion-ios-location"></span>
-                                    <p> 864 W. Walnut Ave. Avon, IN 46123 St James Pl,
-                                        Brooklyn</p>
+                                    <p id="address"></p>
                                 </div>
                                 <div class="address">
                                     <span class="ion-ios-telephone"></span>
-                                    <p> +44 20 7336 8898</p>
+                                    <p id="phone"></p>
                                 </div>
                                 <div class="address">
                                     <span class="ion-ios-email"></span>
-                                    <p> tom@perrin.com</p>
+                                    <p id="email"></p>
                                 </div>
                             </div>
                         </div>
@@ -831,7 +829,7 @@
                 <div class="row nav-folderized">
                     <div class="col-lg-3 col-md-12">
                         <div class="footer-logo">
-                            <a href="index.html"> <img src="images/logo-white.png" alt="logo"></a>
+                            <a href="index.html"> <img src="images/logo-white.png" alt="logo" /></a>
                             <div class="company-desc">
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio excepturi nam totam sequi, ipsam consequatur repudiandae libero illum.
@@ -858,7 +856,6 @@
                                 <li><a class="link-hov style1" href="#">Travel</a></li>
                                 <li><a class="link-hov style1" href="#">Sport</a></li>
                                 <li><a class="link-hov style1" href="#">Restaurant</a></li>
-
                             </ul>
                         </div>
                     </div>
@@ -879,7 +876,7 @@
                                         <div class="icon">
                                             <i class="ion-email"></i>
                                         </div>
-                                        <div class="text"><a href="#">info@listagram.com</a></div>
+                                        <div class="text"><a href="#">info@servee.io</a></div>
                                     </div>
                                 </li>
                                 <li>
@@ -892,11 +889,21 @@
                                 </li>
                             </ul>
                             <ul class="social-buttons style2">
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                                <li><a href="#"><i class="ion-social-youtube"></i></a></li>
-                                <li><a href="#"><i class="ion-social-dribbble"></i></a></li>
+                                <li>
+                                    <a href="#"><i class="ion-social-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ion-social-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ion-social-pinterest"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ion-social-youtube"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ion-social-dribbble"></i></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -907,14 +914,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center">
-                        <p>&copy; 2019 listagram. All Rights Reserved.</p>
+                        <p>&copy; 2019 servee.io. All Rights Reserved.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--Footer ends-->
-    
+
     <!--Scripts starts-->
     <!--plugin js-->
     <script src="js/plugin.js"></script>
@@ -922,6 +929,104 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- This page's script -->
+    <script>
+        const apiBasePath = "https://api.comply-online.com/api/v1";
+
+        // User Info
+        var token = localStorage.getItem("token");
+        var decodedToken = parseJwt(token);
+        console.log("Decoded token:", decodedToken);
+        $("#name").text(`${decodedToken.firstName} ${decodedToken.lastName}`);
+        $("#address").text(`${decodedToken.address}, ${decodedToken.postalCode} ${decodedToken.city}`);
+        $("#phone").text(decodedToken.phone);
+        $("#email").text(decodedToken.email);
+        $("#createdAt").text(moment(new Date(decodedToken.createdAt)).fromNow());
+
+        function parseJwt(token) {
+            var base64Url = token.split(".")[1];
+            var base64 = decodeURIComponent(
+                atob(base64Url)
+                    .split("")
+                    .map(function (c) {
+                        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                    })
+                    .join("")
+            );
+            return JSON.parse(base64);
+        }
+
+        // Quotes
+        $.ajax({
+            method: "GET",
+            url: `${apiBasePath}/quotes/users/${decodedToken.id}`,
+            contentType: "application/json",
+            beforeSend: function (jqXHR, settings) {
+                jqXHR.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+            },
+            dataType: "json",
+            cache: false,
+            data: JSON.stringify({
+                email: $("#login-form #email").val(),
+                password: $("#password").val()
+            })
+        })
+            .done((data, textStatus, jqXHR) => {
+                console.log("Text Status:", textStatus);
+                console.log("Data:", data);
+                console.log("jqXHR:", jqXHR);
+                if (jqXHR.status == 200) {
+                    createQuoteCards(data);
+                }
+            })
+            .fail((jqXHR, textStatus, errorThrown) => {
+                console.error("jqXHR:", jqXHR);
+                console.error("Text Status:", textStatus);
+                console.error("Error Thrown:", errorThrown);
+                //TODO Add alert to show error
+            });
+
+        function createQuoteCards(quotes) {
+            $.each(quotes, async (i, quote) => {
+                var colDiv = $("<div/>", { class: "col-md-6" }).appendTo("#quotes");
+                var itemDiv = $("<div/>", { class: "similar-item mar-bot-40" }).appendTo(colDiv);
+                var titleDiv = $("<div/>", { class: "similar-title-box" }).appendTo(itemDiv);
+                var title = $("<h5/>").appendTo(titleDiv);
+                //Get provider info
+                var provider = await $.ajax({
+                    method: "GET",
+                    url: `${apiBasePath}/providers/${quote.providerId}`,
+                    contentType: "application/json",
+                    beforeSend: function (jqXHR, settings) {
+                        jqXHR.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+                    },
+                    dataType: "json"
+                });
+                console.log(provider);
+                $("<a/>", { href: `/quotes/${quote.id}` }).text(provider.businessName).appendTo(title);
+                var priceParagraph = $("<p/>").appendTo(titleDiv);
+                $("<span/>", { class: "price-amt" }).text(`${quote.amount} ${quote.currency}`).appendTo(priceParagraph);
+                var customerReviewDiv = $("<div/>", { class: "customer-review" }).appendTo(itemDiv);
+                $("<p/>", {}).text(truncateText(quote.description)).appendTo(customerReviewDiv);
+            });
+        }
+
+        function truncateText(str, length, ending) {
+            if (length == null) {
+                length = 100;
+            }
+            if (ending == null) {
+                ending = "...";
+            }
+            if (str.length > length) {
+                return str.substring(0, length - ending.length) + ending;
+            } else {
+                return str;
+            }
+        }
+    </script>
     <!--Scripts ends-->
 </body>
 
