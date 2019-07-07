@@ -91,10 +91,13 @@
                                             </div>
                                             <div class="col-md-6 col-12 text-right">
                                                 <div class="res-box sm-left">
-                                                    <a href="#" tabindex="5" class="forgot-password">Forgot
+                                                    <a id="recoverPassword" href="#" tabindex="5"
+                                                        class="forgot-password">Forgot
                                                         Password?</a>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div id="error" style="display:none" class="alert alert-danger" role="alert">
                                         </div>
                                         <div class="res-box text-center mar-top-30">
                                             <button type="submit" class="btn v3"><i class="ion-log-in"></i> Log
@@ -113,27 +116,35 @@
                                 <div class="tab-pane fade" id="register" role="tabpanel">
                                     <form id="register-form" action="#" method="post">
                                         <div class="form-group">
-                                            <input type="text" name="user_name" id="user_name" tabindex="1"
-                                                class="form-control" placeholder="Username" value="">
+                                            <input type="text" required="" name="firstName" id="firstName" tabindex="2"
+                                                class="form-control" placeholder="First Name" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="email" id="email" tabindex="1"
+                                            <input type="text" required="" name="lastName" id="lastName" tabindex="3"
+                                                class="form-control" placeholder="Last Name" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" required="" name="email" id="email" tabindex="1"
                                                 class="form-control" placeholder="Email Address" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="user_password" id="user_password" tabindex="2"
-                                                class="form-control" placeholder="Password">
+                                            <input type="password" required="" name="password" id="password"
+                                                tabindex="4" class="form-control" placeholder="Password">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="confirm-password" id="confirm-password"
-                                                tabindex="2" class="form-control" placeholder="Confirm Password">
+                                            <input type="password" required="" name="confirm-password"
+                                                id="confirm-password" tabindex="5" class="form-control"
+                                                placeholder="Confirm Password">
                                         </div>
                                         <div class="res-box text-left">
-                                            <input type="checkbox" tabindex="3" class="" name="accept" id="accept">
-                                            <label for="acttp">I have read and accept the terms &amp; conditions</label>
+                                            <input type="checkbox" tabindex="6" class="" name="accept" id="accept">
+                                            <label for="accept">I have read and accept the terms &amp;
+                                                conditions</label>
+                                        </div>
+                                        <div id="error" style="display:none" class="alert alert-danger" role="alert">
                                         </div>
                                         <div class="res-box text-center mar-top-30">
-                                            <button type="submit" class="btn v3"><i
+                                            <button id="signUp" type="submit" disabled class="btn v3"><i
                                                     class="ion-android-checkmark-circle"></i>Sign Up</button>
                                         </div>
                                     </form>
@@ -153,6 +164,33 @@
             </div>
         </div>
         <!--User login section ends-->
+        <!-- Code Confirmation Modal -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter code confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="confirmationForm">
+                        <div class="modal-body">
+                            <p>Please check your email and enter the code that you have received</p>
+                            <div class="form-group">
+                                <label for="code" class="col-form-label">Code:</label>
+                                <input type="text" class="form-control" id="code">
+                            </div>
+                            <a href="#" id="resendCode">Resend code</a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!--Login section ends-->
         <!-- Scroll to top starts-->
         <span class="scrolltotop"><i class="ion-arrow-up-c"></i></span>
@@ -270,39 +308,148 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
+    <script src="js/amazon-cognito-identity.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.487.0.min.js"></script>
+    <script src="js/auth.js"></script>
     <!-- This page's script -->
     <script>
 
-        const apiBasePath = "https://api.comply-online.com/api/v1";
+        //#region login
 
         $("#login-form").submit(event => {
             event.preventDefault();
-            $.ajax({
-                method: "POST",
-                url: `${apiBasePath}/oauth/login`,
-                contentType: "application/json",
-                dataType: "json",
-                cache: false,
-                data: JSON.stringify({
-                    email: $("#login-form #email").val(),
-                    password: $("#password").val()
-                })
-            })
-                .done((data, textStatus, jqXHR) => {
-                    console.log("Text Status:", textStatus);
-                    console.log("Data:", data);
-                    console.log("jqXHR:", jqXHR);
-                    console.log("Token:", data.token);
-                    $("#token").text(`Token: ${data.token}`);
-                    localStorage.setItem("token", data.token);
-                    console.log("Decoded:", parseJwt(data.token));
+            clearError();
+
+            var authenticationData = {
+                Username: $("#email").val(),
+                Password: $("#password").val()
+            };
+
+            var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+            var poolData = {
+                UserPoolId: 'eu-central-1_7iruUqdsk',
+                ClientId: '3gbfhl35avtb3uop6o5scbd0sd'
+            };
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+            var userData = {
+                Username: $("#email").val(),
+                Pool: userPool
+            };
+            var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+            cognitoUser.authenticateUser(authenticationDetails, {
+                onSuccess: function (result) {
+                    console.log("Success!");
+                    var accessToken = result.getAccessToken().getJwtToken();
+                    console.log("Access Token:", accessToken);
+                    /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer*/
+                    var idToken = result.idToken.jwtToken;
+                    console.log("Id Token:", idToken);
+                    var decodedIdToken = parseJwt(accessToken);
+                    console.log("Decoded Id Token:", decodedIdToken);
+                    if ($("#rememberMe").prop("checked")) {
+                        // Remember device
+                        cognitoUser.setDeviceStatusRemembered({
+                            onSuccess: function (result) {
+                                console.log('call result: ' + result);
+                            },
+                            onFailure: function (err) {
+                                console.error(err);
+                                //TODO Always returns "Network Error"??
+                                //alert(err.message);
+                            }
+                        });
+                    } else {
+                        // Do not remember device
+                        cognitoUser.setDeviceStatusNotRemembered({
+                            onSuccess: function (result) {
+                                console.log('call result: ' + result);
+                            },
+                            onFailure: function (err) {
+                                console.error(err);
+                                //alert(err.message);
+                            }
+                        });
+                    }
                     $(location).attr("href", "index.html");
-                })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    console.error("jqXHR:", jqXHR);
-                    console.error("Text Status:", textStatus);
-                    console.error("Error Thrown:", errorThrown);
-                });
+                },
+                onFailure: function (err) {
+                    console.log(err);
+                    showError(err.message);
+                },
+
+            });
+
+            // $.ajax({
+            //     method: "POST",
+            //     url: `${apiBasePath}/oauth/login`,
+            //     contentType: "application/json",
+            //     dataType: "json",
+            //     cache: false,
+            //     data: JSON.stringify({
+            //         email: $("#login-form #email").val(),
+            //         password: $("#password").val()
+            //     })
+            // })
+            //     .done((data, textStatus, jqXHR) => {
+            //         console.log("Text Status:", textStatus);
+            //         console.log("Data:", data);
+            //         console.log("jqXHR:", jqXHR);
+            //         console.log("Token:", data.token);
+            //         $("#token").text(`Token: ${data.token}`);
+            //         localStorage.setItem("token", data.token);
+            //         console.log("Decoded:", parseJwt(data.token));
+            //         $(location).attr("href", "index.html");
+            //     })
+            //     .fail((jqXHR, textStatus, errorThrown) => {
+            //         console.error("jqXHR:", jqXHR);
+            //         console.error("Text Status:", textStatus);
+            //         console.error("Error Thrown:", errorThrown);
+            //     });
+        });
+
+        function showError(message) {
+            $("#error").html(message);
+            $("#error").show();
+        }
+        function clearError() {
+            $("#error").hide();
+        }
+
+        $("#recoverPassword").on("click", (event) => {
+            event.preventDefault();
+
+            if (!$("#login-form #email").val()) {
+                alert("Please enter your email before trying to recover your password");
+                return;
+            }
+
+            var poolData = {
+                UserPoolId: 'eu-central-1_7iruUqdsk',
+                ClientId: '3gbfhl35avtb3uop6o5scbd0sd'
+            };
+
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+            var userData = {
+                Username: $("#login-form #email").val(),
+                Pool: userPool
+            };
+            var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+            cognitoUser.forgotPassword({
+                onSuccess: function (result) {
+                    console.log('call result: ' + result);
+                    alert("Thank you. Your new password has been set");
+                },
+                onFailure: function (err) {
+                    console.error(err);
+                    alert(err);
+                },
+                inputVerificationCode() {
+                    var verificationCode = prompt('Please input verification code ', '');
+                    var newPassword = prompt('Enter new password ', '');
+                    cognitoUser.confirmPassword(verificationCode, newPassword, this);
+                }
+            });
         });
 
         function parseJwt(token) {
@@ -317,6 +464,92 @@
             );
             return JSON.parse(base64);
         }
+
+        //#endregion
+
+        //#region register
+
+        $("#resendCode").click(() => {
+            cognitoUser.resendConfirmationCode(function (err, result) {
+                if (err) {
+                    alert("Failed to resend confirmation code");
+                    return;
+                }
+                alert("A new code was sent to you");
+            });
+        })
+
+        $("#register-form").submit(event => {
+            event.preventDefault();
+            clearError();
+
+            var poolData = {
+                UserPoolId: 'eu-central-1_7iruUqdsk',
+                ClientId: '3gbfhl35avtb3uop6o5scbd0sd'
+            };
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+            var attributeList = [];
+
+            var dataFirstName = {
+                Name: 'given_name',
+                Value: $("#firstName").val()
+            };
+            var dataLastName = {
+                Name: 'family_name',
+                Value: $("#lastName").val()
+            };
+            // var dataEmail = {
+            //     Name: 'email',
+            //     Value: $("#register-form #email").val()
+            // };
+            var attributeFirstName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFirstName);
+            var attributeLastName = new AmazonCognitoIdentity.CognitoUserAttribute(dataLastName);
+            // var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+
+            attributeList.push(attributeFirstName);
+            attributeList.push(attributeLastName);
+            // attributeList.push(attributeEmail);
+
+            userPool.signUp($("#register-form #email").val(), $("#register-form #password").val(), attributeList, null, function (err, result) {
+                if (err) {
+                    showError(err);
+                    return;
+                }
+                cognitoUser = result.user;
+                console.log('user name is ' + cognitoUser.getUsername());
+                // Show confirmation modal dialog
+                $("#confirmationModal #code").empty();
+                $('#confirmationModal').modal('show');
+            });
+        });
+
+        $('#confirmationModal').on('shown.bs.modal', function () {
+            $('#code').trigger('focus')
+        })
+
+        $("#confirmationForm").submit(event => {
+            event.preventDefault();
+            confirmRegistration($("#code").val());
+        });
+
+        function confirmRegistration(code) {
+            cognitoUser.confirmRegistration(code, true, function (err, result) {
+                if (err) {
+                    alert(err.message);
+                    return;
+                }
+                if (result === "SUCCESS") {
+                    $(location).attr("href", "login.html");
+                }
+            });
+        }
+
+        $("#accept").change(() => {
+            $("#signUp").prop("disabled", !$("#accept").is(":checked"))
+        });
+
+        //#endregion
 
     </script>
     <!--Scripts ends-->
