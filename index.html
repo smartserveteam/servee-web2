@@ -144,7 +144,7 @@
                                     </a>
                                 </div>
                                 <div id="signin" class="add-list float-right mar-right-5">
-                                    <a id="signIn" class="btn btn-info" href="login.html">Sign In</a>
+                                    <a class="btn btn-info" href="login.html">Sign In</a>
                                 </div>
                                 <div class="add-list float-right mar-right-5">
                                     <a id="businesses" class="btn btn-outline-info" href="index_pro.html">Businesses</a>
@@ -172,7 +172,7 @@
             <div class="video-container">
                 <div class="overlay op-5"></div>
                 <div id="video-wrapper" style="background-image: url(images/header/video-bg.jpg)"> </div>
-                <a class="player" data-property="{videoURL:'https://youtu.be/HZOhgIrPH4s'}"></a>
+                <a class="player" data-property="{videoURL:'https://youtu.be/5vaLlcYbYTQ'}"></a>
                 <div class="container video-content">
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -1389,33 +1389,6 @@
     <script>
         var locations = [];
 
-        // try {
-        //     var token = localStorage.getItem("token");
-        //     if (token) {
-        //         var parsedToken = parseJwt(token);
-        //         console.log("Parsed Token:", parsedToken);
-        //         $("#signin").empty();
-        //         $("#signin").append(`       
-        //             <nav class="site-navigation float-left">                             
-        //                 <div class="container">
-        //                     <ul class="site-menu js-clone-nav d-none d-lg-block">
-        //                         <li class="has-children">
-        //                             <a href="#">${parsedToken.email}</a>
-        //                             <ul class="dropdown">
-        //                                 <li><a href="account.html">My Account</a></li>
-        //                                 <li><a href="requests.html">My Requests</a></li>
-        //                                 <li><a href="logout.html">Logout</a></li>
-        //                             </ul>
-        //                         </li>
-        //                     </ul>
-        //                 </div>
-        //             </nav>
-        //         `);
-        //     }
-        // } catch (error) {
-        //     console.error("Error occurred while getting token:", error);
-        // }
-
         // Get locations
         $.ajax({
             method: "GET",
@@ -1462,45 +1435,13 @@
                 console.error("Error Thrown:", errorThrown);
             });
 
-        // $.ajax({
-        //     method: "GET",
-        //     url: `${apiBasePath}/categories`,
-        //     dataType: "json",
-        //     cache: false
-        // })
-        //     .done((data, textStatus, jqXHR) => {
-        //         console.log("Text Status:", textStatus);
-        //         console.log("Data:", data);
-        //         console.log("jqXHR:", jqXHR);
-        //         for (const item of data) {
-        //             $("#categories").append($("<option/>", { text: item.name, value: item.id }));
-        //         }
-        //         $('select').niceSelect('update');
-        //     })
-        //     .fail((jqXHR, textStatus, errorThrown) => {
-        //         console.error("jqXHR:", jqXHR);
-        //         console.error("Text Status:", textStatus);
-        //         console.error("Error Thrown:", errorThrown);
-        //     });
-
         $("#searchForm").on("submit", (e) => {
             e.preventDefault();
             let locationId = $("#searchForm #locations").val();
             let categoryId = $("#searchForm #categories").val();
+            $(location).attr("href", `list-half-map.html?location=${encodeURI(locationId)}&categoryId=${encodeURI(categoryId)}`);
         });
 
-        function parseJwt(token) {
-            var base64Url = token.split(".")[1];
-            var base64 = decodeURIComponent(
-                atob(base64Url)
-                    .split("")
-                    .map(function (c) {
-                        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-                    })
-                    .join("")
-            );
-            return JSON.parse(base64);
-        }
     </script>
     <!-- Geolocation -->
     <script>
@@ -1522,7 +1463,7 @@
                     });
                     // Select closest location
                     console.log("Closest location is:", closestLocation);
-                    $(`#locations option[value="${closestLocation._id}"]`).prop('selected', true);
+                    $(`#locations option[value="${closestLocation.id}"]`).prop('selected', true);
                     $('select').niceSelect('update');
                 });
             } else {
