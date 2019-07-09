@@ -49,7 +49,6 @@ function isLoggedIn() {
         });
     } else {
         if (location.pathname.split('/').slice(-1)[0] != "login.html" && location.pathname.split('/').slice(-1)[0] != "index.html" && location.pathname.split('/').slice(-1)[0] != "") {
-            alert(location.pathname.split('/').slice(-1)[0]);
             $(location).attr("href", "login.html");
         }
     }
