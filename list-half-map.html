@@ -691,9 +691,6 @@
                 method: "GET",
                 url: `${categoriesApiBasePath}/categories/${getUrlParameter("categoryId")}`,
                 dataType: "json",
-                beforeSend: function (jqXHR, settings) {
-                    jqXHR.setRequestHeader("Authorization", `Bearer ${accessToken}`);
-                },
                 cache: false
             })
                 .done((data, textStatus, jqXHR) => {
@@ -744,8 +741,8 @@
             // Title
             md6col = $("<div/>", { class: "col-md-6 no-pad-lr" }).appendTo(mainDiv);
             var titleBox = $("<div/>", { class: "trending-title-box" }).appendTo(md6col);
-            var h4 = $("<h4/>", {}).text(item.businessName).appendTo(titleBox);
-            var link = $("<a/>", { href: `providers.html?id=${item.id}` }).appendTo(h4);
+            var h4 = $("<h4/>", {}).appendTo(titleBox);
+            var link = $("<a/>", { href: `single-listing-one.html?providerId=${item.id}` }).text(item.businessName).appendTo(h4);
 
             // Score
             var customerReviewDiv = $("<div/>", { class: "customer-review" }).appendTo(titleBox);
