@@ -6,7 +6,7 @@ const categoriesApiBasePath = "https://g8335hfcy0.execute-api.eu-central-1.amazo
 const locationsApiBasePath = "https://6mo2qzbcag.execute-api.eu-central-1.amazonaws.com/dev";
 const providersApiBasePath = "https://sclx4kb3lk.execute-api.eu-central-1.amazonaws.com/dev";
 
-function isLoggedIn() {
+function checkLoggedInState() {
     var data = {
         UserPoolId: 'eu-central-1_7iruUqdsk',
         ClientId: '3gbfhl35avtb3uop6o5scbd0sd'
@@ -56,6 +56,10 @@ function isLoggedIn() {
     }
 }
 
+function isLoggedIn() {
+    return cognitoUser !== null;
+}
+
 function logout() {
     if (cognitoUser != null) {
         cognitoUser.signOut();
@@ -76,4 +80,4 @@ function parseJwt(token) {
     return JSON.parse(base64);
 }
 
-isLoggedIn();
+checkLoggedInState();
