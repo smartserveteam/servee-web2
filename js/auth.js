@@ -48,7 +48,9 @@ function isLoggedIn() {
             $("#businesses").hide();
         });
     } else {
-        if (location.pathname.split('/').slice(-1)[0] != "login.html" && location.pathname.split('/').slice(-1)[0] != "index.html" && location.pathname.split('/').slice(-1)[0] != "") {
+        var pagesThatDontRequireLogin = ["", "login.html", "index.html", "list-half-map.html", "single-listing-one.html"];
+        if (!pagesThatDontRequireLogin.includes(location.pathname.split('/').slice(-1)[0])) {
+            //if (location.pathname.split('/').slice(-1)[0] != "login.html" && location.pathname.split('/').slice(-1)[0] != "index.html" && location.pathname.split('/').slice(-1)[0] != "") {
             $(location).attr("href", "login.html");
         }
     }
