@@ -6,7 +6,10 @@
     Author URI: https://themeforest.net/user/lioncoders
     Version: 1.0
 -------------------------------------------------------------*/
-
+.disableddiv {
+    pointer-events: none;
+    opacity: 0.4;
+}
 
 /*-----------------------------------------------------------
     1  General Styles
