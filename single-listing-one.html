@@ -16,6 +16,8 @@
     <link href="css/style.css" rel="stylesheet" />
     <!--color switcher css-->
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
+    <!-- Date Time Picker -->
+    <link rel="stylesheet" href="css/jquery.datetimepicker.min.css">
     <!-- Document Title -->
     <title>Servee.io</title>
 </head>
@@ -223,7 +225,7 @@
                             <ul class="list-details-tab fixed_nav">
                                 <li class="nav-item active"><a href="#overview" class="active">Overview</a></li>
                                 <li class="nav-item"><a href="#gallery">Gallery</a></li>
-                                <li class="nav-item"><a href="#rooms">Rooms</a></li>
+                                <li class="nav-item"><a href="#costSamples">Cost Samples</a></li>
                                 <li class="nav-item"><a href="#reviews">Reviews</a></li>
                                 <li class="nav-item"><a href="#add_review">Add Review</a></li>
                             </ul>
@@ -234,238 +236,9 @@
                             </div>
                             <div id="gallery" class="list-details-section">
                             </div>
-                            <div id="rooms" class="list-details-section mar-top-75">
-                                <h4>Cost Sample</h4>
-                                <div class="room-type-wrapper">
-                                    <div class="room-type-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <a href="images/single-listing/gallery-1.jpg" data-lightbox="single-1">
-                                                    <img src="images/single-listing/gallery-1.jpg" alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="feature-left float-left">
-                                                            <h3>Faucet Installation</h3>
-                                                            <p>Max : <span> 2 Sinks</span>
-                                                            </p>
-                                                            <div class="facilities-list">
-                                                                <ul>
-                                                                    <li><i class="icofont-tools-alt-2"></i><span>Tools</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="feature-right float-right">
-                                                            <span class="price-amt">$80</span>
-                                                            Total for 1 faucet, 2 sinks
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="room-type-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <a href="images/single-listing/gallery-2.jpg" data-lightbox="single-1">
-                                                    <img src="images/single-listing/gallery-2.jpg" alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="feature-left float-left">
-                                                            <h3>Busted Pipes</h3>
-                                                            </p>
-                                                            <div class="facilities-list">
-                                                                <ul>
-                                                                    <li><i class="icofont-tools-alt-2"></i><span>Tools</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="feature-right float-right">
-                                                            <span class="price-amt">$150</span>
-                                                            Total for 1 basement
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="room-type-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <a href="images/single-listing/gallery-8.jpg" data-lightbox="single-1">
-                                                    <img src="images/single-listing/gallery-8.jpg" alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="feature-left float-left">
-                                                            <h3>Appliance Repair</h3>
-                                                            <p>Max : <span> 1 Appliance</span>
-                                                            </p>
-                                                            <div class="facilities-list">
-                                                                <ul>
-                                                                    <li><i class="icofont-tools-alt-2"></i><span>Tools</span>
-                                                                    </li>
-                                                                    <li><i class="icofont-washing-machine"></i><span>Washing
-                                                                            Machine</span></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="feature-right float-right">
-                                                            <span class="price-amt">$100</span>
-                                                            Total for 1 appliance
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="costSamples" class="list-details-section mar-top-75">
                             </div>
                             <div id="reviews" class="list-details-section mar-top-10">
-                                <h4>Reviews <span>(15)</span></h4>
-                                <div class="review-box">
-                                    <ul class="review_wrap">
-                                        <li>
-                                            <div class="customer-review_wrap">
-                                                <div class="reviewer-img">
-                                                    <img src="images/clients/reviewer-1.png" class="img-fluid" alt="...">
-                                                    <p>Frank Jane</p>
-                                                    <span>35 Reviews</span>
-                                                </div>
-                                                <div class="customer-content-wrap">
-                                                    <div class="customer-content">
-                                                        <div class="customer-review">
-                                                            <h6>Best hotel in the Newyork city</h6>
-                                                            <p>Posted 2 days ago</p>
-                                                        </div>
-                                                        <div class="customer-rating">5.0</div>
-                                                    </div>
-                                                    <p class="customer-text">I love the hotel here but it is so rare
-                                                        that I get to come here. Tasty Hand-Pulled hotel is the best
-                                                        type of whole in the wall restaurant. The staff are really nice,
-                                                        and you should be seated quickly.
-                                                    </p>
-                                                    <div class="review-img">
-                                                        <img src="images/single-listing/gallery-1.jpg" alt="...">
-                                                        <img src="images/single-listing/gallery-2.jpg" alt="...">
-                                                        <img src="images/single-listing/gallery-3.jpg" alt="...">
-
-                                                    </div>
-
-                                                    <div class="like-btn mar-top-40">
-                                                        <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review
-                                                            <span>2</span></a>
-                                                        <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <ul class="has-child">
-                                                <li>
-                                                    <div class="customer-review_wrap">
-                                                        <div class="reviewer-img">
-                                                            <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
-                                                            <p>Amanda G</p>
-                                                            <span>35 Reviews</span>
-                                                        </div>
-                                                        <div class="customer-content-wrap">
-                                                            <div class="customer-content">
-                                                                <div class="customer-review">
-                                                                    <h6>Best hotel in the Newyork city</h6>
-                                                                    <p>Posted 1 day ago</p>
-                                                                </div>
-                                                            </div>
-                                                            <p class="customer-text">I love the hotel here but it is so
-                                                                rare that I get to come here. Tasty Hand-Pulled hotel is
-                                                                the best type of whole in the wall restaurant. The staff
-                                                                are really nice, and you should be seated quickly.
-                                                            </p>
-                                                            <div class="like-btn mar-top-40">
-                                                                <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review
-                                                                    <span>2</span></a>
-                                                                <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="customer-review_wrap">
-                                                        <div class="reviewer-img">
-                                                            <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
-                                                            <p>Frank Jane</p>
-                                                            <span>35 Reviews</span>
-                                                        </div>
-                                                        <div class="customer-content-wrap">
-                                                            <div class="customer-content">
-                                                                <div class="customer-review">
-                                                                    <h6>Best hotel in the Newyork city</h6>
-                                                                    <p>Posted 10 hours ago</p>
-                                                                </div>
-                                                            </div>
-                                                            <p class="customer-text">I love the hotel here but it is so
-                                                                rare that I get to come here. Tasty Hand-Pulled hotel is
-                                                                the best type of whole in the wall restaurant. The staff
-                                                                are really nice, and you should be seated quickly.
-                                                            </p>
-                                                            <div class="like-btn mar-top-40">
-                                                                <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review
-                                                                    <span>2</span></a>
-                                                                <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div class="customer-review_wrap">
-                                                <div class="reviewer-img">
-                                                    <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#">
-                                                    <p>Lee Priest</p>
-                                                    <span>35 Reviews</span>
-                                                </div>
-                                                <div class="customer-content-wrap">
-                                                    <div class="customer-content">
-                                                        <div class="customer-review">
-                                                            <h6>Best hotel in the Newyork city</h6>
-                                                            <p>Posted 2 days ago</p>
-                                                        </div>
-                                                        <div class="customer-rating">5.0</div>
-                                                    </div>
-                                                    <p class="customer-text">I love the hotel here but it is so rare
-                                                        that I get to come here. Tasty Hand-Pulled hotel is the best
-                                                        type of whole in the wall restaurant. The staff are really nice,
-                                                        and you should be seated quickly.
-                                                    </p>
-                                                    <div class="like-btn mar-top-40">
-                                                        <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review
-                                                            <span>2</span></a>
-                                                        <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                             <div id="add_review" class="list-details-section mar-top-10">
                                 <h4>Add Review</h4>
@@ -500,11 +273,8 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <input class="contact-form__input-text" type="text" name="name" id="name" placeholder="Name:">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="contact-form__input-text" type="text" name="mail" id="mail" placeholder="Email:">
+                                        <div class="col-md-12">
+                                            <input class="contact-form__input-text" type="text" name="title" id="title" placeholder="Title">
                                         </div>
                                     </div>
                                     <textarea class="contact-form__textarea" name="comment" id="comment" placeholder="Comment"></textarea>
@@ -514,7 +284,7 @@
                         </div>
                         <!--Listing Details ends-->
                         <!--Similar Listing Starts-->
-                        <div class="similar-listing">
+                        <!-- <div class="similar-listing">
                             <div class="similar-listing-title">
                                 <h3>Similar Listings</h3>
                             </div>
@@ -610,34 +380,40 @@
                             </div>
                             <div class="slider-btn v3 similar-next"><i class="ion-arrow-right-c"></i></div>
                             <div class="slider-btn v3 similar-prev"><i class="ion-arrow-left-c"></i></div>
-                        </div>
+                        </div> -->
                         <!--Similar Listing ends-->
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="listing-sidebar">
-                            <div id="booking" class="sidebar-widget info">
-                                <h3><i class="ion-android-calendar"></i>Booking</h3>
+                            <div id="quoteRequest" class="sidebar-widget info">
+                                <h3><i class="ion-android-calendar"></i>Get Help</h3>
                                 <div class="row">
                                     <div class="col-md-12 mar-bot-15">
-                                        <div class="nice-select filter-input mar-top-0" tabindex="0"><span class="current">Select Room</span>
-                                            <ul class="list">
-                                                <li class="option selected focus">Standard Single Room </li>
-                                                <li class="option">Deluxe Room</li>
-                                                <li class="option">Signature Room</li>
-                                            </ul>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" style="width: 100%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Category
+                                            </button>
+                                            <div id="categories" style="width: 100%;" class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mar-bot-15">
-                                        <div id="datepicker-from" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" placeholder="Check In">
-                                            <span class="input-group-addon"><i class="icofont-ui-calendar"></i></span>
+                                    <div class="col-md-12 mar-bot-15">
+                                        <div class="input-group">
+                                            <textarea class="form-control" id="description" cols="30" rows="5" placeholder="Description"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mar-bot-15">
-                                        <div id="datepicker-to" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" placeholder="Check Out">
-                                            <span class="input-group-addon"><i class="icofont-ui-calendar"></i></span>
+                                    <span class="col-md-12 mar-bot-15">When?</span>
+                                    <div class="col-md-12 mar-bot-15">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="icofont-ui-calendar"></i></div>
+                                            </div>
+                                            <input id="datetimepicker" class="form-control" type="text" placeholder="Preferred Timings">
                                         </div>
+                                        <!-- <div id="datepicker-from" class="input-group date" data-date-format="dd-mm-yyyy">
+                                            <input class="form-control" type="text" placeholder="Preferred Timings">
+                                            <span class="input-group-addon"><i class="icofont-ui-calendar"></i></span>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-6 mar-bot-15">
                                         <div class="book-amount">
@@ -677,7 +453,7 @@
                                     </div>
                                 </div>
                                 <div class="book-btn text-center">
-                                    <a href="booking.html"> Request To Book</a>
+                                    <a href="booking.html"> Request a Quote</a>
                                 </div>
                             </div>
                             <div class="sidebar-widget">
@@ -860,6 +636,10 @@
     <script src="js/plugin.js"></script>
     <!--google maps-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVvsK4COEruAO5KSmhzGdmTpqzz2jfnNk&amp;libraries=places"></script>
+    <!--moment.js-->
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <!--Date Time Picker-->
+    <script src="js/jquery.datetimepicker.full.min.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/amazon-cognito-identity.min.js"></script>
@@ -870,7 +650,20 @@
 
         if (!isLoggedIn()) {
             $("#booking").addClass("disableddiv");
+            $("#add_review").addClass("disableddiv");
         }
+
+        //$('#datetimepicker').datetimepicker();
+        $('#datetimepicker').datetimepicker({
+            timepicker: true,
+            formatDate: 'Y/m/d',
+            minDate: '0',
+            onChangeDateTime: logic,
+            onShow: logic
+        });
+
+        // Business Hours
+        var openHours = [];
 
         main();
 
@@ -898,10 +691,17 @@
                     // Categories
                     for (let index = 0; index < data.categoriesProvided.length; index++) {
                         const categoryId = data.categoriesProvided[index];
+
+                        // Add tags
                         var category = await getCategoryDetails(categoryId);
                         console.log("Category Name:", category.name);
                         var headerParagraph = $("<p/>", {}).appendTo("#providerHeader");
                         var categoryLink = $("<a/>", { class: "btn v6", href: `categories.html?categoryId=${categoryId}` }).text(category.name).appendTo(headerParagraph);
+
+                        // Add category to quote widget
+                        //<a class="dropdown-item" href="#">Action</a>
+                        $("<a/>", { class: "dropdown-item", href: "#", style: "width: 100%;" }).text(category.name).appendTo("#categories");
+
                     }
 
                     // Business Name
@@ -981,28 +781,41 @@
                     h6.html('<i class="ion-android-alarm-clock"></i> Business Hours');
                     $("<span/>", { class: "float-right" }).text("Open Now").appendTo(businessTitleDiv); //TODO: Calculate if open now
 
-                    // Business Hours
                     if (data.schedule) {
+                        var disabledWeekDays = [];
                         console.log("Got data schedules:", data.schedule);
                         var scheduleList = $("<ul/>", { class: "business-hours" }).appendTo("#schedule");
                         for (let index = 0; index < data.schedule.length; index++) {
                             const schedule = data.schedule[index];
                             var businessOpenList, openCloseIntervalsDiv;
                             if (schedule.intervals.length == 0) {
+                                // Closed
                                 businessOpenList = $("<li/>", { class: `business-open trend-closed` }).appendTo(scheduleList);
                                 $("<span/>", { class: "day" }).text(dayOfWeekAsString(schedule.day)).appendTo(businessOpenList);
                                 openCloseIntervalsDiv = $("<div/>", { class: "atbd_open_close_time" }).appendTo(businessOpenList);
                                 $("<span/>", { class: "time" }).text("Closed").appendTo(openCloseIntervalsDiv);
+                                disabledWeekDays.push(schedule.day);
                             } else {
+                                // Open hours
                                 businessOpenList = $("<li/>", { class: `business-open` }).appendTo(scheduleList);
                                 $("<span/>", { class: "day" }).text(dayOfWeekAsString(schedule.day)).appendTo(businessOpenList);
                                 openCloseIntervalsDiv = $("<div/>", { class: "atbd_open_close_time" }).appendTo(businessOpenList);
                                 for (let intervalIndex = 0; intervalIndex < schedule.intervals.length; intervalIndex++) {
                                     const interval = schedule.intervals[intervalIndex];
                                     var startTime = $("<span/>", { class: "time" }).html(`${interval.startTime} - ${interval.endTime}<br/>`).appendTo(openCloseIntervalsDiv);
+                                    if (openHours[schedule.day]) {
+                                        // Add allowTimes
+                                        console.log(`Add startTime to day ${schedule.day} (${openHours[schedule.day].allowTimes})`);
+                                        pushTimeRange(schedule.day, interval.startTime, interval.endTime);
+                                    } else {
+                                        console.log("Add NEW intervals to", openHours);
+                                        pushTimeRange(schedule.day, interval.startTime, interval.endTime);
+                                    }
                                 }
                             }
                         }
+                        console.log("disabledWeekDays:", disabledWeekDays);
+                        $("#datetimepicker").datetimepicker('setOptions', { disabledWeekDays: disabledWeekDays });
                     }
 
                     // Map
@@ -1097,6 +910,149 @@
                         });
                         marker.addListener('click', toggleBounce);
                     });
+
+                    // Cost Samples
+                    if (data.costSamples) {
+                        var costSampleTitle = $("<h4/>").text("Cost Samples").appendTo("#costSamples");
+                        var costSampleWrapper = $("<div/>", { class: "room-type-wrapper" }).appendTo("#costSamples");
+                        for (let costSampleIndex = 0; costSampleIndex < data.costSamples.length; costSampleIndex++) {
+                            const costSample = data.costSamples[costSampleIndex];
+                            var costSampleItem = $("<div/>", { class: "room-type-item" }).appendTo(costSampleWrapper);
+                            var costSampleRow = $("<div/>", { class: "row" }).appendTo(costSampleItem);
+
+                            // Image
+                            var costSampleColImg = $("<div/>", { class: "col-md-4" }).appendTo(costSampleRow);
+                            var costSampleLink = $("<a/>", { href: costSample.picture, "data-lightbox": "single-1" }).appendTo(costSampleColImg);
+                            $("<img/>", { src: costSample.picture, alt: "..." }).appendTo(costSampleLink);
+
+                            // Content
+                            var costSampleColContent = $("<div/>", { class: "col-md-8" }).appendTo(costSampleRow);
+                            var costSampleColContentRow = $("<div/>", { class: "row" }).appendTo(costSampleColContent);
+
+                            // Type and Max
+                            var costSampleColContentSub = $("<div/>", { class: "col-md-6" }).appendTo(costSampleColContentRow);
+                            var costSampleColContentFeatureLeft = $("<div/>", { class: "feature-left float-left" }).appendTo(costSampleColContentSub);
+                            $("<h3/>", {}).text(costSample.type).appendTo(costSampleColContentFeatureLeft);
+                            if (costSample.max) {
+                                var maxParagraph = $("<p/>", {}).text("Max : ").appendTo(costSampleColContentFeatureLeft);
+                                $("<span/>", {}).text(costSample.max).appendTo(maxParagraph);
+                            }
+
+                            // Icons
+                            var costSampleFacilitiesList = $("<div/>", { class: "facilities-list" }).appendTo(costSampleColContentFeatureLeft);
+                            var facilitiesList = $("<ul/>", {}).appendTo(costSampleFacilitiesList);
+                            for (let iconIndex = 0; iconIndex < costSample.icons.length; iconIndex++) {
+                                const icon = costSample.icons[iconIndex];
+                                var li = $("<li/>", {}).appendTo(facilitiesList);
+                                $("<i/>", { class: icon }).appendTo(li);
+                            }
+
+                            // Price and Description
+                            var costSampleColContentSub2 = $("<div/>", { class: "col-md-6" }).appendTo(costSampleColContentRow);
+                            var costSampleColContentFeatureRight = $("<div/>", { class: "feature-right float-right" }).appendTo(costSampleColContentSub2);
+                            $("<span/>", { class: "price-amt" }).text(`${costSample.price} ${costSample.currency}`).appendTo(costSampleColContentFeatureRight);
+                            costSampleColContentFeatureRight.append(costSample.description);
+                            $("<div/>", { class: "clear" }).appendTo(costSampleColContentFeatureRight);
+                        }
+                    }
+
+                    // Reviews
+                    await $.ajax({
+                        method: "GET",
+                        url: `${reviewsApiBasePath}/reviews/providers/${data.id}`,
+                        dataType: "json",
+                        cache: false
+                    })
+                        .done(async (data, textStatus, jqXHR) => {
+                            console.log("Text Status:", textStatus);
+                            console.log("Data:", data);
+                            console.log("jqXHR:", jqXHR);
+                            var reviewsTitle = $("<h4/>", {}).text("Reviews").appendTo("#reviews");
+                            $("<span/>", {}).text(` (${data.length})`).appendTo(reviewsTitle);
+                            var reviewBox = $("<div/>", { class: "review-box" }).appendTo("#reviews");
+                            var reviewWrapList = $("<ul/>", { class: "review_wrap" }).appendTo(reviewBox);
+                            for (let reviewIndex = 0; reviewIndex < data.length; reviewIndex++) {
+                                const review = data[reviewIndex];
+                                var reviewLi = $("<li/>", {}).appendTo(reviewWrapList);
+                                var customerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(reviewLi);
+                                // Reviewer
+                                var reviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
+                                $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(reviewerImg); //TODO: Add user image
+                                reviewerImg.append("<p>Username</p>"); //TODO: Add user's name
+                                $("<span/>", {}).text(`35 Reviews`).appendTo(reviewerImg); //TODO: Add number of reviews provided by user
+                                var customerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
+                                var customerContent = $("<div/>", { class: "customer-content" }).appendTo(customerContentWrap);
+                                var customerReview = $("<div/>", { class: "customer-review" }).appendTo(customerContent);
+                                // Review title
+                                $("<h6/>", {}).text(review.title || "").appendTo(customerReview);
+                                $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(customerReview);
+                                // Review content
+                                $("<div/>", { class: "customer-rating" }).text(review.score).appendTo(customerContent);
+                                $("<p/>", { class: "customer-text" }).text(review.content).appendTo(customerContentWrap);
+                                // Review pics
+                                if (review.pictures) {
+                                    for (let reviewPictureIndex = 0; reviewPictureIndex < review.pictures.length; reviewPictureIndex++) {
+                                        const reviewPicture = review.pictures[reviewPictureIndex];
+                                        $("<img/>", { src: reviewPicture, alt: "..." });
+                                    }
+                                }
+                                // Like button
+                                var likeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(customerContentWrap);
+                                var likeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(likeDiv);
+                                $("<i/>", { class: "icofont-thumbs-up" }).appendTo(likeLink);
+                                likeLink.append("Helpful Review");
+                                $("<span/>", {}).text(review.likes).appendTo(likeLink);
+                                var replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(likeDiv);
+                                $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
+                                replyLink.append("Reply");
+
+                                // Replies
+                                if (review.replies) {
+                                    for (let reviewRepliesIndex = 0; reviewRepliesIndex < review.replies.length; reviewRepliesIndex++) {
+                                        const reply = review.replies[reviewRepliesIndex];
+
+                                        let reviewReply = $("<ul/>", { class: "has-child" }).appendTo(reviewLi);
+                                        let replyLi = $("<li/>", {}).appendTo(reviewReply);
+                                        let replyCustomerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(replyLi);
+                                        // Reviewer
+                                        let replyReviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
+                                        $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(replyReviewerImg); //TODO: Add user image
+                                        replyReviewerImg.append("<p>Username</p>"); //TODO: Add user's name
+                                        $("<span/>", {}).text(`35 Reviews`).appendTo(replyReviewerImg); //TODO: Add number of reviews provided by user
+                                        let replyCustomerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
+                                        let replyCustomerContent = $("<div/>", { class: "customer-content" }).appendTo(replyCustomerContentWrap);
+                                        let replyCustomerReview = $("<div/>", { class: "customer-review" }).appendTo(replyCustomerContent);
+                                        // Review title
+                                        $("<h6/>", {}).text(reply.title || "").appendTo(replyCustomerReview);
+                                        $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(replyCustomerReview);
+                                        // Review content
+                                        $("<div/>", { class: "customer-rating" }).text(reply.score).appendTo(replyCustomerContent);
+                                        $("<p/>", { class: "customer-text" }).text(reply.content).appendTo(replyCustomerContentWrap);
+                                        // Review pics
+                                        if (reply.pictures) {
+                                            for (let reviewPictureIndex = 0; reviewPictureIndex < reply.pictures.length; reviewPictureIndex++) {
+                                                const reviewPicture = reply.pictures[reviewPictureIndex];
+                                                $("<img/>", { src: reviewPicture, alt: "..." });
+                                            }
+                                        }
+                                        // Like button
+                                        let replyLikeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(replyCustomerContentWrap);
+                                        let replyLikeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(replyLikeDiv);
+                                        $("<i/>", { class: "icofont-thumbs-up" }).appendTo(replyLikeLink);
+                                        replyLikeLink.append("Helpful Review");
+                                        $("<span/>", {}).text(reply.likes).appendTo(replyLikeLink);
+                                        let replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(replyLikeDiv);
+                                        $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
+                                        replyLink.append("Reply");
+                                    }
+                                }
+                            }
+                        })
+                        .fail((jqXHR, textStatus, errorThrown) => {
+                            console.error("jqXHR:", jqXHR);
+                            console.error("Text Status:", textStatus);
+                            console.error("Error Thrown:", errorThrown);
+                        });
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
                     console.error("jqXHR:", jqXHR);
@@ -1104,6 +1060,38 @@
                     console.error("Error Thrown:", errorThrown);
                 });
         }
+
+        function pushTimeRange(day, startTime, endTime) {
+            var x = 15; //minutes interval
+            var times = []; // time array
+            var tt = parseInt(startTime.split(":")[0]) * 60; // start time
+            var endtt = parseInt(endTime.split(":")[0]) * 60; // end time
+
+            //loop to increment the time and push results in array
+            for (var i = 0; tt < endtt; i++) {
+                var hh = Math.floor(tt / 60); // getting hours of day in 0-24 format
+                var mm = (tt % 60); // getting minutes of the hour in 0-55 format
+                times[i] = ("0" + (hh)).slice(-2) + ':' + ("0" + mm).slice(-2); // pushing data in array in [00:00 - 12:00 AM/PM format]
+                tt = tt + x;
+            }
+            for (let index = 0; index < times.length; index++) {
+                const time = times[index];
+                if (!openHours[day]) {
+                    openHours[day] = { allowTimes: [] };
+                }
+                openHours[day].allowTimes.push(time);
+            }
+        }
+
+        function logic(currentDateTime) {
+            if (!currentDateTime) {
+                return;
+            }
+            var dayEntry = openHours[currentDateTime.getDay()];
+            this.setOptions({
+                allowTimes: dayEntry.allowTimes
+            })
+        };
 
         function doGeocode(address, postal_code, country, callback) {
             console.log("TEST: " + address.toString());
