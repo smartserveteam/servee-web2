@@ -1,8 +1,8 @@
-(function(A) {
+(function (A) {
   if (!Array.prototype.forEach)
     A.forEach =
       A.forEach ||
-      function(action, that) {
+      function (action, that) {
         for (var i = 0, l = this.length; i < l; i++) if (i in this) action.call(that, this[i], i, this);
       };
 })(Array.prototype);
@@ -141,29 +141,29 @@ var mapOptions = {
   ]
 };
 var marker;
-mapObject = new google.maps.Map(document.getElementById("map_right_listing"), mapOptions);
-for (var key in markersData)
-  markersData[key].forEach(function(item) {
-    marker = new google.maps.Marker({
-      position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
-      map: mapObject,
-      icon: "images/others/" + key + ".png"
-    });
+// mapObject = new google.maps.Map(document.getElementById("map_right_listing"), mapOptions);
+// for (var key in markersData)
+//   markersData[key].forEach(function(item) {
+//     marker = new google.maps.Marker({
+//       position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
+//       map: mapObject,
+//       icon: "images/others/" + key + ".png"
+//     });
 
-    if ("undefined" === typeof markers[key]) markers[key] = [];
-    markers[key].push(marker);
-    google.maps.event.addListener(marker, "click", function() {
-      closeInfoBox();
-      getInfoBox(item).open(mapObject, this);
-      mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
-    });
-  });
+//     if ("undefined" === typeof markers[key]) markers[key] = [];
+//     markers[key].push(marker);
+//     google.maps.event.addListener(marker, "click", function() {
+//       closeInfoBox();
+//       getInfoBox(item).open(mapObject, this);
+//       mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
+//     });
+//   });
 
-new MarkerClusterer(mapObject, markers[key]);
+// new MarkerClusterer(mapObject, markers[key]);
 
 function hideAllMarkers() {
   for (var key in markers)
-    markers[key].forEach(function(marker) {
+    markers[key].forEach(function (marker) {
       marker.setMap(null);
     });
 }

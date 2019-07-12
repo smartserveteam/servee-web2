@@ -601,6 +601,7 @@
                     var addressParagraph = $("<p/>", {}).appendTo("#providerHeader");
                     addressParagraph.html(`<i class="ion-ios-location"></i> ${data.address}, ${data.postalCode} ${data.city}`);
 
+
                     // Score
                     var scoreSpan = $("<span/>", { class: "list-ratings" }).appendTo("#providerHeader");
                     data.score = 4; //TODO: For testing purposes
@@ -981,7 +982,6 @@
         };
 
         function doGeocode(address, postal_code, country, callback) {
-            console.log("TEST: " + address.toString());
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({
                 'address': address,

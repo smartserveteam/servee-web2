@@ -537,7 +537,7 @@
     <!--plugin js-->
     <script src="js/plugin.js"></script>
     <!--google maps-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVvsK4COEruAO5KSmhzGdmTpqzz2jfnNk&amp;libraries=places"></script>
     <!--Markercluster js-->
     <script src="js/markerclusterer.js"></script>
     <!--Maps js-->
@@ -674,6 +674,97 @@
             $("<p/>", {}).text(item.address).appendTo(addressEntry);
             $("<p/>", {}).text(item.city).appendTo(addressEntry);
 
+            // Add to map
+            if (item.address && item.postalCode && item.country) {
+                console.log("Adding map marker for:", item.address, item.postalCode, item.country);
+                doGeocode(item.address, item.postalCode, item.country, (results) => {
+                    console.log("Results:", results);
+                    // Only use the first result
+                    let lat = results[0].geometry.location.lat();
+                    let long = results[0].geometry.location.lng();
+
+                    var mapOptions = {
+                        // How zoomed in you want the map to start at (always required)
+                        zoom: 15,
+
+                        // The latitude and longitude to center the map (always required)
+                        center: new google.maps.LatLng(lat, long),
+
+                        scrollwheel: false,
+
+                        // How you would like to style the map.
+                        // This is where you would paste any style found on Snazzy Maps.
+                        styles: [
+                            {
+                                "featureType": "administrative",
+                                "elementType": "geometry",
+                                "stylers": [
+                                    {
+                                        "visibility": "off"
+                                    }
+                                ]
+                            },
+                            {
+                                "featureType": "administrative.land_parcel",
+                                "elementType": "labels",
+                                "stylers": [
+                                    {
+                                        "visibility": "off"
+                                    }
+                                ]
+                            },
+                            {
+                                "featureType": "poi",
+                                "stylers": [
+                                    {
+                                        "visibility": "off"
+                                    }
+                                ]
+                            },
+                            {
+                                "featureType": "road",
+                                "elementType": "labels.icon",
+                                "stylers": [
+                                    {
+                                        "visibility": "off"
+                                    }
+                                ]
+                            },
+                            {
+                                "featureType": "road.local",
+                                "elementType": "labels",
+                                "stylers": [
+                                    {
+                                        "visibility": "off"
+                                    }
+                                ]
+                            },
+                            {
+                                "featureType": "transit",
+                                "stylers": [
+                                    {
+                                        "visibility": "off"
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+
+                    var mapElement = document.getElementById('map_right_listing');
+                    var map = new google.maps.Map(mapElement, mapOptions);
+
+                    var image = 'images/others/marker.png';
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, long),
+                        map: map,
+                        icon: image,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP
+                    });
+                    marker.addListener('click', toggleBounce);
+                });
+            }
+
             // Phone
             var phoneEntry = $("<li/>", {}).appendTo(addressList);
             var phoneIcon = $("<i/>", { class: "ion-ios-telephone" }).appendTo(phoneEntry);
@@ -700,6 +791,32 @@
             $("<p/>", {}).text("till 11.00pm").appendTo(openClosedDiv);
 
             return mainDiv;
+        }
+
+        function doGeocode(address, postal_code, country, callback) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                'address': address,
+                'componentRestrictions': {
+                    'postalCode': postal_code,
+                    'country': country
+                }
+            }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    callback(results);
+                } else {
+                    //Error handling
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
         }
 
         function getUrlParameter(sParam) {
