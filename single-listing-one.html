@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
     <!-- Date Time Picker -->
     <link rel="stylesheet" href="css/jquery.datetimepicker.min.css">
+    <!-- Rate It -->
+    <link rel="stylesheet" href="js/rateit/rateit.css">
     <!-- Document Title -->
     <title>Servee.io</title>
 </head>
@@ -135,29 +137,21 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-7 col-12">
-                                            <p class="contact-form__rate">
+                                            <span class="contact-form__rate">
                                                 Your rating for this listing:
-                                            </p>
-                                            <p class="contact-form__rate-bx">
-                                                <i class="ion-ios-star"></i>
-                                                <i class="ion-ios-star"></i>
-                                                <i class="ion-ios-star"></i>
-                                                <i class="ion-ios-star"></i>
-                                                <i class="ion-ios-star"></i>
-                                            </p>
-                                            <p class="contact-form__rate-bx-show">
-                                                <span class="rate-actual">0</span> / 5
-                                            </p>
+                                                <div class="rateit mb-4" data-rateit-mode="font" id="rateitreview">
+                                                </div>
+                                            </span>
                                         </div>
-                                        <div class="col-md-6 col-sm-5 col-12">
+                                        <!-- <div class="col-md-6 col-sm-5 col-12">
                                             <div class="contact-form__upload-btn xs-left">
-                                                <input class="contact-form__input-file" type="file" name="photo-upload" id="photo-upload">
+                                                <input disabled class="contact-form__input-file" type="file" name="photo-upload" id="photo-upload">
                                                 <span>
                                                     <i class="icofont-upload-alt"></i>
                                                     Upload Photos
                                                 </span>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -165,7 +159,7 @@
                                         </div>
                                     </div>
                                     <textarea class="contact-form__textarea" name="comment" id="comment" placeholder="Comment"></textarea>
-                                    <input class="btn v1" type="submit" name="submit-contact" id="submit_contact" value="Submit">
+                                    <input class="btn v1" type="submit" name="submit-review" id="submit-review" value="Submit">
                                 </form>
                             </div>
                         </div>
@@ -527,6 +521,10 @@
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <!--Date Time Picker-->
     <script src="js/jquery.datetimepicker.full.min.js"></script>
+    <!--Cookies-->
+    <script src="js/js.cookie.js"></script>
+    <!--RateIt-->
+    <script src="js/rateit/jquery.rateit.min.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/amazon-cognito-identity.min.js"></script>
@@ -535,12 +533,23 @@
 
         var providerId = getUrlParameter("providerId");
 
-        if (!isLoggedIn()) {
-            $("#booking").addClass("disableddiv");
-            $("#add_review").addClass("disableddiv");
-        }
+        $("#leave-review #submit-review").on("click", async (e) => {
+            e.preventDefault();
 
-        //$('#datetimepicker').datetimepicker();
+            //Submit review
+            getUserByCognitoId(getLoggedInUserId()).then((user) => {
+                createReview(user.id, providerId, $("#leave-review #title").val(), $("#leave-review #comment").val(), $("#rateitreview").rateit("value")).then((response) => {
+                }).catch((error) => {
+                    console.error("Failed to get user by cognito id:", error);
+                    alert("Failed to get user by cognito id:" + error.statusText);
+                })
+
+            }).catch((error) => {
+                console.error("Failed to submit review:", error);
+                alert("Failed to submit review:" + error.statusText);
+            });
+        });
+
         $('#datetimepicker').datetimepicker({
             timepicker: true,
             formatDate: 'Y/m/d',
@@ -561,393 +570,384 @@
                 return;
             }
 
+            var isUserLoggedIn = await isLoggedIn();
+            if (!isUserLoggedIn) {
+                $("#booking").addClass("disableddiv");
+                $("#add_review").addClass("disableddiv");
+            }
+
             // Get provider details
-            await $.ajax({
-                method: "GET",
-                url: `${providersApiBasePath}/providers/${providerId}`,
-                dataType: "json",
-                cache: false
+            console.log("Getting provider:" + providerId);
+            getProvider(providerId).then((provider) => {
+                // Populate fields
+                populateProviderInfo(provider);
+            }).catch((error) => {
+                console.error("Failed to retrieve provider:", error);
+                alert("Failed to retrieve provider:" + error.statusText);
             })
-                .done(async (data, textStatus, jqXHR) => {
-                    console.log("Text Status:", textStatus);
-                    console.log("Data:", data);
-                    console.log("jqXHR:", jqXHR);
+        }
 
-                    // Populate fields
+        async function populateProviderInfo(provider) {
+            // Categories
+            for (let index = 0; index < provider.categoriesProvided.length; index++) {
+                const categoryId = provider.categoriesProvided[index];
 
-                    // Categories
-                    for (let index = 0; index < data.categoriesProvided.length; index++) {
-                        const categoryId = data.categoriesProvided[index];
+                // Add tags
+                var category = await getCategoryDetails(categoryId);
+                console.log("Category Name:", category.name);
+                var headerParagraph = $("<p/>", {}).appendTo("#providerHeader");
+                var categoryLink = $("<a/>", { class: "btn v6", href: `categories.html?categoryId=${categoryId}` }).text(category.name).appendTo(headerParagraph);
 
-                        // Add tags
-                        var category = await getCategoryDetails(categoryId);
-                        console.log("Category Name:", category.name);
-                        var headerParagraph = $("<p/>", {}).appendTo("#providerHeader");
-                        var categoryLink = $("<a/>", { class: "btn v6", href: `categories.html?categoryId=${categoryId}` }).text(category.name).appendTo(headerParagraph);
+                // Add category to quote widget
+                //<a class="dropdown-item" href="#">Action</a>
+                $("<a/>", { class: "dropdown-item", href: "#", style: "width: 100%;" }).text(category.name).appendTo("#categories");
 
-                        // Add category to quote widget
-                        //<a class="dropdown-item" href="#">Action</a>
-                        $("<a/>", { class: "dropdown-item", href: "#", style: "width: 100%;" }).text(category.name).appendTo("#categories");
+            }
 
-                    }
+            // Business Name
+            var businessNameH2 = $("<h2/>", {}).text(`${provider.businessName} `).appendTo("#providerHeader");
+            if (provider.isVerified) {
+                $("<i/>", { class: "icofont-tick-boxed" }).appendTo(businessNameH2);
+            }
 
-                    // Business Name
-                    var businessNameH2 = $("<h2/>", {}).text(`${data.businessName} `).appendTo("#providerHeader");
-                    if (data.isVerified) {
-                        $("<i/>", { class: "icofont-tick-boxed" }).appendTo(businessNameH2);
-                    }
+            // Address
+            var addressParagraph = $("<p/>", {}).appendTo("#providerHeader");
+            addressParagraph.html(`<i class="ion-ios-location"></i> ${provider.address}, ${provider.postalCode} ${provider.city}`);
 
-                    // Address
-                    var addressParagraph = $("<p/>", {}).appendTo("#providerHeader");
-                    addressParagraph.html(`<i class="ion-ios-location"></i> ${data.address}, ${data.postalCode} ${data.city}`);
+            // Score
+            var scoreSpan = $("<span/>", { class: "list-ratings" }).appendTo("#providerHeader");
+            provider.score = 4; //TODO: For testing purposes
+            //TODO: Add code to handle half stars
+            for (let index = 0; index < provider.score; index++) {
+                $("<span/>", { class: "ion-android-star" }).appendTo(scoreSpan);
+            }
+            if (provider.score < 5) {
+                for (let index = 0; index < 5 - provider.score; index++) {
+                    $("<span/>", { class: "ion-android-star-outline" }).appendTo(scoreSpan);
+                }
+            }
+            $("<a/>", { href: "#" }).text(`(3 Reviews)`).appendTo(scoreSpan); //TODO: Get number of reviews
 
+            // Overview
+            $("<h4/>", {}).text("Overview").appendTo("#overview");
+            var contentDiv = $("<div/>", { class: "overview-content" }).appendTo("#overview");
+            $("<p/>", { class: "mar-bot-10" }).text(provider.description).appendTo(contentDiv);
+            var servicesProvidedDiv = $("<div/>", { class: "mar-top-20" }).appendTo("#overview");
+            $("<h6/>", {}).text("Services Provided").appendTo(servicesProvidedDiv);
+            var servicesProvidedList = $("<ul/>", { class: "listing-features" }).appendTo(servicesProvidedDiv);
+            for (let index = 0; index < provider.categoriesProvided.length; index++) {
+                const serviceProvidedId = provider.categoriesProvided[index];
+                var serviceProvided = await getCategoryDetails(serviceProvidedId);
+                let li = $("<li/>", {}).appendTo(servicesProvidedList);
+                li.html(`<i class="${serviceProvided.icon}"></i> ${serviceProvided.name}`);
+            }
 
-                    // Score
-                    var scoreSpan = $("<span/>", { class: "list-ratings" }).appendTo("#providerHeader");
-                    data.score = 4; //TODO: For testing purposes
-                    //TODO: Add code to handle half stars
-                    for (let index = 0; index < data.score; index++) {
-                        $("<span/>", { class: "ion-android-star" }).appendTo(scoreSpan);
-                    }
-                    if (data.score < 5) {
-                        for (let index = 0; index < 5 - data.score; index++) {
-                            $("<span/>", { class: "ion-android-star-outline" }).appendTo(scoreSpan);
-                        }
-                    }
-                    $("<a/>", { href: "#" }).text(`(3 Reviews)`).appendTo(scoreSpan); //TODO: Get number of reviews
+            // Gallery
+            $("<h4/>", {}).text("Gallery").appendTo("#gallery");
+            // Carousel Wrapper
+            var carousel = $("<div/>", { class: "carousel slide carousel-fade carousel-thumbnails list-gallery", id: "carousel-thumb", "provider-ride": "carousel" }).appendTo("#gallery");
+            // Slides
+            var carouselInnerDiv = $("<div/>", { class: "carousel-inner", role: "listbox" }).appendTo(carousel);
 
-                    // Overview
-                    $("<h4/>", {}).text("Overview").appendTo("#overview");
-                    var contentDiv = $("<div/>", { class: "overview-content" }).appendTo("#overview");
-                    $("<p/>", { class: "mar-bot-10" }).text(data.description).appendTo(contentDiv);
-                    var servicesProvidedDiv = $("<div/>", { class: "mar-top-20" }).appendTo("#overview");
-                    $("<h6/>", {}).text("Services Provided").appendTo(servicesProvidedDiv);
-                    var servicesProvidedList = $("<ul/>", { class: "listing-features" }).appendTo(servicesProvidedDiv);
-                    for (let index = 0; index < data.categoriesProvided.length; index++) {
-                        const serviceProvidedId = data.categoriesProvided[index];
-                        var serviceProvided = await getCategoryDetails(serviceProvidedId);
-                        let li = $("<li/>", {}).appendTo(servicesProvidedList);
-                        li.html(`<i class="${serviceProvided.icon}"></i> ${serviceProvided.name}`);
-                    }
+            //TODO: For testing only
+            if (!provider.workPhotoAlbums) {
+                provider.workPhotoAlbums = [];
+                provider.workPhotoAlbums.push("images/single-listing/gallery-1.jpg");
+                provider.workPhotoAlbums.push("images/single-listing/gallery-2.jpg");
+            }
+            for (let index = 0; index < provider.workPhotoAlbums.length; index++) {
+                const photo = provider.workPhotoAlbums[index];
+                console.log("Photo:", photo);
+                let carouselItem = $("<div/>", { class: `carousel-item ${index == 0 ? "active" : ""}` }).appendTo(carouselInnerDiv);
+                $("<img/>", { class: "d-block w-100", src: photo, alt: "slide" }).appendTo(carouselItem);
+            }
 
-                    // Gallery
-                    $("<h4/>", {}).text("Gallery").appendTo("#gallery");
-                    // Carousel Wrapper
-                    var carousel = $("<div/>", { class: "carousel slide carousel-fade carousel-thumbnails list-gallery", id: "carousel-thumb", "data-ride": "carousel" }).appendTo("#gallery");
-                    // Slides
-                    var carouselInnerDiv = $("<div/>", { class: "carousel-inner", role: "listbox" }).appendTo(carousel);
+            // Controls
+            var controlPrev = $("<a/>", { class: "carousel-control-prev", href: "#carousel-thumb", role: "button", "provider-slide": "prev" }).appendTo(carousel);
+            $("<span/>", { class: "ion-arrow-left-c", "aria-hidden": "true" }).appendTo(controlPrev);
+            $("<span/>", { class: "sr-only" }).text("Previous").appendTo(controlPrev);
+            var controlNext = $("<a/>", { class: "carousel-control-next", href: "#carousel-thumb", role: "button", "provider-slide": "next" }).appendTo(carousel);
+            $("<span/>", { class: "ion-arrow-right-c", "aria-hidden": "true" }).appendTo(controlNext);
+            $("<span/>", { class: "sr-only" }).text("Next").appendTo(controlNext);
 
-                    //TODO: For testing only
-                    data.workPhotoAlbums.push("images/single-listing/gallery-1.jpg");
-                    data.workPhotoAlbums.push("images/single-listing/gallery-2.jpg");
-                    for (let index = 0; index < data.workPhotoAlbums.length; index++) {
-                        const photo = data.workPhotoAlbums[index];
-                        console.log("Photo:", photo);
-                        let carouselItem = $("<div/>", { class: `carousel-item ${index == 0 ? "active" : ""}` }).appendTo(carouselInnerDiv);
-                        $("<img/>", { class: "d-block w-100", src: photo, alt: "slide" }).appendTo(carouselItem);
-                    }
+            // Thumbnails
+            var ol = $("<ol/>", { class: "carousel-indicators list-gallery-thumb" }).appendTo(carousel);
+            for (let index = 0; index < provider.workPhotoAlbums.length; index++) {
+                const photo = provider.workPhotoAlbums[index];
+                let li = $("<li/>", { "provider-target": "#carousel-thumb", "provider-slide-to": index }).appendTo(ol);
+                $("<img/>", { class: "img-fluid d-block w-100", src: photo, alt: "..." }).appendTo(li);
+            }
 
-                    // Controls
-                    var controlPrev = $("<a/>", { class: "carousel-control-prev", href: "#carousel-thumb", role: "button", "data-slide": "prev" }).appendTo(carousel);
-                    $("<span/>", { class: "ion-arrow-left-c", "aria-hidden": "true" }).appendTo(controlPrev);
-                    $("<span/>", { class: "sr-only" }).text("Previous").appendTo(controlPrev);
-                    var controlNext = $("<a/>", { class: "carousel-control-next", href: "#carousel-thumb", role: "button", "data-slide": "next" }).appendTo(carousel);
-                    $("<span/>", { class: "ion-arrow-right-c", "aria-hidden": "true" }).appendTo(controlNext);
-                    $("<span/>", { class: "sr-only" }).text("Next").appendTo(controlNext);
+            // Schedule
+            var businessTitleDiv = $("<div/>", { class: "business-title" }).appendTo("#schedule");
+            var h6 = $("<h6/>", {}).appendTo(businessTitleDiv);
+            h6.html('<i class="ion-android-alarm-clock"></i> Business Hours');
+            $("<span/>", { class: "float-right" }).text("Open Now").appendTo(businessTitleDiv); //TODO: Calculate if open now
 
-                    // Thumbnails
-                    var ol = $("<ol/>", { class: "carousel-indicators list-gallery-thumb" }).appendTo(carousel);
-                    for (let index = 0; index < data.workPhotoAlbums.length; index++) {
-                        const photo = data.workPhotoAlbums[index];
-                        let li = $("<li/>", { "data-target": "#carousel-thumb", "data-slide-to": index }).appendTo(ol);
-                        $("<img/>", { class: "img-fluid d-block w-100", src: photo, alt: "..." }).appendTo(li);
-                    }
-
-                    // Schedule
-                    var businessTitleDiv = $("<div/>", { class: "business-title" }).appendTo("#schedule");
-                    var h6 = $("<h6/>", {}).appendTo(businessTitleDiv);
-                    h6.html('<i class="ion-android-alarm-clock"></i> Business Hours');
-                    $("<span/>", { class: "float-right" }).text("Open Now").appendTo(businessTitleDiv); //TODO: Calculate if open now
-
-                    if (data.schedule) {
-                        var disabledWeekDays = [];
-                        console.log("Got data schedules:", data.schedule);
-                        var scheduleList = $("<ul/>", { class: "business-hours" }).appendTo("#schedule");
-                        for (let index = 0; index < data.schedule.length; index++) {
-                            const schedule = data.schedule[index];
-                            var businessOpenList, openCloseIntervalsDiv;
-                            if (schedule.intervals.length == 0) {
-                                // Closed
-                                businessOpenList = $("<li/>", { class: `business-open trend-closed` }).appendTo(scheduleList);
-                                $("<span/>", { class: "day" }).text(dayOfWeekAsString(schedule.day)).appendTo(businessOpenList);
-                                openCloseIntervalsDiv = $("<div/>", { class: "atbd_open_close_time" }).appendTo(businessOpenList);
-                                $("<span/>", { class: "time" }).text("Closed").appendTo(openCloseIntervalsDiv);
-                                disabledWeekDays.push(schedule.day);
+            if (provider.schedule) {
+                var disabledWeekDays = [];
+                console.log("Got provider schedules:", provider.schedule);
+                var scheduleList = $("<ul/>", { class: "business-hours" }).appendTo("#schedule");
+                for (let index = 0; index < provider.schedule.length; index++) {
+                    const schedule = provider.schedule[index];
+                    var businessOpenList, openCloseIntervalsDiv;
+                    if (schedule.intervals.length == 0) {
+                        // Closed
+                        businessOpenList = $("<li/>", { class: `business-open trend-closed` }).appendTo(scheduleList);
+                        $("<span/>", { class: "day" }).text(dayOfWeekAsString(schedule.day)).appendTo(businessOpenList);
+                        openCloseIntervalsDiv = $("<div/>", { class: "atbd_open_close_time" }).appendTo(businessOpenList);
+                        $("<span/>", { class: "time" }).text("Closed").appendTo(openCloseIntervalsDiv);
+                        disabledWeekDays.push(schedule.day);
+                    } else {
+                        // Open hours
+                        businessOpenList = $("<li/>", { class: `business-open` }).appendTo(scheduleList);
+                        $("<span/>", { class: "day" }).text(dayOfWeekAsString(schedule.day)).appendTo(businessOpenList);
+                        openCloseIntervalsDiv = $("<div/>", { class: "atbd_open_close_time" }).appendTo(businessOpenList);
+                        for (let intervalIndex = 0; intervalIndex < schedule.intervals.length; intervalIndex++) {
+                            const interval = schedule.intervals[intervalIndex];
+                            var startTime = $("<span/>", { class: "time" }).html(`${interval.startTime} - ${interval.endTime}<br/>`).appendTo(openCloseIntervalsDiv);
+                            if (openHours[schedule.day]) {
+                                // Add allowTimes
+                                console.log(`Add startTime to day ${schedule.day} (${openHours[schedule.day].allowTimes})`);
+                                pushTimeRange(schedule.day, interval.startTime, interval.endTime);
                             } else {
-                                // Open hours
-                                businessOpenList = $("<li/>", { class: `business-open` }).appendTo(scheduleList);
-                                $("<span/>", { class: "day" }).text(dayOfWeekAsString(schedule.day)).appendTo(businessOpenList);
-                                openCloseIntervalsDiv = $("<div/>", { class: "atbd_open_close_time" }).appendTo(businessOpenList);
-                                for (let intervalIndex = 0; intervalIndex < schedule.intervals.length; intervalIndex++) {
-                                    const interval = schedule.intervals[intervalIndex];
-                                    var startTime = $("<span/>", { class: "time" }).html(`${interval.startTime} - ${interval.endTime}<br/>`).appendTo(openCloseIntervalsDiv);
-                                    if (openHours[schedule.day]) {
-                                        // Add allowTimes
-                                        console.log(`Add startTime to day ${schedule.day} (${openHours[schedule.day].allowTimes})`);
-                                        pushTimeRange(schedule.day, interval.startTime, interval.endTime);
-                                    } else {
-                                        console.log("Add NEW intervals to", openHours);
-                                        pushTimeRange(schedule.day, interval.startTime, interval.endTime);
-                                    }
-                                }
+                                console.log("Add NEW intervals to", openHours);
+                                pushTimeRange(schedule.day, interval.startTime, interval.endTime);
                             }
                         }
-                        console.log("disabledWeekDays:", disabledWeekDays);
-                        $("#datetimepicker").datetimepicker('setOptions', { disabledWeekDays: disabledWeekDays });
                     }
+                }
+                console.log("disabledWeekDays:", disabledWeekDays);
+                $("#datetimepicker").datetimepicker('setOptions', { disabledWeekDays: disabledWeekDays });
+            }
 
-                    // Map
-                    $("#address").text(`${data.address}, ${data.postalCode} ${data.city}`);
-                    $("#phone").text(data.phone);
-                    $("#website").text(data.website);
+            // Map
+            $("#address").text(`${provider.address}, ${provider.postalCode} ${provider.city}`);
+            $("#phone").text(provider.phone);
+            $("#website").text(provider.website);
 
-                    doGeocode(data.address, data.postalCode, data.country, (results) => {
-                        console.log("Results:", results);
-                        // Only use the first result
-                        let lat = results[0].geometry.location.lat();
-                        let long = results[0].geometry.location.lng();
+            doGeocode(provider.address, provider.postalCode, provider.country, (results) => {
+                console.log("Results:", results);
+                // Only use the first result
+                let lat = results[0].geometry.location.lat();
+                let long = results[0].geometry.location.lng();
 
-                        var mapOptions = {
-                            // How zoomed in you want the map to start at (always required)
-                            zoom: 15,
-
-                            // The latitude and longitude to center the map (always required)
-                            center: new google.maps.LatLng(lat, long),
-
-                            scrollwheel: false,
-
-
-                            // How you would like to style the map.
-                            // This is where you would paste any style found on Snazzy Maps.
-                            styles: [
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 15,
+                    // The latitude and longitude to center the map (always required)
+                    center: new google.maps.LatLng(lat, long),
+                    scrollwheel: false,
+                    // How you would like to style the map.
+                    // This is where you would paste any style found on Snazzy Maps.
+                    styles: [
+                        {
+                            "featureType": "administrative",
+                            "elementType": "geometry",
+                            "stylers": [
                                 {
-                                    "featureType": "administrative",
-                                    "elementType": "geometry",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "administrative.land_parcel",
-                                    "elementType": "labels",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "poi",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "road",
-                                    "elementType": "labels.icon",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "road.local",
-                                    "elementType": "labels",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "transit",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
+                                    "visibility": "off"
                                 }
                             ]
-                        };
-
-                        var mapElement = document.getElementById('map');
-                        var map = new google.maps.Map(mapElement, mapOptions);
-
-                        var image = 'images/others/marker.png';
-                        var marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(lat, long),
-                            map: map,
-                            icon: image,
-                            draggable: true,
-                            animation: google.maps.Animation.DROP
-                        });
-                        marker.addListener('click', toggleBounce);
-                    });
-
-                    // Cost Samples
-                    if (data.costSamples) {
-                        var costSampleTitle = $("<h4/>").text("Cost Samples").appendTo("#costSamples");
-                        var costSampleWrapper = $("<div/>", { class: "room-type-wrapper" }).appendTo("#costSamples");
-                        for (let costSampleIndex = 0; costSampleIndex < data.costSamples.length; costSampleIndex++) {
-                            const costSample = data.costSamples[costSampleIndex];
-                            var costSampleItem = $("<div/>", { class: "room-type-item" }).appendTo(costSampleWrapper);
-                            var costSampleRow = $("<div/>", { class: "row" }).appendTo(costSampleItem);
-
-                            // Image
-                            var costSampleColImg = $("<div/>", { class: "col-md-4" }).appendTo(costSampleRow);
-                            var costSampleLink = $("<a/>", { href: costSample.picture, "data-lightbox": "single-1" }).appendTo(costSampleColImg);
-                            $("<img/>", { src: costSample.picture, alt: "..." }).appendTo(costSampleLink);
-
-                            // Content
-                            var costSampleColContent = $("<div/>", { class: "col-md-8" }).appendTo(costSampleRow);
-                            var costSampleColContentRow = $("<div/>", { class: "row" }).appendTo(costSampleColContent);
-
-                            // Type and Max
-                            var costSampleColContentSub = $("<div/>", { class: "col-md-6" }).appendTo(costSampleColContentRow);
-                            var costSampleColContentFeatureLeft = $("<div/>", { class: "feature-left float-left" }).appendTo(costSampleColContentSub);
-                            $("<h3/>", {}).text(costSample.type).appendTo(costSampleColContentFeatureLeft);
-                            if (costSample.max) {
-                                var maxParagraph = $("<p/>", {}).text("Max : ").appendTo(costSampleColContentFeatureLeft);
-                                $("<span/>", {}).text(costSample.max).appendTo(maxParagraph);
-                            }
-
-                            // Icons
-                            var costSampleFacilitiesList = $("<div/>", { class: "facilities-list" }).appendTo(costSampleColContentFeatureLeft);
-                            var facilitiesList = $("<ul/>", {}).appendTo(costSampleFacilitiesList);
-                            for (let iconIndex = 0; iconIndex < costSample.icons.length; iconIndex++) {
-                                const icon = costSample.icons[iconIndex];
-                                var li = $("<li/>", {}).appendTo(facilitiesList);
-                                $("<i/>", { class: icon }).appendTo(li);
-                            }
-
-                            // Price and Description
-                            var costSampleColContentSub2 = $("<div/>", { class: "col-md-6" }).appendTo(costSampleColContentRow);
-                            var costSampleColContentFeatureRight = $("<div/>", { class: "feature-right float-right" }).appendTo(costSampleColContentSub2);
-                            $("<span/>", { class: "price-amt" }).text(`${costSample.price} ${costSample.currency}`).appendTo(costSampleColContentFeatureRight);
-                            costSampleColContentFeatureRight.append(costSample.description);
-                            $("<div/>", { class: "clear" }).appendTo(costSampleColContentFeatureRight);
+                        },
+                        {
+                            "featureType": "administrative.land_parcel",
+                            "elementType": "labels",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "labels.icon",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.local",
+                            "elementType": "labels",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "transit",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
                         }
+                    ]
+                };
+
+                var mapElement = document.getElementById('map');
+                var map = new google.maps.Map(mapElement, mapOptions);
+
+                var image = 'images/others/marker.png';
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, long),
+                    map: map,
+                    icon: image,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP
+                });
+                marker.addListener('click', toggleBounce);
+            });
+
+            // Cost Samples
+            if (provider.costSamples) {
+                var costSampleTitle = $("<h4/>").text("Cost Samples").appendTo("#costSamples");
+                var costSampleWrapper = $("<div/>", { class: "room-type-wrapper" }).appendTo("#costSamples");
+                for (let costSampleIndex = 0; costSampleIndex < provider.costSamples.length; costSampleIndex++) {
+                    const costSample = provider.costSamples[costSampleIndex];
+                    var costSampleItem = $("<div/>", { class: "room-type-item" }).appendTo(costSampleWrapper);
+                    var costSampleRow = $("<div/>", { class: "row" }).appendTo(costSampleItem);
+
+                    // Image
+                    var costSampleColImg = $("<div/>", { class: "col-md-4" }).appendTo(costSampleRow);
+                    var costSampleLink = $("<a/>", { href: costSample.picture, "provider-lightbox": "single-1" }).appendTo(costSampleColImg);
+                    $("<img/>", { src: costSample.picture, alt: "..." }).appendTo(costSampleLink);
+
+                    // Content
+                    var costSampleColContent = $("<div/>", { class: "col-md-8" }).appendTo(costSampleRow);
+                    var costSampleColContentRow = $("<div/>", { class: "row" }).appendTo(costSampleColContent);
+
+                    // Type and Max
+                    var costSampleColContentSub = $("<div/>", { class: "col-md-6" }).appendTo(costSampleColContentRow);
+                    var costSampleColContentFeatureLeft = $("<div/>", { class: "feature-left float-left" }).appendTo(costSampleColContentSub);
+                    $("<h3/>", {}).text(costSample.type).appendTo(costSampleColContentFeatureLeft);
+                    if (costSample.max) {
+                        var maxParagraph = $("<p/>", {}).text("Max : ").appendTo(costSampleColContentFeatureLeft);
+                        $("<span/>", {}).text(costSample.max).appendTo(maxParagraph);
                     }
 
-                    // Reviews
-                    await $.ajax({
-                        method: "GET",
-                        url: `${reviewsApiBasePath}/reviews/providers/${data.id}`,
-                        dataType: "json",
-                        cache: false
-                    })
-                        .done(async (data, textStatus, jqXHR) => {
-                            console.log("Text Status:", textStatus);
-                            console.log("Data:", data);
-                            console.log("jqXHR:", jqXHR);
-                            var reviewsTitle = $("<h4/>", {}).text("Reviews").appendTo("#reviews");
-                            $("<span/>", {}).text(` (${data.length})`).appendTo(reviewsTitle);
-                            var reviewBox = $("<div/>", { class: "review-box" }).appendTo("#reviews");
-                            var reviewWrapList = $("<ul/>", { class: "review_wrap" }).appendTo(reviewBox);
-                            for (let reviewIndex = 0; reviewIndex < data.length; reviewIndex++) {
-                                const review = data[reviewIndex];
-                                var reviewLi = $("<li/>", {}).appendTo(reviewWrapList);
-                                var customerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(reviewLi);
-                                // Reviewer
-                                var reviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
-                                $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(reviewerImg); //TODO: Add user image
-                                reviewerImg.append("<p>Username</p>"); //TODO: Add user's name
-                                $("<span/>", {}).text(`35 Reviews`).appendTo(reviewerImg); //TODO: Add number of reviews provided by user
-                                var customerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
-                                var customerContent = $("<div/>", { class: "customer-content" }).appendTo(customerContentWrap);
-                                var customerReview = $("<div/>", { class: "customer-review" }).appendTo(customerContent);
-                                // Review title
-                                $("<h6/>", {}).text(review.title || "").appendTo(customerReview);
-                                $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(customerReview);
-                                // Review content
-                                $("<div/>", { class: "customer-rating" }).text(review.score).appendTo(customerContent);
-                                $("<p/>", { class: "customer-text" }).text(review.content).appendTo(customerContentWrap);
-                                // Review pics
-                                if (review.pictures) {
-                                    for (let reviewPictureIndex = 0; reviewPictureIndex < review.pictures.length; reviewPictureIndex++) {
-                                        const reviewPicture = review.pictures[reviewPictureIndex];
-                                        $("<img/>", { src: reviewPicture, alt: "..." });
-                                    }
-                                }
-                                // Like button
-                                var likeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(customerContentWrap);
-                                var likeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(likeDiv);
-                                $("<i/>", { class: "icofont-thumbs-up" }).appendTo(likeLink);
-                                likeLink.append("Helpful Review");
-                                $("<span/>", {}).text(review.likes).appendTo(likeLink);
-                                var replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(likeDiv);
-                                $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
-                                replyLink.append("Reply");
+                    // Icons
+                    var costSampleFacilitiesList = $("<div/>", { class: "facilities-list" }).appendTo(costSampleColContentFeatureLeft);
+                    var facilitiesList = $("<ul/>", {}).appendTo(costSampleFacilitiesList);
+                    for (let iconIndex = 0; iconIndex < costSample.icons.length; iconIndex++) {
+                        const icon = costSample.icons[iconIndex];
+                        var li = $("<li/>", {}).appendTo(facilitiesList);
+                        $("<i/>", { class: icon }).appendTo(li);
+                    }
 
-                                // Replies
-                                if (review.replies) {
-                                    for (let reviewRepliesIndex = 0; reviewRepliesIndex < review.replies.length; reviewRepliesIndex++) {
-                                        const reply = review.replies[reviewRepliesIndex];
+                    // Price and Description
+                    var costSampleColContentSub2 = $("<div/>", { class: "col-md-6" }).appendTo(costSampleColContentRow);
+                    var costSampleColContentFeatureRight = $("<div/>", { class: "feature-right float-right" }).appendTo(costSampleColContentSub2);
+                    $("<span/>", { class: "price-amt" }).text(`${costSample.price} ${costSample.currency}`).appendTo(costSampleColContentFeatureRight);
+                    costSampleColContentFeatureRight.append(costSample.description);
+                    $("<div/>", { class: "clear" }).appendTo(costSampleColContentFeatureRight);
+                }
+            }
 
-                                        let reviewReply = $("<ul/>", { class: "has-child" }).appendTo(reviewLi);
-                                        let replyLi = $("<li/>", {}).appendTo(reviewReply);
-                                        let replyCustomerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(replyLi);
-                                        // Reviewer
-                                        let replyReviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
-                                        $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(replyReviewerImg); //TODO: Add user image
-                                        replyReviewerImg.append("<p>Username</p>"); //TODO: Add user's name
-                                        $("<span/>", {}).text(`35 Reviews`).appendTo(replyReviewerImg); //TODO: Add number of reviews provided by user
-                                        let replyCustomerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
-                                        let replyCustomerContent = $("<div/>", { class: "customer-content" }).appendTo(replyCustomerContentWrap);
-                                        let replyCustomerReview = $("<div/>", { class: "customer-review" }).appendTo(replyCustomerContent);
-                                        // Review title
-                                        $("<h6/>", {}).text(reply.title || "").appendTo(replyCustomerReview);
-                                        $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(replyCustomerReview);
-                                        // Review content
-                                        $("<div/>", { class: "customer-rating" }).text(reply.score).appendTo(replyCustomerContent);
-                                        $("<p/>", { class: "customer-text" }).text(reply.content).appendTo(replyCustomerContentWrap);
-                                        // Review pics
-                                        if (reply.pictures) {
-                                            for (let reviewPictureIndex = 0; reviewPictureIndex < reply.pictures.length; reviewPictureIndex++) {
-                                                const reviewPicture = reply.pictures[reviewPictureIndex];
-                                                $("<img/>", { src: reviewPicture, alt: "..." });
-                                            }
-                                        }
-                                        // Like button
-                                        let replyLikeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(replyCustomerContentWrap);
-                                        let replyLikeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(replyLikeDiv);
-                                        $("<i/>", { class: "icofont-thumbs-up" }).appendTo(replyLikeLink);
-                                        replyLikeLink.append("Helpful Review");
-                                        $("<span/>", {}).text(reply.likes).appendTo(replyLikeLink);
-                                        let replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(replyLikeDiv);
-                                        $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
-                                        replyLink.append("Reply");
-                                    }
+            // Reviews
+            getReviews(provider.id).then(async (reviews) => {
+                var reviewsTitle = $("<h4/>", {}).text("Reviews").appendTo("#reviews");
+                $("<span/>", {}).text(` (${reviews.length})`).appendTo(reviewsTitle);
+                var reviewBox = $("<div/>", { class: "review-box" }).appendTo("#reviews");
+                var reviewWrapList = $("<ul/>", { class: "review_wrap" }).appendTo(reviewBox);
+                for (let reviewIndex = 0; reviewIndex < reviews.length; reviewIndex++) {
+                    const review = reviews[reviewIndex];
+
+                    // Get reviewer username
+                    var userInfo = parseJwt(getIdToken().jwtToken);
+
+                    var reviewLi = $("<li/>", {}).appendTo(reviewWrapList);
+                    var customerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(reviewLi);
+                    // Reviewer
+                    var reviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
+                    $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(reviewerImg); //TODO: Add user image
+                    reviewerImg.append(`<figcaption style="text-align:center">${userInfo.given_name} ${userInfo.family_name}</figcaption>`);
+                    $("<figcaption/>", { style: "text-align:center" }).text(`35 Reviews`).appendTo(reviewerImg); //TODO: Add number of reviews provided by user
+                    var customerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
+                    var customerContent = $("<div/>", { class: "customer-content" }).appendTo(customerContentWrap);
+                    var customerReview = $("<div/>", { class: "customer-review" }).appendTo(customerContent);
+                    // Review title
+                    $("<h6/>", {}).text(review.title || "").appendTo(customerReview);
+                    $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(customerReview);
+                    // Review comment
+                    $("<div/>", { class: "customer-rating" }).text(review.score).appendTo(customerContent);
+                    $("<p/>", { class: "customer-text" }).text(review.comment).appendTo(customerContentWrap);
+                    // Review pics
+                    if (review.pictures) {
+                        for (let reviewPictureIndex = 0; reviewPictureIndex < review.pictures.length; reviewPictureIndex++) {
+                            const reviewPicture = review.pictures[reviewPictureIndex];
+                            $("<img/>", { src: reviewPicture, alt: "..." });
+                        }
+                    }
+                    // Like button
+                    var likeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(customerContentWrap);
+                    var likeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(likeDiv);
+                    $("<i/>", { class: "icofont-thumbs-up" }).appendTo(likeLink);
+                    likeLink.append("Helpful Review");
+                    $("<span/>", {}).text(review.likes).appendTo(likeLink);
+                    var replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(likeDiv);
+                    $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
+                    replyLink.append("Reply");
+
+                    // Replies
+                    if (review.replies) {
+                        for (let reviewRepliesIndex = 0; reviewRepliesIndex < review.replies.length; reviewRepliesIndex++) {
+                            const reply = review.replies[reviewRepliesIndex];
+
+                            let reviewReply = $("<ul/>", { class: "has-child" }).appendTo(reviewLi);
+                            let replyLi = $("<li/>", {}).appendTo(reviewReply);
+                            let replyCustomerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(replyLi);
+                            // Reviewer
+                            let replyReviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
+                            $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(replyReviewerImg); //TODO: Add user image
+                            replyReviewerImg.append("<p>Username</p>"); //TODO: Add user's name
+                            $("<span/>", {}).text(`35 Reviews`).appendTo(replyReviewerImg); //TODO: Add number of reviews provided by user
+                            let replyCustomerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
+                            let replyCustomerContent = $("<div/>", { class: "customer-content" }).appendTo(replyCustomerContentWrap);
+                            let replyCustomerReview = $("<div/>", { class: "customer-review" }).appendTo(replyCustomerContent);
+                            // Review title
+                            $("<h6/>", {}).text(reply.title || "").appendTo(replyCustomerReview);
+                            $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(replyCustomerReview);
+                            // Review content
+                            $("<div/>", { class: "customer-rating" }).text(reply.score).appendTo(replyCustomerContent);
+                            $("<p/>", { class: "customer-text" }).text(reply.content).appendTo(replyCustomerContentWrap);
+                            // Review pics
+                            if (reply.pictures) {
+                                for (let reviewPictureIndex = 0; reviewPictureIndex < reply.pictures.length; reviewPictureIndex++) {
+                                    const reviewPicture = reply.pictures[reviewPictureIndex];
+                                    $("<img/>", { src: reviewPicture, alt: "..." });
                                 }
                             }
-                        })
-                        .fail((jqXHR, textStatus, errorThrown) => {
-                            console.error("jqXHR:", jqXHR);
-                            console.error("Text Status:", textStatus);
-                            console.error("Error Thrown:", errorThrown);
-                        });
+                            // Like button
+                            let replyLikeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(replyCustomerContentWrap);
+                            let replyLikeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(replyLikeDiv);
+                            $("<i/>", { class: "icofont-thumbs-up" }).appendTo(replyLikeLink);
+                            replyLikeLink.append("Helpful Review");
+                            $("<span/>", {}).text(reply.likes).appendTo(replyLikeLink);
+                            let replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(replyLikeDiv);
+                            $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
+                            replyLink.append("Reply");
+                        }
+                    }
+                }
+            })
+                .catch((error) => {
+                    console.error("Failed to retrieve reviews:", error);
+                    alert("Failed to retrieve reviews:" + error);
                 })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    console.error("jqXHR:", jqXHR);
-                    console.error("Text Status:", textStatus);
-                    console.error("Error Thrown:", errorThrown);
-                });
         }
+
 
         function pushTimeRange(day, startTime, endTime) {
             var x = 15; //minutes interval
@@ -1033,21 +1033,6 @@
         function dayOfWeekAsString(dayIndex) {
             return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dayIndex];
         }
-
-        function getUrlParameter(sParam) {
-            var sPageURL = window.location.search.substring(1),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
-
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-                }
-            }
-        };
 
     </script>
     <!--Scripts ends-->

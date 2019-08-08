@@ -1271,59 +1271,40 @@
     <script src="js/plugin.js"></script>
     <!--google maps-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places"></script>
+    <!--Cookies-->
+    <script src="js/js.cookie.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/amazon-cognito-identity.min.js"></script>
     <script src="js/auth.js"></script>
     <!-- This page's script -->
     <script>
+
+        isLoggedIn();
+
         var locations = [];
 
         // Get locations
-        $.ajax({
-            method: "GET",
-            url: `${locationsApiBasePath}/locations`,
-            dataType: "json",
-            cache: false
-        })
-            .done((data, textStatus, jqXHR) => {
-                console.log("Text Status:", textStatus);
-                console.log("Data:", data);
-                console.log("jqXHR:", jqXHR);
-                locations = data;
-                for (const item of data) {
-                    $("#locations").append($("<option/>", { text: item.name, value: item.id }));
-                }
-                $('select').niceSelect('update');
-                getLocation();
-            })
-            .fail((jqXHR, textStatus, errorThrown) => {
-                console.error("jqXHR:", jqXHR);
-                console.error("Text Status:", textStatus);
-                console.error("Error Thrown:", errorThrown);
-            });
+        getLocations().then((retrievedLocations) => {
+            locations = retrievedLocations;
+            for (const location of locations) {
+                $("#locations").append($("<option/>", { text: location.name, value: location.id }));
+            }
+            $('select').niceSelect('update');
+            getLocation();
+        }).catch((error) => {
+            alert("Failed to retrieve locations:", error);
+        });
 
         // Get categories
-        $.ajax({
-            method: "GET",
-            url: `${categoriesApiBasePath}/categories`,
-            dataType: "json",
-            cache: false
-        })
-            .done((data, textStatus, jqXHR) => {
-                console.log("Text Status:", textStatus);
-                console.log("Data:", data);
-                console.log("jqXHR:", jqXHR);
-                for (const item of data) {
-                    $("#categories").append($("<option/>", { text: item.name, value: item.id }));
-                }
-                $('select').niceSelect('update');
-            })
-            .fail((jqXHR, textStatus, errorThrown) => {
-                console.error("jqXHR:", jqXHR);
-                console.error("Text Status:", textStatus);
-                console.error("Error Thrown:", errorThrown);
-            });
+        getCategories().then((categories) => {
+            for (const category of categories) {
+                $("#categories").append($("<option/>", { text: category.name, value: category.id }));
+            }
+            $('select').niceSelect('update');
+        }).catch((error) => {
+            alert("Failed to retrieve categories:", error);
+        });
 
         $("#searchForm").on("submit", (e) => {
             e.preventDefault();
@@ -1333,71 +1314,6 @@
         });
 
     </script>
-    <!-- Geolocation -->
-    <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position, showError) => {
-                    console.log(`Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
-                    // Calculate closest location
-                    var closestLocation = {};
-                    var previousDistance = 50000;
-                    $.each(locations, (index, location) => {
-                        console.log(location);
-                        var distance = getDistanceFromLatLonInKm(position.coords.longitude, position.coords.latitude, parseFloat(location.long).toFixed(2), parseFloat(location.lat).toFixed(2))
-                        console.log("Distance to " + location.name + ": " + distance);
-                        if (distance < previousDistance) {
-                            previousDistance = distance;
-                            closestLocation = location;
-                        }
-                    });
-                    // Select closest location
-                    console.log("Closest location is:", closestLocation);
-                    $(`#locations option[value="${closestLocation.id}"]`).prop('selected', true);
-                    $('select').niceSelect('update');
-                });
-            } else {
-                console.warning("Geolocation is not supported by this browser.");
-            }
-        }
-
-        // Calculate distance between 2 GPS coordinates
-        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-            var R = 6371; // Radius of the earth in km
-            var dLat = deg2rad(lat2 - lat1);  // deg2rad below
-            var dLon = deg2rad(lon2 - lon1);
-            var a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2)
-                ;
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c; // Distance in km
-            return d;
-        }
-
-        function deg2rad(deg) {
-            return deg * (Math.PI / 180)
-        }
-
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    console.error("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    console.error("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    console.error("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    console.error("An unknown error occurred.");
-                    break;
-            }
-        }
-    </script>
-    <!--Scripts ends-->
 </body>
 
 </html>

@@ -544,6 +544,8 @@
     <script src="js/maps.js"></script>
     <!--Infobox js-->
     <script src="js/infobox.min.js"></script>
+    <!--Cookies-->
+    <script src="js/js.cookie.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/amazon-cognito-identity.min.js"></script>
@@ -554,72 +556,48 @@
 
         var currentPage = getUrlParameter("page") || 1;
 
+        isLoggedIn();
+
         main();
 
         async function main() {
             // Get category name
-            await $.ajax({
-                method: "GET",
-                url: `${categoriesApiBasePath}/categories/${getUrlParameter("categoryId")}`,
-                dataType: "json",
-                cache: false
-            })
-                .done((data, textStatus, jqXHR) => {
-                    console.log("Text Status:", textStatus);
-                    console.log("Data:", data);
-                    console.log("jqXHR:", jqXHR);
-                    categoryName = data.name;
-                })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    console.error("jqXHR:", jqXHR);
-                    console.error("Text Status:", textStatus);
-                    console.error("Error Thrown:", errorThrown);
-                });
+            getCategory(getUrlParameter("categoryId")).then((category) => {
+                categoryName = category.name;
+            });
 
             // Get providers
-            await $.ajax({
-                method: "GET",
-                url: `${providersApiBasePath}/providers`,
-                dataType: "json",
-                cache: false
-            })
-                .done((data, textStatus, jqXHR) => {
-                    console.log("Text Status:", textStatus);
-                    console.log("Data:", data);
-                    console.log("jqXHR:", jqXHR);
+            getProviders().then((providers) => {
+                var providersByPage = 5;
+                console.log("Page Number:", currentPage);
+                var totalNumPages = Math.round((providers.length / 5) + 1);
 
-                    var providersByPage = 5;
-                    console.log("Page Number:", currentPage);
-                    var totalNumPages = Math.round((data.length / 5) + 1);
-
-                    if (data.length > 0) {
-                        if (data.length <= providersByPage) {
-                            $("#totalNumProviders").html(`Showing <span>1-${data.length} of ${data.length}</span> providers(s)`);
-                        } else {
-                            $("#totalNumProviders").html(`Showing <span>${Math.max((currentPage - 1) * providersByPage, 1)}-${Math.min(currentPage * providersByPage, data.length)} of ${data.length}</span> providers`);
-                        }
-                        // Page Numbers
-                        var providers = paginate(data, providersByPage, currentPage);
-
-                        var pagesList = $("<ul/>", {}).appendTo("#pagenum");
-                        console.log("Total Num Pages:", totalNumPages);
-                        for (let pageIndex = 1; pageIndex <= totalNumPages; pageIndex++) {
-                            $("<li/>", { class: currentPage == pageIndex ? "active" : "" }).append($("<a/>", { href: location.href.replace(/&?page=([^&]$|[^&]*)/i, "&page=" + pageIndex) }).text(pageIndex)).appendTo(pagesList);
-                        }
-
-                        for (let index = 0; index < providers.length; index++) {
-                            const provider = providers[index];
-                            $("#list-view").append(createCard(provider));
-                        }
+                if (providers.length > 0) {
+                    if (providers.length <= providersByPage) {
+                        $("#totalNumProviders").html(`Showing <span>1-${providers.length} of ${providers.length}</span> providers(s)`);
                     } else {
-                        $("#list-view").append("No providers found");
+                        $("#totalNumProviders").html(`Showing <span>${Math.max((currentPage - 1) * providersByPage, 1)}-${Math.min(currentPage * providersByPage, providers.length)} of ${providers.length}</span> providers`);
                     }
-                })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    console.error("jqXHR:", jqXHR);
-                    console.error("Text Status:", textStatus);
-                    console.error("Error Thrown:", errorThrown);
-                });
+                    // Page Numbers
+                    var currentProviders = paginate(providers, providersByPage, currentPage);
+
+                    var pagesList = $("<ul/>", {}).appendTo("#pagenum");
+                    console.log("Total Num Pages:", totalNumPages);
+                    for (let pageIndex = 1; pageIndex <= totalNumPages; pageIndex++) {
+                        $("<li/>", { class: currentPage == pageIndex ? "active" : "" }).append($("<a/>", { href: location.href.replace(/&?page=([^&]$|[^&]*)/i, "&page=" + pageIndex) }).text(pageIndex)).appendTo(pagesList);
+                    }
+
+                    for (let index = 0; index < currentProviders.length; index++) {
+                        const provider = currentProviders[index];
+                        $("#list-view").append(createCard(provider));
+                    }
+                } else {
+                    $("#list-view").append("No providers found");
+                }
+            }).catch((error) => {
+                console.error(error);
+                alert("Failed to retrieve providers:", error);
+            })
         }
 
         function paginate(array, page_size, page_number) {
@@ -793,24 +771,6 @@
             return mainDiv;
         }
 
-        function doGeocode(address, postal_code, country, callback) {
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                'address': address,
-                'componentRestrictions': {
-                    'postalCode': postal_code,
-                    'country': country
-                }
-            }, function (results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    callback(results);
-                } else {
-                    //Error handling
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
-            });
-        }
-
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
@@ -819,20 +779,6 @@
             }
         }
 
-        function getUrlParameter(sParam) {
-            var sPageURL = window.location.search.substring(1),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
-
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-                }
-            }
-        };
     </script>
     <!--Scripts ends-->
 </body>
