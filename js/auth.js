@@ -1,7 +1,3 @@
-var cognitoUser = undefined;
-var currentSession = undefined;
-var accessToken = undefined;
-
 const authApiBasePath = "https://ommkdunauc.execute-api.eu-central-1.amazonaws.com/dev";
 const categoriesApiBasePath = "https://g8335hfcy0.execute-api.eu-central-1.amazonaws.com/dev";
 const locationsApiBasePath = "https://6mo2qzbcag.execute-api.eu-central-1.amazonaws.com/dev"
