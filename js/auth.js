@@ -44,8 +44,8 @@ async function login() {
         dataType: "json",
         cache: false,
         data: JSON.stringify({
-            username: $("#email").val(),
-            password: $("#password").val()
+            username: $("#loginemail").val(),
+            password: $("#loginpassword").val()
         })
     })
         .done((data, textStatus, jqXHR) => {
@@ -56,6 +56,52 @@ async function login() {
         .fail((jqXHR, textStatus, errorThrown) => {
             logAjaxError("GET /auth", jqXHR, textStatus, errorThrown);
             showError(textStatus);
+        });
+}
+
+async function registerUser() {
+    return await $.ajax({
+        method: "POST",
+        url: `${authApiBasePath}/register`,
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify({
+            email: $("#registeremail").val(),
+            password: $("#password").val(),
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val()
+        })
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("POST /register", data, textStatus, jqXHR);
+            return data;
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            logAjaxError("POST /register", jqXHR, textStatus, errorThrown);
+            return jqXHR.responseJSON.message;
+        });
+}
+
+async function confirmRegistrationCode(username, code) {
+    return await $.ajax({
+        method: "POST",
+        url: `${authApiBasePath}/confirmRegistrationCode`,
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify({
+            username: username,
+            code: code
+        })
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("POST /confirmRegistrationCode", data, textStatus, jqXHR);
+            return data;
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            logAjaxError("POST /confirmRegistrationCode", jqXHR, textStatus, errorThrown);
+            return jqXHR.responseJSON.message;
         });
 }
 

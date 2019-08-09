@@ -72,10 +72,10 @@
                                     </p>
                                     <form id="login-form" action="#" method="post">
                                         <div class="form-group">
-                                            <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="email" value="" required />
+                                            <input type="text" name="loginemail" id="loginemail" tabindex="1" class="form-control" placeholder="email" value="" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" />
+                                            <input type="password" name="loginpassword" id="loginpassword" tabindex="2" class="form-control" placeholder="Password" />
                                         </div>
                                         <div class="row mar-top-20">
                                             <div class="col-md-6 col-12 text-left">
@@ -116,7 +116,7 @@
                                             <input type="text" required="" name="lastName" id="lastName" tabindex="3" class="form-control" placeholder="Last Name" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" required="" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                            <input type="email" required="" name="registeremail" id="registeremail" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" required="" name="password" id="password" tabindex="4" class="form-control" placeholder="Password">
@@ -346,7 +346,6 @@
                 });
             });
 
-            //TODO MOVE TO AWS LAMBDA
             //#region register
 
             $("#resendCode").click(() => {
@@ -360,48 +359,21 @@
             })
 
             $("#register-form").submit(event => {
+                console.log("Registering new user...");
                 event.preventDefault();
                 clearError();
 
-                var poolData = {
-                    UserPoolId: 'eu-central-1_7iruUqdsk',
-                    ClientId: '3gbfhl35avtb3uop6o5scbd0sd'
-                };
-                var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+                registerUser().then((user) => {
+                    console.log("User registration is successful:", user);
+                    Cookies.set("User", user);
 
-                var attributeList = [];
-
-                var dataFirstName = {
-                    Name: 'given_name',
-                    Value: $("#firstName").val()
-                };
-                var dataLastName = {
-                    Name: 'family_name',
-                    Value: $("#lastName").val()
-                };
-                // var dataEmail = {
-                //     Name: 'email',
-                //     Value: $("#register-form #email").val()
-                // };
-                var attributeFirstName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFirstName);
-                var attributeLastName = new AmazonCognitoIdentity.CognitoUserAttribute(dataLastName);
-                // var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
-
-                attributeList.push(attributeFirstName);
-                attributeList.push(attributeLastName);
-                // attributeList.push(attributeEmail);
-
-                userPool.signUp($("#register-form #email").val(), $("#register-form #password").val(), attributeList, null, function (err, result) {
-                    if (err) {
-                        showError(err);
-                        return;
-                    }
-                    cognitoUser = result.user;
-                    console.log('user name is ' + cognitoUser.getUsername());
                     // Show confirmation modal dialog
                     $("#confirmationModal #code").empty();
                     $('#confirmationModal').modal('show');
-                });
+                }).catch((error) => {
+                    console.error("Failed to register user:", error);
+                    showError(error);
+                })
             });
 
             $('#confirmationModal').on('shown.bs.modal', function () {
@@ -410,26 +382,23 @@
 
             $("#confirmationForm").submit(event => {
                 event.preventDefault();
-                confirmRegistration($("#code").val());
+                let cookiesUser = Cookies.getJSON("User");
+                console.log("Cookies user:", cookiesUser);
+                const username = cookiesUser.username;
+                confirmRegistrationCode(username, $("#code").val()).then((result) => {
+                    console.log("Result from code confirmation:", result);
+                    $(location).attr("href", "login.html");
+                }).catch((error) => {
+                    console.error("Failed to confirm registration code:", error);
+                    showError(error);
+                })
             });
 
-            function confirmRegistration(code) {
-                cognitoUser.confirmRegistration(code, true, function (err, result) {
-                    if (err) {
-                        alert(err.message);
-                        return;
-                    }
-                    if (result === "SUCCESS") {
-                        $(location).attr("href", "login.html");
-                    }
-                });
-            }
-
-            $("#acce pt").change(() => {
+            $("#accept").change(() => {
                 $("#signUp").prop("disabled", !$("#accept").is(":checked"))
             });
 
-        //#endregion
+            //#endregion
 
         </script>
         <!--Scripts ends-->
