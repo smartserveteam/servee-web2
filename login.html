@@ -320,88 +320,101 @@
                 </div>
             </div>
         </div>
-        <!--Footer ends-->
+    </div>
+    <!--Footer ends-->
 
-        <!--Scripts starts-->
-        <!--plugin js-->
-        <script src="js/plugin.js"></script>
-        <!--google maps-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places"></script>
-        <!--Cookies-->
-        <script src="js/js.cookie.js"></script>
-        <!--Main js-->
-        <script src="js/main.js"></script>
-        <script src="js/amazon-cognito-identity.min.js"></script>
-        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.487.0.min.js"></script>
-        <script src="js/auth.js"></script>
-        <!-- This page's script -->
-        <script>
+    <!--Scripts starts-->
+    <!--plugin js-->
+    <script src="js/plugin.js"></script>
+    <!--google maps-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places"></script>
+    <!--Cookies-->
+    <script src="js/js.cookie.js"></script>
+    <!--Main js-->
+    <script src="js/main.js"></script>
+    <script src="js/amazon-cognito-identity.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.487.0.min.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- This page's script -->
+    <script>
 
-            $("#login-form").submit(event => {
-                event.preventDefault();
-                clearError();
+        $("#login-form").submit(event => {
+            event.preventDefault();
+            clearError();
 
-                login().then(() => {
-                    $(location).attr("href", "index.html");
-                });
-            });
-
-            //#region register
-
-            $("#resendCode").click(() => {
-                cognitoUser.resendConfirmationCode(function (err, result) {
-                    if (err) {
-                        alert("Failed to resend confirmation code");
+            login().then((data) => {
+                console.log("Login response:", data);
+                getLoggedInUser().then((loggedInUser) => {
+                    // NOT RETURNING FULL USER??
+                    console.log("Logged In User (from login):", loggedInUser);
+                    if (!loggedInUser.hasOwnProperty("given_name")) {
+                        $(location).attr("href", "edit-profile.html?message=incomplete");
                         return;
                     }
-                    alert("A new code was sent to you");
+                    $(location).attr("href", "index.html");
+                }).catch((error) => {
+                    console.error(error);
+                    alert("Error:" + error);
                 });
+            });
+        });
+
+        //#region register
+
+        $("#resendCode").click(() => {
+            cognitoUser.resendConfirmationCode(function (err, result) {
+                if (err) {
+                    alert("Failed to resend confirmation code");
+                    return;
+                }
+                alert("A new code was sent to you");
+            });
+        })
+
+        $("#register-form").submit(event => {
+            console.log("Registering new user...");
+            event.preventDefault();
+            clearError();
+
+            registerUser().then((user) => {
+                console.log("User registration is successful:", user);
+                Cookies.set("User", user);
+
+                // Show confirmation modal dialog
+                $("#confirmationModal #code").empty();
+                $('#confirmationModal').modal('show');
+            }).catch((error) => {
+                console.error("Failed to register user:", error);
+                showError(error);
             })
+        });
 
-            $("#register-form").submit(event => {
-                console.log("Registering new user...");
-                event.preventDefault();
-                clearError();
+        $('#confirmationModal').on('shown.bs.modal', function () {
+            $('#code').trigger('focus')
+        })
 
-                registerUser().then((user) => {
-                    console.log("User registration is successful:", user);
-                    Cookies.set("User", user);
-
-                    // Show confirmation modal dialog
-                    $("#confirmationModal #code").empty();
-                    $('#confirmationModal').modal('show');
-                }).catch((error) => {
-                    console.error("Failed to register user:", error);
-                    showError(error);
-                })
-            });
-
-            $('#confirmationModal').on('shown.bs.modal', function () {
-                $('#code').trigger('focus')
+        $("#confirmationForm").submit(event => {
+            event.preventDefault();
+            let cookiesUser = Cookies.getJSON("User");
+            console.log("Cookies user:", cookiesUser);
+            const username = cookiesUser.username;
+            confirmRegistrationCode(username, $("#code").val()).then((result) => {
+                console.log("Result from code confirmation:", result);
+                $(location).attr("href", "login.html");
+            }).catch((error) => {
+                console.error("Failed to confirm registration code:", error);
+                showError(error);
             })
+        });
 
-            $("#confirmationForm").submit(event => {
-                event.preventDefault();
-                let cookiesUser = Cookies.getJSON("User");
-                console.log("Cookies user:", cookiesUser);
-                const username = cookiesUser.username;
-                confirmRegistrationCode(username, $("#code").val()).then((result) => {
-                    console.log("Result from code confirmation:", result);
-                    $(location).attr("href", "login.html");
-                }).catch((error) => {
-                    console.error("Failed to confirm registration code:", error);
-                    showError(error);
-                })
-            });
-
-            $("#accept").change(() => {
-                $("#signUp").prop("disabled", !$("#accept").is(":checked"))
-            });
+        $("#accept").change(() => {
+            $("#signUp").prop("disabled", !$("#accept").is(":checked"))
+        });
 
             //#endregion
 
-        </script>
-        <!--Scripts ends-->
+    </script>
+    <!--Scripts ends-->
 </body>
 
 </html>
