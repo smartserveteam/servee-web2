@@ -4,7 +4,6 @@ const locationsApiBasePath = "https://6mo2qzbcag.execute-api.eu-central-1.amazon
 const providersApiBasePath = "https://sclx4kb3lk.execute-api.eu-central-1.amazonaws.com/dev";
 const reviewsApiBasePath = "https://2nhq1hidx6.execute-api.eu-central-1.amazonaws.com/dev";
 const quotesApiBasePath = "https://z75j3glj94.execute-api.eu-central-1.amazonaws.com/dev";
-const usersApiBasePath = "https://ommkdunauc.execute-api.eu-central-1.amazonaws.com/dev";
 
 //#region Authentication
 
@@ -48,10 +47,9 @@ async function login() {
             password: $("#loginpassword").val()
         })
     })
-        .done((data, textStatus, jqXHR) => {
+        .done(async (data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /auth", data, textStatus, jqXHR);
             setTokens(data);
-            return true;
         })
         .fail((jqXHR, textStatus, errorThrown) => {
             logAjaxError("GET /auth", jqXHR, textStatus, errorThrown);
@@ -208,23 +206,49 @@ function parseJwt(token) {
 }
 
 function getLoggedInUserId() {
-    return parseJwt(getIdToken().jwtToken)["cognito:username"];
+    return parseJwt(getIdToken().jwtToken)["sub"];
 }
 
 //#endregion
 
 //#region Users
 
-async function getUserByCognitoId(cognitoId) {
+async function getUser(userId) {
     return await $.ajax({
         method: "GET",
-        url: `${usersApiBasePath}/usersByCognitoId/${cognitoId}`,
+        url: `${authApiBasePath}/users/${userId}`,
+        dataType: "json",
+        beforeSend: getHeaders,
+        cache: false
+    })
+        .done(async (data, textStatus, jqXHR) => {
+            logAjaxSuccess("GET /providers/" + userId, data, textStatus, jqXHR);
+            return data;
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            handleError(getUser(userId), jqXHR, textStatus, errorThrown);
+        });
+}
+
+async function getLoggedInUser() {
+    // Get cognito user info
+    let idToken = getIdToken().jwtToken;
+    let user = parseJwt(idToken);
+    console.log("User from id token:", user);
+    let cognitoId = user.sub;
+
+    // Get the servee user info too
+    return await $.ajax({
+        method: "GET",
+        url: `${authApiBasePath}/usersByCognitoId/${cognitoId}`,
         beforeSend: getHeaders,
         dataType: "json",
         cache: false
     })
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /usersByCognitoId/" + cognitoId, data, textStatus, jqXHR);
+            Object.keys(user).forEach(key => data[key] = user[key]);
+            return data;
         })
         .fail((jqXHR, textStatus, errorThrown) => {
             handleError(null, jqXHR, textStatus, errorThrown);
@@ -295,7 +319,7 @@ async function getCategory(categoryId) {
 async function getProviders() {
     return await $.ajax({
         method: "GET",
-        url: `${usersApiBasePath}/providers`,
+        url: `${providersApiBasePath}/providers`,
         dataType: "json",
         beforeSend: getHeaders,
         cache: false
@@ -312,17 +336,17 @@ async function getProviders() {
 async function getProvider(providerId) {
     return await $.ajax({
         method: "GET",
-        url: `${usersApiBasePath}/users/${providerId}`,
-        dataType: "json",
+        url: `${authApiBasePath}/users/${providerId}`,
+        contentType: "application/json",
         beforeSend: getHeaders,
-        cache: false
+        dataType: "json"
     })
-        .done(async (data, textStatus, jqXHR) => {
+        .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /providers/" + providerId, data, textStatus, jqXHR);
             return data;
         })
         .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(getProvider(providerId), jqXHR, textStatus, errorThrown);
+            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -362,10 +386,49 @@ async function getReviews(providerId) {
         cache: false
     })
         .done((data, textStatus, jqXHR) => {
-            logAjaxSuccess("GET /reviews/" + providerId, data, textStatus, jqXHR);
+            logAjaxSuccess("GET /reviews/providers/" + providerId, data, textStatus, jqXHR);
+            return data;
         })
         .fail((jqXHR, textStatus, errorThrown) => {
             handleError(getReviews(providerId), jqXHR, textStatus, errorThrown);
+        });
+}
+
+async function getReviewsByUser(userId) {
+    return await $.ajax({
+        method: "GET",
+        url: `${reviewsApiBasePath}/reviews/users/${userId}`,
+        dataType: "json",
+        cache: false
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("GET /reviews/users/" + userId, data, textStatus, jqXHR);
+            return data;
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            handleError(null, jqXHR, textStatus, errorThrown);
+        });
+}
+
+//#endregion
+
+//#region Quotes
+
+async function getQuotesByUser(userId) {
+    return await $.ajax({
+        method: "GET",
+        url: `${quotesApiBasePath}/quotes/users/${userId}`,
+        contentType: "application/json",
+        beforeSend: getHeaders,
+        dataType: "json",
+        cache: false
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("GET /quotes/users/" + userId, data, textStatus, jqXHR);
+            return data;
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -457,6 +520,20 @@ function showGeoError(error) {
 //#endregion
 
 //#region Logging/Message/Error Handling
+
+function truncateText(str, length, ending) {
+    if (length == null) {
+        length = 100;
+    }
+    if (ending == null) {
+        ending = "...";
+    }
+    if (str.length > length) {
+        return str.substring(0, length - ending.length) + ending;
+    } else {
+        return str;
+    }
+}
 
 function logAjaxSuccess(apiFunction, data, textStatus, jqXHR) {
     console.log(apiFunction + " -> Data:", data);
