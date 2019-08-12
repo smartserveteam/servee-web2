@@ -16,135 +16,37 @@
     <link href="css/style.css" rel="stylesheet" />
     <!--color switcher css-->
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
+    <!-- Rate It -->
+    <link rel="stylesheet" href="js/rateit/rateit.css">
     <!-- Document Title -->
     <title>Servee.io</title>
 </head>
 
 <body>
-    <!--Preloader starts-->
-    <!-- <div class="preloader js-preloader">
-        <div class="dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-    </div> -->
-    <!--Preloader ends-->
     <!--Page Wrapper starts-->
     <div class="page-wrapper fixed-footer">
         <!--header starts-->
-        <header class="header transparent scroll-hide">
+        <header class="header-fixed">
             <!--Main Menu starts-->
             <div class="site-navbar-wrap v2">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="site-navbar">
                         <div class="row align-items-center">
                             <div class="col-md-4 col-6">
-                                <a class="navbar-brand" href="/"><img src="images/logo-black.png" alt="logo" class="img-fluid" /></a>
+                                <a class="navbar-brand" href="/"><img src="images/logo-black.png" alt="logo" class="img-fluid"></a>
                             </div>
                             <div class="col-md-8 col-6">
-                                <!-- <nav class="site-navigation float-left">
-                                    <div class="container">
-                                        <ul class="site-menu js-clone-nav d-none d-lg-block">
-                                            <li class="has-children">
-                                                <a href="#">Home</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="home-v1.html">Home 1</a></li>
-                                                    <li><a href="home-v2.html">Home 2</a></li>
-                                                    <li><a href="home-v3.html">Home 3</a></li>
-                                                    <li><a href="home-v4.html">Home 4</a></li>
-                                                    <li><a href="home-v5.html">Home 5</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">Listings</a>
-                                                <ul class="dropdown">
-                                                    <li class="has-children">
-                                                        <a href="#">List Layout</a>
-                                                        <ul class="dropdown sub-menu">
-                                                            <li><a href="list-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="list-fullwidth-map.html">Fullwidth with map</a></li>
-                                                            <li><a href="list-left-sidebar.html">Left Sidebar</a></li>
-                                                            <li><a href="list-right-sidebar.html">Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="has-children">
-                                                        <a href="#">Grid Layout</a>
-                                                        <ul class="dropdown sub-menu">
-                                                            <li><a href="grid-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="grid-fullwidth-map.html">Fullwidth with map</a></li>
-                                                            <li><a href="grid-left-sidebar.html">Left Sidebar</a></li>
-                                                            <li><a href="grid-right-sidebar.html">Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="has-children">
-                                                        <a href="#">Map sidebar Layout</a>
-                                                        <ul class="dropdown sub-menu">
-                                                            <li><a href="list-half-map.html">List Layout</a></li>
-                                                            <li><a href="grid-half-map.html">grid Layout</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="has-children">
-                                                        <a href="#">Listing Details</a>
-                                                        <ul class="dropdown sub-menu">
-                                                            <li><a href="single-listing-one.html">Single Listing one</a></li>
-                                                            <li><a href="single-listing-two.html">Single Listing two</a></li>
-                                                            <li><a href="single-listing-three.html">Single Listing three</a></li>
-                                                            <li><a href="single-listing-four.html">Single Listing four</a></li>
-                                                            <li><a href="single-listing-five.html">Single Listing five</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">News</a>
-                                                <ul class="dropdown">
-                                                    <li class="has-children">
-                                                        <a href="#">News Layout</a>
-                                                        <ul class="dropdown sub-menu">
-                                                            <li><a href="news-left-sidebar.html">News Left sidebar</a></li>
-                                                            <li><a href="news-right-sidebar.html">News right sidebar</a></li>
-                                                            <li><a href="news-without-sidebar.html">News without sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="has-children">
-                                                        <a href="#">Single News Layout</a>
-                                                        <ul class="dropdown sub-menu">
-                                                            <li><a href="single-news-one.html">Single News one</a></li>
-                                                            <li><a href="single-news-two.html">Single News two</a></li>
-                                                            <li><a href="single-news-three.html">Single News three</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">Pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about.html">About us</a></li>
-                                                    <li><a href="contact.html">Contact us</a></li>
-                                                    <li><a href="404-page.html">404 error</a></li>
-                                                    <li><a href="add-listing.html">Add Listing</a></li>
-                                                    <li><a href="booking.html">Booking Page</a></li>
-                                                    <li><a href="booking-confirmation.html">Booking Confirmation</a></li>
-                                                    <li><a href="login.html">Login</a></li>
-                                                    <li><a href="pricing-table.html">Pricing Table</a></li>
-                                                    <li><a href="user-profile.html">User profile</a></li>
-                                                    <li><a href="faq.html">FAQ</a></li>
-                                                    <li><a href="invoice.html">invoice</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="d-lg-none"><a class="btn v1" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </nav> -->
                                 <div class="d-lg-none sm-right">
                                     <a href="#" class="mobile-bar js-menu-toggle">
                                         <span class="ion-navicon"></span>
                                     </a>
                                 </div>
-                                <!-- <div class="add-list float-right">
-                                    <a class="btn v8" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a>
-                                </div> -->
+                                <div id="signin" class="add-list float-right mar-right-5">
+                                    <a class="btn btn-info" href="login.html">Sign In</a>
+                                </div>
+                                <div class="add-list float-right mar-right-5">
+                                    <a id="businesses" class="btn btn-outline-info" href="index_pro.html">Businesses</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -174,7 +76,7 @@
                             </div>
                             <div class="user-name">
                                 <h4 id="name"></h4>
-                                <div>Created <span id="createdAt"></span></div>
+                                <div>Updated <span id="updatedAt"></span></div>
                                 <!-- <div class="list-ratings">
                                     <span class="ion-android-star"></span>
                                     <span class="ion-android-star"></span>
@@ -304,149 +206,6 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="my-reviews">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-item__post">
-                                            <div class="review-item__post-image">
-                                                <img class="review-item__image" src="images/reviews/burger.jpg" alt="..." />
-                                            </div>
-                                            <div class="review-item__post-content">
-                                                <h2 class="review-item__post-title">
-                                                    <a href="#">Burger House</a>
-                                                </h2>
-                                                <p class="review-item__post-location">
-                                                    <i class="ion-ios-location"></i>
-                                                    Vienna 1010, Thailand
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="float-right md-left">
-                                            <div class="list-ratings">
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star-half"></span>
-                                                <a href="#">(31 Reviews)</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__content">
-                                        <p class="review-item__date">
-                                            <span class="review-item__rating">5.0</span>
-                                        </p>
-                                        <p class="review-item__date">
-                                            Posted October 7, 2018
-                                        </p>
-                                    </div>
-                                    <h3 class="review-item__title">
-                                        Yammy Burger in Thailand.
-                                    </h3>
-                                    <p class="review-item__description">
-                                        I love the Burger here but it is so rare that I get to come here. Tasty Burger
-                                        is the best type of whole in the wall restaurant. The staff are really nice,
-                                        and you should be seated quickly.
-                                    </p>
-                                    <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful
-                                        Review <span>2</span></a>
-                                    <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                </div>
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-item__post">
-                                            <div class="review-item__post-image">
-                                                <img class="review-item__image" src="images/reviews/noodles.jpg" alt="..." />
-                                            </div>
-                                            <div class="review-item__post-content">
-                                                <h2 class="review-item__post-title">
-                                                    <a href="#">Noodles shop</a>
-                                                </h2>
-                                                <p class="review-item__post-location">
-                                                    <i class="ion-ios-location"></i>
-                                                    Vienna 1010, Thailand
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="float-right md-left">
-                                            <div class="list-ratings">
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star-half"></span>
-                                                <a href="#">(31 Reviews)</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__content">
-                                        <p class="review-item__date">
-                                            <span class="review-item__rating">3.5</span>
-                                        </p>
-                                        <p class="review-item__date">
-                                            Posted October 7, 2018
-                                        </p>
-                                    </div>
-                                    <h3 class="review-item__title">
-                                        Best Noodles in Thailand.
-                                    </h3>
-                                    <p class="review-item__description">
-                                        I love the noodles here but it is so rare that I get to come here. Tasty
-                                        Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff
-                                        are
-                                        really nice, and you should be seated quickly.
-                                    </p>
-
-                                    <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful
-                                        Review <span>2</span></a>
-                                    <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                </div>
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-item__post">
-                                            <div class="review-item__post-image">
-                                                <img class="review-item__image" src="images/reviews/coffee.jpg" alt="..." />
-                                            </div>
-                                            <div class="review-item__post-content">
-                                                <h2 class="review-item__post-title">
-                                                    <a href="#">La Caffe</a>
-                                                </h2>
-                                                <p class="review-item__post-location">
-                                                    <i class="ion-ios-location"></i>
-                                                    Vienna 1010, Thailand
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="float-right  md-left">
-                                            <div class="list-ratings">
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star"></span>
-                                                <span class="ion-android-star-half"></span>
-                                                <a href="#">(31 Reviews)</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__content">
-                                        <p class="review-item__date">
-                                            <span class="review-item__rating">4.5</span>
-                                        </p>
-                                        <p class="review-item__date">
-                                            Posted October 7, 2018
-                                        </p>
-                                    </div>
-                                    <h3 class="review-item__title">
-                                        Best Caffe in London.
-                                    </h3>
-                                    <p class="review-item__description">
-                                        I love the Coffee here but it is so rare that I get to come here. Tasty Coffee
-                                        is the best type of whole in the wall restaurant. The staff are really nice,
-                                        and you should be seated quickly.
-                                    </p>
-                                    <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful
-                                        Review <span>2</span></a>
-                                    <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
-                                </div>
                             </div>
                             <div class="tab-pane fade" id="followers">
                                 <div class="tab-content mar-tb-30" id="lionTabContent-1">
@@ -940,68 +699,54 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- Cookies.js -->
     <script src="js/js.cookie.js"></script>
-    <!-- AWS -->
+    <!--RateIt-->
+    <script src="js/rateit/jquery.rateit.min.js"></script>
+    <!--Main js-->
     <script src="js/auth.js"></script>
     <!-- This page's script -->
     <script>
 
-        // User Info
-        var decodedToken = parseJwt(getIdToken().jwtToken);
-        console.log("Decoded token:", decodedToken);
-        $("#name").text(`${decodedToken.given_name} ${decodedToken.family_name}`);
-        $("#address").text(`${decodedToken.address}, ${decodedToken.postalCode} ${decodedToken.city}`);
-        $("#phone").text(decodedToken.phone);
-        $("#email").text(decodedToken.email);
-        $("#createdAt").text(moment.unix(decodedToken.iat).fromNow());
+        isLoggedIn();
 
-        // Quotes
-        // $.ajax({
-        //     method: "GET",
-        //     url: `${quotesApiBasePath}/quotes/users/${decodedToken.id}`,
-        //     contentType: "application/json",
-        //     beforeSend: function (jqXHR, settings) {
-        //         jqXHR.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
-        //     },
-        //     dataType: "json",
-        //     cache: false,
-        //     data: JSON.stringify({
-        //         email: $("#login-form #email").val(),
-        //         password: $("#password").val()
-        //     })
-        // })
-        //     .done((data, textStatus, jqXHR) => {
-        //         console.log("Text Status:", textStatus);
-        //         console.log("Data:", data);
-        //         console.log("jqXHR:", jqXHR);
-        //         if (jqXHR.status == 200) {
-        //             createQuoteCards(data);
-        //         }
-        //     })
-        //     .fail((jqXHR, textStatus, errorThrown) => {
-        //         console.error("jqXHR:", jqXHR);
-        //         console.error("Text Status:", textStatus);
-        //         console.error("Error Thrown:", errorThrown);
-        //         //TODO Add alert to show error
-        //     });
+        // User Info
+        getLoggedInUser().then((loggedInUser) => {
+            console.log("Logged In User:", loggedInUser);
+            $("#name").text(`${loggedInUser.given_name} ${loggedInUser.family_name}`);
+            $("#address").text(`${loggedInUser.address}, ${loggedInUser.postalCode} ${loggedInUser.city}, ${loggedInUser.country}`);
+            $("#phone").text(loggedInUser.phone);
+            $("#email").text(loggedInUser.email);
+            $("#updatedAt").text(moment.unix(loggedInUser.updatedAt / 1000).fromNow());
+
+            getQuotesByUser(loggedInUser.id).then((quotes) => {
+                createQuoteCards(quotes);
+            }).catch((error) => {
+                console.error(error);
+                alert("Failed to retrieve quotes:" + error);
+            });
+
+            getReviewsByUser(loggedInUser.id).then((reviews) => {
+                createReviewCards(reviews);
+            }).catch((error) => {
+                console.error(error);
+                alert("Failed to retrieve reviews: " + error.statusText);
+            });
+        });
 
         function createQuoteCards(quotes) {
             $.each(quotes, async (i, quote) => {
+                console.log("Adding quote:", quote);
                 var colDiv = $("<div/>", { class: "col-md-6" }).appendTo("#quotes");
                 var itemDiv = $("<div/>", { class: "similar-item mar-bot-40" }).appendTo(colDiv);
                 var titleDiv = $("<div/>", { class: "similar-title-box" }).appendTo(itemDiv);
                 var title = $("<h5/>").appendTo(titleDiv);
                 //Get provider info
-                var provider = await $.ajax({
-                    method: "GET",
-                    url: `${apiBasePath}/providers/${quote.providerId}`,
-                    contentType: "application/json",
-                    beforeSend: function (jqXHR, settings) {
-                        jqXHR.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
-                    },
-                    dataType: "json"
+                getProvider(quote.provider).then((provider) => {
+                    console.log(provider);
+                    $("<a/>", { href: `/quotes/${quote.id}` }).text(provider.businessName).appendTo(title);
+                }).catch((error) => {
+                    console.error(error);
+                    alert("Failed to retrieve provider:" + error);
                 });
-                console.log(provider);
-                $("<a/>", { href: `/quotes/${quote.id}` }).text(provider.businessName).appendTo(title);
                 var priceParagraph = $("<p/>").appendTo(titleDiv);
                 $("<span/>", { class: "price-amt" }).text(`${quote.amount} ${quote.currency}`).appendTo(priceParagraph);
                 var customerReviewDiv = $("<div/>", { class: "customer-review" }).appendTo(itemDiv);
@@ -1009,18 +754,58 @@
             });
         }
 
-        function truncateText(str, length, ending) {
-            if (length == null) {
-                length = 100;
-            }
-            if (ending == null) {
-                ending = "...";
-            }
-            if (str.length > length) {
-                return str.substring(0, length - ending.length) + ending;
-            } else {
-                return str;
-            }
+        function createReviewCards(reviews) {
+            $.each(reviews, async (i, review) => {
+                console.log("Adding review:", review);
+                var reviewItem = $("<div/>", { class: "review-item" }).appendTo("#my-reviews");
+                var reviewHeader = $("<div/>", { class: "review-header" }).appendTo(reviewItem);
+                // Get provider info
+                getProvider(review.providerId).then((provider) => {
+                    var reviewItemPost = $("<div/>", { class: "review-item__post" }).appendTo(reviewHeader);
+                    var reviewItemPostImage = $("<div/>", { class: "review-item__post-image" }).appendTo(reviewItemPost);
+                    // Pic
+                    $("<img/>", { class: "review-item__image", src: "images/reviews/burger.jpg" }).appendTo(reviewItemPostImage);
+                    var reviewItemPostContent = $("<div/>", { class: "review-item__post-content" }).appendTo(reviewItemPost);
+                    var reviewItemPostTitle = $("<h2/>", { class: "review-item__post-title" }).appendTo(reviewItemPostContent);
+                    // Name
+                    $("<a/>", { href: `/single-listing-one.html?providerId=${provider.id}` }).text(provider.businessName).appendTo(reviewItemPostTitle);
+                    $("<p/>", { class: "review-item__post-location" }).html(`<i class="ion-ios-location"></i> ${provider.address}`).appendTo(reviewItemPostContent);
+
+                    //TODO Get provider average score on all reviews (and count of reviews)
+                    getReviews(review.providerId).then((providerReviews) => {
+                        // Reviews average and total
+                        var scoreSection = $("<div/>", { class: "float-right md-left" }).appendTo(reviewHeader);
+                        var listRatings = $("<div/>", { class: "list-ratings" }).appendTo(scoreSection);
+                        var rateIt = $("<div/>", { class: "rate-it", "date-rateit-mode": "font", "data-rateit-readonly": true }).appendTo(listRatings);
+                        rateIt.rateit();
+                        let sum = providerReviews.reduce((previous, current) => current.score += previous.score);
+                        let avg = sum / providerReviews.length;
+                        rateIt.rateit("value", avg);
+                        $("<a/>", { href: "#" }).text(`(${providerReviews.length} Reviews)`).appendTo(listRatings);
+                    });
+
+                    //$("#rateitreview").rateit("value", review.score);
+                    // <div class="rateit mb-4" data-rateit-mode="font" id="rateitreview">
+                    // </div>
+
+
+                }).catch((error) => {
+                    console.error(error);
+                    alert("Failed to retrieve reviews: " + error.statusText);
+                });
+                // Review Content
+                var reviewItemContent = $("<div/>", { class: "review-item__content" }).appendTo(reviewItem);
+                // Review Score
+                var reviewItemScore = $("<p/>", { class: "review-item__date" }).appendTo(reviewItemContent);
+                $("<span/>", { class: "review-item__rating" }).text(review.score).appendTo(reviewItemScore);
+                // Review Date
+                var reviewItemDate = $("<p/>", { class: "review-item__date ml-1" }).text(`Posted ${moment.unix(review.updatedAt / 1000).fromNow()}`).appendTo(reviewItemContent);
+                // Review Title
+                $("<h3/>", { class: "review-item__title" }).text(review.title).appendTo(reviewItem);
+                $("<p/>", { class: "review-item__description" }).text(review.comment).appendTo(reviewItem);
+                var helpfulReview = $("<a/>", { class: "rate-review float-left", href: "#" }).html(`<i class="iconfont-thumbs-up"></i> Helpful Review <span>${review.likes || 0}</span>`).appendTo(reviewItem);
+
+            });
         }
     </script>
     <!--Scripts ends-->
