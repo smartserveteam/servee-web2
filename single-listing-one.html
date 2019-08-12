@@ -536,7 +536,7 @@
             e.preventDefault();
 
             //Submit review
-            getUserByCognitoId(getLoggedInUserId()).then((user) => {
+            getLoggedInUserId().then((user) => {
                 createReview(user.id, providerId, $("#leave-review #title").val(), $("#leave-review #comment").val(), $("#rateitreview").rateit("value")).then((response) => {
                 }).catch((error) => {
                     console.error("Failed to get user by cognito id:", error);
@@ -577,7 +577,7 @@
 
             // Get provider details
             console.log("Getting provider:" + providerId);
-            getProvider(providerId).then((provider) => {
+            getUser(providerId).then((provider) => {
                 // Populate fields
                 populateProviderInfo(provider);
             }).catch((error) => {
