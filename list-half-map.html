@@ -40,7 +40,6 @@
                                     </a>
                                 </div>
                                 <div id="signin" class="add-list float-right mar-right-5">
-                                    <a class="btn btn-info" href="login.html">Sign In</a>
                                 </div>
                                 <div class="add-list float-right mar-right-5">
                                     <a id="businesses" class="btn btn-outline-info" href="index_pro.html">Businesses</a>
@@ -555,7 +554,7 @@
 
         var currentPage = getUrlParameter("page") || 1;
 
-        isLoggedIn();
+        isLoggedIn(false);
 
         main();
 

@@ -44,7 +44,6 @@
                                     </a>
                                 </div>
                                 <div id="signin" class="add-list float-right mar-right-5">
-                                    <a class="btn btn-info" href="login.html">Sign In</a>
                                 </div>
                                 <div class="add-list float-right mar-right-5">
                                     <a id="businesses" class="btn btn-outline-info" href="index_pro.html">Businesses</a>
@@ -569,10 +568,11 @@
                 return;
             }
 
-            var isUserLoggedIn = await isLoggedIn();
+            var isUserLoggedIn = await isLoggedIn(false);
             if (!isUserLoggedIn) {
                 $("#booking").addClass("disableddiv");
                 $("#add_review").addClass("disableddiv");
+                $(".listing-sidebar").addClass("disableddiv");
             }
 
             // Get provider details
@@ -855,96 +855,103 @@
             }
 
             // Reviews
-            getReviews(provider.id).then(async (reviews) => {
+            if (getIdToken() === undefined) {
                 var reviewsTitle = $("<h4/>", {}).text("Reviews").appendTo("#reviews");
-                $("<span/>", {}).text(` (${reviews.length})`).appendTo(reviewsTitle);
-                var reviewBox = $("<div/>", { class: "review-box" }).appendTo("#reviews");
-                var reviewWrapList = $("<ul/>", { class: "review_wrap" }).appendTo(reviewBox);
-                for (let reviewIndex = 0; reviewIndex < reviews.length; reviewIndex++) {
-                    const review = reviews[reviewIndex];
+                $("<p/>").appendTo(reviewsTitle);
+                $("<small/>", {}).text("You need to login to view the reviews").appendTo(reviewsTitle);
+            } else {
+                getReviews(provider.id).then(async (reviews) => {
+                    var reviewsTitle = $("<h4/>", {}).text("Reviews").appendTo("#reviews");
+                    $("<span/>", {}).text(` (${reviews.length})`).appendTo(reviewsTitle);
+                    var reviewBox = $("<div/>", { class: "review-box" }).appendTo("#reviews");
+                    var reviewWrapList = $("<ul/>", { class: "review_wrap" }).appendTo(reviewBox);
+                    for (let reviewIndex = 0; reviewIndex < reviews.length; reviewIndex++) {
+                        const review = reviews[reviewIndex];
 
-                    // Get reviewer username
-                    var userInfo = parseJwt(getIdToken().jwtToken);
+                        // Get reviewer username - THIS IS WRONG
+                        var userInfo = parseJwt(getIdToken().jwtToken);
 
-                    var reviewLi = $("<li/>", {}).appendTo(reviewWrapList);
-                    var customerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(reviewLi);
-                    // Reviewer
-                    var reviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
-                    $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(reviewerImg); //TODO: Add user image
-                    reviewerImg.append(`<figcaption style="text-align:center">${userInfo.given_name} ${userInfo.family_name}</figcaption>`);
-                    $("<figcaption/>", { style: "text-align:center" }).text(`35 Reviews`).appendTo(reviewerImg); //TODO: Add number of reviews provided by user
-                    var customerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
-                    var customerContent = $("<div/>", { class: "customer-content" }).appendTo(customerContentWrap);
-                    var customerReview = $("<div/>", { class: "customer-review" }).appendTo(customerContent);
-                    // Review title
-                    $("<h6/>", {}).text(review.title || "").appendTo(customerReview);
-                    $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(customerReview);
-                    // Review comment
-                    $("<div/>", { class: "customer-rating" }).text(review.score).appendTo(customerContent);
-                    $("<p/>", { class: "customer-text" }).text(review.comment).appendTo(customerContentWrap);
-                    // Review pics
-                    if (review.pictures) {
-                        for (let reviewPictureIndex = 0; reviewPictureIndex < review.pictures.length; reviewPictureIndex++) {
-                            const reviewPicture = review.pictures[reviewPictureIndex];
-                            $("<img/>", { src: reviewPicture, alt: "..." });
-                        }
-                    }
-                    // Like button
-                    var likeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(customerContentWrap);
-                    var likeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(likeDiv);
-                    $("<i/>", { class: "icofont-thumbs-up" }).appendTo(likeLink);
-                    likeLink.append("Helpful Review");
-                    $("<span/>", {}).text(review.likes).appendTo(likeLink);
-                    var replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(likeDiv);
-                    $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
-                    replyLink.append("Reply");
-
-                    // Replies
-                    if (review.replies) {
-                        for (let reviewRepliesIndex = 0; reviewRepliesIndex < review.replies.length; reviewRepliesIndex++) {
-                            const reply = review.replies[reviewRepliesIndex];
-
-                            let reviewReply = $("<ul/>", { class: "has-child" }).appendTo(reviewLi);
-                            let replyLi = $("<li/>", {}).appendTo(reviewReply);
-                            let replyCustomerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(replyLi);
-                            // Reviewer
-                            let replyReviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
-                            $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(replyReviewerImg); //TODO: Add user image
-                            replyReviewerImg.append("<p>Username</p>"); //TODO: Add user's name
-                            $("<span/>", {}).text(`35 Reviews`).appendTo(replyReviewerImg); //TODO: Add number of reviews provided by user
-                            let replyCustomerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
-                            let replyCustomerContent = $("<div/>", { class: "customer-content" }).appendTo(replyCustomerContentWrap);
-                            let replyCustomerReview = $("<div/>", { class: "customer-review" }).appendTo(replyCustomerContent);
-                            // Review title
-                            $("<h6/>", {}).text(reply.title || "").appendTo(replyCustomerReview);
-                            $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(replyCustomerReview);
-                            // Review content
-                            $("<div/>", { class: "customer-rating" }).text(reply.score).appendTo(replyCustomerContent);
-                            $("<p/>", { class: "customer-text" }).text(reply.content).appendTo(replyCustomerContentWrap);
-                            // Review pics
-                            if (reply.pictures) {
-                                for (let reviewPictureIndex = 0; reviewPictureIndex < reply.pictures.length; reviewPictureIndex++) {
-                                    const reviewPicture = reply.pictures[reviewPictureIndex];
-                                    $("<img/>", { src: reviewPicture, alt: "..." });
-                                }
+                        var reviewLi = $("<li/>", {}).appendTo(reviewWrapList);
+                        var customerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(reviewLi);
+                        // Reviewer
+                        var reviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
+                        $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(reviewerImg); //TODO: Add user image
+                        reviewerImg.append(`<figcaption style="text-align:center">${userInfo.given_name} ${userInfo.family_name}</figcaption>`);
+                        $("<figcaption/>", { style: "text-align:center" }).text(`35 Reviews`).appendTo(reviewerImg); //TODO: Add number of reviews provided by user
+                        var customerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
+                        var customerContent = $("<div/>", { class: "customer-content" }).appendTo(customerContentWrap);
+                        var customerReview = $("<div/>", { class: "customer-review" }).appendTo(customerContent);
+                        // Review title
+                        $("<h6/>", {}).text(review.title || "").appendTo(customerReview);
+                        $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(customerReview);
+                        // Review comment
+                        $("<div/>", { class: "customer-rating" }).text(review.score).appendTo(customerContent);
+                        $("<p/>", { class: "customer-text" }).text(review.comment).appendTo(customerContentWrap);
+                        // Review pics
+                        if (review.pictures) {
+                            for (let reviewPictureIndex = 0; reviewPictureIndex < review.pictures.length; reviewPictureIndex++) {
+                                const reviewPicture = review.pictures[reviewPictureIndex];
+                                $("<img/>", { src: reviewPicture, alt: "..." });
                             }
-                            // Like button
-                            let replyLikeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(replyCustomerContentWrap);
-                            let replyLikeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(replyLikeDiv);
-                            $("<i/>", { class: "icofont-thumbs-up" }).appendTo(replyLikeLink);
-                            replyLikeLink.append("Helpful Review");
-                            $("<span/>", {}).text(reply.likes).appendTo(replyLikeLink);
-                            let replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(replyLikeDiv);
-                            $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
-                            replyLink.append("Reply");
+                        }
+                        // Like button
+                        var likeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(customerContentWrap);
+                        var likeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(likeDiv);
+                        $("<i/>", { class: "icofont-thumbs-up" }).appendTo(likeLink);
+                        likeLink.append("Helpful Review");
+                        $("<span/>", {}).text(review.likes).appendTo(likeLink);
+                        var replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(likeDiv);
+                        $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
+                        replyLink.append("Reply");
+
+                        // Replies
+                        if (review.replies) {
+                            for (let reviewRepliesIndex = 0; reviewRepliesIndex < review.replies.length; reviewRepliesIndex++) {
+                                const reply = review.replies[reviewRepliesIndex];
+
+                                let reviewReply = $("<ul/>", { class: "has-child" }).appendTo(reviewLi);
+                                let replyLi = $("<li/>", {}).appendTo(reviewReply);
+                                let replyCustomerReviewWrap = $("<div/>", { class: "customer-review_wrap" }).appendTo(replyLi);
+                                // Reviewer
+                                let replyReviewerImg = $("<div/>", { class: "reviewer-img" }).appendTo(customerReviewWrap);
+                                $("<img/>", { src: "images/clients/reviewer-1.png", class: "img-fluid", alt: "..." }).appendTo(replyReviewerImg); //TODO: Add user image
+                                replyReviewerImg.append("<p>Username</p>"); //TODO: Add user's name
+                                $("<span/>", {}).text(`35 Reviews`).appendTo(replyReviewerImg); //TODO: Add number of reviews provided by user
+                                let replyCustomerContentWrap = $("<div/>", { class: "customer-content-wrap" }).appendTo(customerReviewWrap);
+                                let replyCustomerContent = $("<div/>", { class: "customer-content" }).appendTo(replyCustomerContentWrap);
+                                let replyCustomerReview = $("<div/>", { class: "customer-review" }).appendTo(replyCustomerContent);
+                                // Review title
+                                $("<h6/>", {}).text(reply.title || "").appendTo(replyCustomerReview);
+                                $("<p/>", {}).text(`Posted ${moment(review.updatedAt).fromNow()}`).appendTo(replyCustomerReview);
+                                // Review content
+                                $("<div/>", { class: "customer-rating" }).text(reply.score).appendTo(replyCustomerContent);
+                                $("<p/>", { class: "customer-text" }).text(reply.content).appendTo(replyCustomerContentWrap);
+                                // Review pics
+                                if (reply.pictures) {
+                                    for (let reviewPictureIndex = 0; reviewPictureIndex < reply.pictures.length; reviewPictureIndex++) {
+                                        const reviewPicture = reply.pictures[reviewPictureIndex];
+                                        $("<img/>", { src: reviewPicture, alt: "..." });
+                                    }
+                                }
+                                // Like button
+                                let replyLikeDiv = $("<div/>", { class: "like-btn mar-top-40" }).appendTo(replyCustomerContentWrap);
+                                let replyLikeLink = $("<a/>", { href: "#", class: "rate-review float-left" }).appendTo(replyLikeDiv);
+                                $("<i/>", { class: "icofont-thumbs-up" }).appendTo(replyLikeLink);
+                                replyLikeLink.append("Helpful Review");
+                                $("<span/>", {}).text(reply.likes).appendTo(replyLikeLink);
+                                let replyLink = $("<a/>", { href: "#", class: "rate-review float-right" }).appendTo(replyLikeDiv);
+                                $("<i/>", { class: "icofont-reply" }).appendTo(replyLink);
+                                replyLink.append("Reply");
+                            }
                         }
                     }
-                }
-            })
-                .catch((error) => {
-                    console.error("Failed to retrieve reviews:", error);
-                    alert("Failed to retrieve reviews:" + error);
                 })
+                    .catch((error) => {
+                        console.error("Failed to retrieve reviews:", error);
+                        alert("Failed to retrieve reviews:" + error);
+                    })
+
+            }
         }
 
 
