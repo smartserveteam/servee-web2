@@ -1,3 +1,4 @@
+.flag-text { margin-left: 10px; }
 /*-----------------------------------------------------------
     Theme Name: listagram
     Theme URI: http://demo.lion-coders.com/listagram/
@@ -1592,7 +1593,7 @@ ul.list-inline li {
 .site-navbar .site-navigation .site-menu .has-children .dropdown {
     box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.05);
     position: absolute;
-    min-width: 15.3rem;
+    /* min-width: 15.3rem; */
     z-index: 9999;
     border-radius: 2px;
 

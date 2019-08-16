@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+    <!-- Metas -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="LionCoders" />
+    <!-- Links -->
+    <link rel="icon" type="image/png" href="#" />
+    <!-- google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="css/plugin.css" rel="stylesheet" />
+    <!-- style CSS -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!--color switcher css-->
+    <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
+    <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
+    <!-- Country Flags -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
+    <!-- Document Title -->
+    <title>Servee.io</title>
+</head>
+
+<body>
+    <!--Page Wrapper starts-->
+    <div class="page-wrapper fixed-footer">
+        <!--header starts-->
+        <header class="header transparent scroll-hide">
+            <!--Main Menu starts-->
+            <div class="site-navbar-wrap v1">
+                <div class="container">
+                    <div class="site-navbar">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 col-6">
+                                <a class="navbar-brand" href="#"><img src="images/logo-white.png" alt="logo" class="img-fluid"></a>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <div class="d-lg-none sm-right">
+                                    <a href="#" class="mobile-bar js-menu-toggle">
+                                        <span class="ion-navicon"></span>
+                                    </a>
+                                </div>
+                                <div id="signin" class="add-list float-right mar-right-5">
+                                    <a class="btn btn-info" href="login.html">Sign In</a>
+                                </div>
+                                <div class="add-list float-right mar-right-5">
+                                    <a id="businesses" class="btn btn-outline-info" href="index_pro.html">Businesses</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--mobile-menu starts -->
+                    <div class="site-mobile-menu">
+                        <div class="site-mobile-menu-header">
+                            <div class="site-mobile-menu-close  js-menu-toggle">
+                                <span class="ion-ios-close-empty"></span>
+                            </div>
+                        </div>
+                        <div class="site-mobile-menu-body"></div>
+                    </div>
+                    <!--mobile-menu ends-->
+                </div>
+            </div>
+            <!--Main Menu ends-->
+        </header>
+        <!--Header ends-->
+        <!--Breadcrumb section starts-->
+        <div class="breadcrumb-section" style="background-image: url(images/breadcrumb/breadcrumb-1.jpg)">
+            <div class="overlay op-5"></div>
+            <div class="container">
+                <div class="row align-items-center  pad-top-80">
+                    <div class="col-md-6 col-12">
+                        <div class="breadcrumb-menu">
+                            <h2 class="page-title">User Profile</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="breadcrumb-menu text-right sm-left">
+                            <ul>
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">User Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Breadcrumb section ends-->
+        <!--Add Listing starts-->
+        <div class="list-details-section section-padding add_list pad-top-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs list-details-tab">
+                            <li class="nav-item active">
+                                <a data-toggle="tab" href="#general_info">General Information</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content mar-tb-30 add_list_content">
+                            <div class="tab-pane fade show active" id="general_info">
+                                <h4> <i class="ion-ios-information"></i> General Information</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" id="firstName" class="form-control filter-input" placeholder="Your first name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" id="address" class="form-control filter-input" placeholder="Your address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input id="lastName" type="text" class="form-control filter-input" placeholder="Your last name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input id="city" type="text" class="form-control filter-input" placeholder="Your city">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Postal Code</label>
+                                            <input id="postalCode" type="text" class="form-control filter-input" placeholder="Your postal code">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <select id="country" required class="select2 form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phone </label>
+                                            <input id="phone" type="text" class="form-control filter-input" placeholder="Your phone number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="form-group">
+                                            <input class="btn btn-primary" id="save" type="button" value="Save">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Add Listing ends-->
+        <!-- Scroll to top starts-->
+        <span class="scrolltotop"><i class="ion-arrow-up-c"></i></span>
+        <!-- Scroll to top ends-->
+    </div>
+    <!--Page Wrapper ends-->
+    <!--Footer Starts-->
+    <div class="footer-wrapper no-pad-tb footer-fixed">
+        <div class="footer-top-area section-padding" style="background-image: url(images/bg/pattern.png)">
+            <div class="overlay op-9 green"></div>
+            <div class="container">
+                <div class="row nav-folderized">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-logo">
+                            <a href="index.html"> <img src="images/logo-white.png" alt="logo"></a>
+                            <div class="company-desc">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio excepturi nam totam sequi, ipsam consequatur repudiandae libero illum.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title">Helpful Links</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Login</a></li>
+                                <li><a class="link-hov style1" href="#">My Account</a></li>
+                                <li><a class="link-hov style1" href="#">Add Listing</a></li>
+                                <li><a class="link-hov style1" href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title">Category</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Shop</a></li>
+                                <li><a class="link-hov style1" href="#">Travel</a></li>
+                                <li><a class="link-hov style1" href="#">Sport</a></li>
+                                <li><a class="link-hov style1" href="#">Restaurant</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title">Contact us</h2>
+                            <ul class="list footer-list">
+                                <li>
+                                    <div class="contact-info">
+                                        <div class="icon">
+                                            <i class="ion-ios-location"></i>
+                                        </div>
+                                        <div class="text">13th North Ave, Florida, USA</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-info">
+                                        <div class="icon">
+                                            <i class="ion-email"></i>
+                                        </div>
+                                        <div class="text"><a href="#">info@listagram.com</a></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-info">
+                                        <div class="icon">
+                                            <i class="ion-ios-telephone"></i>
+                                        </div>
+                                        <div class="text">+44 078 767 595</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="social-buttons style2">
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+                                <li><a href="#"><i class="ion-social-youtube"></i></a></li>
+                                <li><a href="#"><i class="ion-social-dribbble"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <p>&copy; 2019 listagram. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer ends-->
+
+    <!--Scripts starts-->
+    <!--plugin js-->
+    <script src="js/plugin.js"></script>
+    <!--select2-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.full.min.js"></script>
+    <!--Cookies-->
+    <script src="js/js.cookie.js"></script>
+    <!--Main js-->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- this page's script -->
+    <script>
+
+        isLoggedIn();
+
+        var userId;
+
+        countriesDropdown("#country");
+        getLoggedInUser().then((user) => {
+            console.log("Logged In User:", user);
+            userId = user.id;
+            $("#firstName").val(user.given_name);
+            $("#lastName").val(user.family_name);
+            $("#address").val(user.address);
+            $("#city").val(user.city);
+            $("#postalCode").val(user.postalCode);
+            $("#country").val(user.country);
+            $("#country").trigger("change");
+            $("#phone").val(user.phone);
+        }).catch((error) => {
+            console.error(error);
+            alert("Failed to retrieve user information:" + error);
+        });
+
+        $("#save").on("click", () => {
+            saveUser(userId, $("#firstName").val(), $("#lastName").val(), $("#address").val(), $("#city").val(), $("#postalCode").val(), $("#country").val(), $("#phone").val()).then((response) => {
+                console.log("User saved:", response);
+                $(location).attr("href", "user-profile.html");
+            }).catch((error) => {
+                console.error("Failed to save user:", error);
+                alert("Failed to save user:" + error.statusText);
+            });
+        });
+    </script>
+    <!--Scripts ends-->
+</body>
+
+</html>

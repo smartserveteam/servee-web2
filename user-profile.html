@@ -574,6 +574,10 @@
                                     <span class="ion-ios-email"></span>
                                     <p id="email"></p>
                                 </div>
+
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-info" id="editProfile">Edit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -708,6 +712,10 @@
 
         isLoggedIn();
 
+        $("#editProfile").on("click", () => {
+            $(location).attr("href", "/edit-profile.html");
+        });
+
         // User Info
         getLoggedInUser().then((loggedInUser) => {
             console.log("Logged In User:", loggedInUser);
@@ -783,12 +791,6 @@
                         rateIt.rateit("value", avg);
                         $("<a/>", { href: "#" }).text(`(${providerReviews.length} Reviews)`).appendTo(listRatings);
                     });
-
-                    //$("#rateitreview").rateit("value", review.score);
-                    // <div class="rateit mb-4" data-rateit-mode="font" id="rateitreview">
-                    // </div>
-
-
                 }).catch((error) => {
                     console.error(error);
                     alert("Failed to retrieve reviews: " + error.statusText);
