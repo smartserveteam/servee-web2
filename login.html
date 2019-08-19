@@ -91,7 +91,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="error" style="display:none" class="alert alert-danger" role="alert">
+                                        <div id="loginerror" style="display:none" class="alert alert-danger" role="alert">
                                         </div>
                                         <div class="res-box text-center mar-top-30">
                                             <button type="submit" class="btn v3"><i class="ion-log-in"></i> Log
@@ -129,7 +129,7 @@
                                             <label for="accept">I have read and accept the terms &amp;
                                                 conditions</label>
                                         </div>
-                                        <div id="error" style="display:none" class="alert alert-danger" role="alert">
+                                        <div id="registererror" style="display:none" class="alert alert-danger" role="alert">
                                         </div>
                                         <div class="res-box text-center mar-top-30">
                                             <button id="signUp" type="submit" disabled class="btn v3"><i class="ion-android-checkmark-circle"></i>Sign Up</button>
@@ -338,6 +338,8 @@
     <!-- This page's script -->
     <script>
 
+        //#region Login
+
         $("#login-form").submit(event => {
             event.preventDefault();
             clearError();
@@ -354,10 +356,11 @@
                     $(location).attr("href", "index.html");
                 }).catch((error) => {
                     console.error(error);
-                    alert("Error:" + error);
                 });
             });
         });
+
+        //#endregion
 
         //#region register
 

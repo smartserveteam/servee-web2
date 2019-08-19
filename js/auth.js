@@ -52,7 +52,7 @@ async function login() {
         })
         .fail((jqXHR, textStatus, errorThrown) => {
             logAjaxError("GET /auth", jqXHR, textStatus, errorThrown);
-            showError(textStatus);
+            showError(jqXHR.responseJSON.message);
         });
 }
 
@@ -583,7 +583,11 @@ function logAjaxError(apiFunction, jqXHR, textStatus, errorThrown) {
 
 function showError(message) {
     $("#error").html(message);
+    $("#loginerror").html(message);
+    $("#registererror").html(message);
     $("#error").show();
+    $("#loginerror").show();
+    $("#registererror").show();
 }
 
 function showMessage(heading, message) {
@@ -600,6 +604,8 @@ function showMessage(heading, message) {
 
 function clearError() {
     $("#error").hide();
+    $("#loginerror").hide();
+    $("#registererror").hide();
 }
 
 function handleError(functionCalled, jqXHR, textStatus, errorThrown) {
