@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" href="#" />
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+    <!-- toast CSS -->
+    <link rel="stylesheet" href="css/jquery.toast.css">
     <!-- Plugins CSS -->
     <link href="css/plugin.css" rel="stylesheet" />
     <!-- style CSS -->
@@ -545,6 +547,8 @@
     <script src="js/infobox.min.js"></script>
     <!--Cookies-->
     <script src="js/js.cookie.js"></script>
+    <!-- Toast -->
+    <script src="js/jquery.toast.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
@@ -560,9 +564,13 @@
 
         async function main() {
             // Get category name
-            getCategory(getUrlParameter("categoryId")).then((category) => {
-                categoryName = category.name;
-            });
+            getCategory(getUrlParameter("categoryId"))
+                .then((category) => {
+                    categoryName = category.name;
+                }).catch((error) => {
+                    console.error(error);
+                    showErrorMessage("Error", "Failed to get category");
+                });
 
             // Get providers
             getProviders().then((providers) => {
@@ -594,7 +602,7 @@
                 }
             }).catch((error) => {
                 console.error(error);
-                alert("Failed to retrieve providers:", error);
+                showErrorMessage("Error", "Failed to retrieve providers");
             })
         }
 

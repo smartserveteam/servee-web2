@@ -49,10 +49,7 @@ async function login() {
         .done(async (data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /auth", data, textStatus, jqXHR);
             setTokens(data);
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            logAjaxError("GET /auth", jqXHR, textStatus, errorThrown);
-            showError(jqXHR.responseJSON.message);
+            return data;
         });
 }
 
@@ -73,10 +70,6 @@ async function registerUser() {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("POST /register", data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            logAjaxError("POST /register", jqXHR, textStatus, errorThrown);
-            return jqXHR.responseJSON.message;
         });
 }
 
@@ -95,10 +88,6 @@ async function confirmRegistrationCode(username, code) {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("POST /confirmRegistrationCode", data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            logAjaxError("POST /confirmRegistrationCode", jqXHR, textStatus, errorThrown);
-            return jqXHR.responseJSON.message;
         });
 }
 
@@ -172,10 +161,6 @@ async function refreshToken() {
             logAjaxSuccess("POST /auth/refreshToken", data, textStatus, jqXHR);
             updateTokens(data);
             loadCards();
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            logAjaxError("POST /auth/refreshToken", jqXHR, textStatus, errorThrown);
-            throw new Error(errorThrown);
         });
 }
 
@@ -231,9 +216,6 @@ async function getUser(userId) {
         .done(async (data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /users/" + userId, data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -258,9 +240,6 @@ async function saveUser(userId, firstName, lastName, address, city, postalCode, 
         .done(async (data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /providers/" + userId, data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(getUser(userId), jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -283,9 +262,6 @@ async function getLoggedInUser() {
             logAjaxSuccess("GET /usersByCognitoId/" + cognitoId, data, textStatus, jqXHR);
             Object.keys(user).forEach(key => data[key] = user[key]);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -303,9 +279,6 @@ async function getLocations() {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /locations", data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(getLocations, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -323,9 +296,6 @@ async function getCategories() {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /categories", data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(getCategories, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -339,11 +309,7 @@ async function getCategory(categoryId) {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /categories/" + categoryId, data, textStatus, jqXHR);
             return data.name;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(getCategory(categoryId), jqXHR, textStatus, errorThrown);
         });
-
 }
 
 //#endregion
@@ -361,9 +327,6 @@ async function getProviders() {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /providers", data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -378,9 +341,6 @@ async function getProvider(providerId) {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /providers/" + providerId, data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -405,9 +365,6 @@ async function createReview(reviewerId, providerId, title, comment, score) {
     })
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("POST /reviews", data, textStatus, jqXHR);
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(createReview(title, comment), jqXHR, textStatus, errorThrown);
         });
 
 }
@@ -422,9 +379,6 @@ async function getReviews(providerId) {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /reviews/providers/" + providerId, data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(getReviews(providerId), jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -438,9 +392,6 @@ async function getReviewsByUser(userId) {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /reviews/users/" + userId, data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -460,9 +411,6 @@ async function getQuotesByUser(userId) {
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /quotes/users/" + userId, data, textStatus, jqXHR);
             return data;
-        })
-        .fail((jqXHR, textStatus, errorThrown) => {
-            handleError(null, jqXHR, textStatus, errorThrown);
         });
 }
 
@@ -581,13 +529,9 @@ function logAjaxError(apiFunction, jqXHR, textStatus, errorThrown) {
     console.error(apiFunction + " -> Error Thrown:", errorThrown);
 }
 
-function showError(message) {
-    $("#error").html(message);
-    $("#loginerror").html(message);
-    $("#registererror").html(message);
-    $("#error").show();
-    $("#loginerror").show();
-    $("#registererror").show();
+function showError(control, message) {
+    $(control).html(message);
+    $(control).show();
 }
 
 function showMessage(heading, message) {
@@ -598,6 +542,18 @@ function showMessage(heading, message) {
         , loaderBg: '#ff6849'
         , icon: 'info'
         , hideAfter: 3500
+        , stack: 6
+    })
+}
+
+function showErrorMessage(heading, message) {
+    $.toast({
+        heading: heading
+        , text: message
+        , position: 'top-right'
+        , loaderBg: '#ff0000'
+        , icon: 'error'
+        , hideAfter: 10000
         , stack: 6
     })
 }
@@ -912,11 +868,6 @@ function formatCountry(country) {
     );
     return $country;
 };
-
-//Assuming you have a select element with name country
-// e.g. <select name="name"></select>
-
-
 
 //#endregion
 

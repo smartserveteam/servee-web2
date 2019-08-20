@@ -355,8 +355,11 @@
                     }
                     $(location).attr("href", "index.html");
                 }).catch((error) => {
-                    console.error(error);
+                    console.error("GetLoggedInUser Error:", error);
                 });
+            }).catch((error) => {
+                console.error("Login Error:", error);
+                showError("#loginerror", error.responseJSON.message);
             });
         });
 
@@ -388,7 +391,7 @@
                 $('#confirmationModal').modal('show');
             }).catch((error) => {
                 console.error("Failed to register user:", error);
-                showError(error);
+                showError("#registererror", error.responseJSON.message);
             })
         });
 
@@ -406,7 +409,7 @@
                 $(location).attr("href", "login.html");
             }).catch((error) => {
                 console.error("Failed to confirm registration code:", error);
-                showError(error);
+                showError("#registererror", error.statusText);
             })
         });
 
@@ -414,7 +417,7 @@
             $("#signUp").prop("disabled", !$("#accept").is(":checked"))
         });
 
-            //#endregion
+        //#endregion
 
     </script>
     <!--Scripts ends-->

@@ -14,6 +14,8 @@
     <link href="css/plugin.css" rel="stylesheet" />
     <!-- style CSS -->
     <link href="css/style.css" rel="stylesheet" />
+    <!-- toast CSS -->
+    <link rel="stylesheet" href="css/jquery.toast.css">
     <!--color switcher css-->
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
     <!-- Date Time Picker -->
@@ -524,6 +526,8 @@
     <script src="js/js.cookie.js"></script>
     <!--RateIt-->
     <script src="js/rateit/jquery.rateit.min.js"></script>
+    <!-- Toast -->
+    <script src="js/jquery.toast.js"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
@@ -544,7 +548,7 @@
 
             }).catch((error) => {
                 console.error("Failed to submit review:", error);
-                alert("Failed to submit review:" + error.statusText);
+                showErrorMessage("Error", "Failed to submit review: " + error.statusText);
             });
         });
 
@@ -582,7 +586,7 @@
                 populateProviderInfo(provider);
             }).catch((error) => {
                 console.error("Failed to retrieve provider:", error);
-                alert("Failed to retrieve provider:" + error.statusText);
+                showErrorMessage("Error", "Failed to retrieve provider: " + error.statusText);
             })
         }
 
