@@ -94,8 +94,8 @@
                                         <div id="loginerror" style="display:none" class="alert alert-danger" role="alert">
                                         </div>
                                         <div class="res-box text-center mar-top-30">
-                                            <button type="submit" class="btn v3"><i class="ion-log-in"></i> Log
-                                                In</button>
+                                            <button type="submit" id="loginbutton" class="btn v3"><i class="ion-log-in"></i> Log In
+                                            </button>
                                         </div>
                                     </form>
                                     <!-- <div class="social-profile-login text-center mar-top-30">
@@ -344,10 +344,14 @@
             event.preventDefault();
             clearError();
 
+            $("#loginbutton").prop("disabled", true);
+            $("#loginbutton").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging you in...`);
+
             login().then((data) => {
                 console.log("Login response:", data);
+                $("#loginbutton").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Getting your info...`);
                 getLoggedInUser().then((loggedInUser) => {
-                    // NOT RETURNING FULL USER??
+                    $("#loginbutton").html(`Done!`);
                     console.log("Logged In User (from login):", loggedInUser);
                     if (!loggedInUser.hasOwnProperty("given_name")) {
                         $(location).attr("href", "edit-profile.html?message=incomplete");
@@ -356,9 +360,13 @@
                     $(location).attr("href", "index.html");
                 }).catch((error) => {
                     console.error("GetLoggedInUser Error:", error);
+                    $("#loginbutton").html(`<i class="ion-log-in"></i> Log In`);
+                    $("#loginbutton").prop("disabled", false);
                 });
             }).catch((error) => {
                 console.error("Login Error:", error);
+                $("#loginbutton").html(`<i class="ion-log-in"></i> Log In`);
+                $("#loginbutton").prop("disabled", false);
                 showError("#loginerror", error.responseJSON.message);
             });
         });
@@ -382,14 +390,19 @@
             event.preventDefault();
             clearError();
 
+            $("#signUp").prop("disabled", true);
+            $("#signUp").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registering...`);
+
             registerUser().then((user) => {
                 console.log("User registration is successful:", user);
+                $("#signUp").html(`<i class="ion-android-checkmark-circle"></i>Sign Up`);
                 Cookies.set("User", user);
 
                 // Show confirmation modal dialog
                 $("#confirmationModal #code").empty();
                 $('#confirmationModal').modal('show');
             }).catch((error) => {
+                $("#signUp").html(`<i class="ion-android-checkmark-circle"></i>Sign Up`);
                 console.error("Failed to register user:", error);
                 showError("#registererror", error.responseJSON.message);
             })
