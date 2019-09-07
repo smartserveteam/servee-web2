@@ -91,6 +91,23 @@ async function confirmRegistrationCode(username, code) {
         });
 }
 
+async function resendCode(username) {
+    return await $.ajax({
+        method: "POST",
+        url: `${authApiBasePath}/resendCode`,
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify({
+            username: username
+        })
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("POST /resendCode", data, textStatus, jqXHR);
+            return data;
+        });
+}
+
 async function isLoggedIn(redirectToLogin) {
 
     // Check if token is still valid
@@ -245,6 +262,10 @@ async function saveUser(userId, firstName, lastName, address, city, postalCode, 
 
 async function getLoggedInUser() {
     // Get cognito user info
+    if (getIdToken() === undefined) {
+        console.log("Token has expired");
+        $(location).attr("href", "login.html");
+    }
     let idToken = getIdToken().jwtToken;
     let user = parseJwt(idToken);
     console.log("User from id token:", user);
@@ -497,6 +518,24 @@ function showGeoError(error) {
             console.error("An unknown error occurred.");
             break;
     }
+}
+
+//#endregion
+
+//#region Spinner
+
+$(document).ajaxStart(function () {
+    $("#loading").removeClass('hide');
+}).ajaxStop(function () {
+    $("#loading").addClass('hide');
+});
+
+function showLoader() {
+    $("#loading").removeClass('hide');
+}
+
+function hideLoader() {
+    $("#loading").addClass('hide');
 }
 
 //#endregion
