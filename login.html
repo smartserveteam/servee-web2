@@ -337,7 +337,6 @@
     <script src="js/auth.js"></script>
     <!-- This page's script -->
     <script>
-
         //#region Login
 
         $("#login-form").submit(event => {
@@ -353,7 +352,7 @@
                 getLoggedInUser().then((loggedInUser) => {
                     $("#loginbutton").html(`Done!`);
                     console.log("Logged In User (from login):", loggedInUser);
-                    if (!loggedInUser.hasOwnProperty("given_name")) {
+                    if (!loggedInUser.hasOwnProperty("phone")) {
                         $(location).attr("href", "edit-profile.html?message=incomplete");
                         return;
                     }
@@ -376,14 +375,18 @@
         //#region register
 
         $("#resendCode").click(() => {
-            cognitoUser.resendConfirmationCode(function (err, result) {
-                if (err) {
-                    alert("Failed to resend confirmation code");
-                    return;
-                }
-                alert("A new code was sent to you");
-            });
-        })
+            event.preventDefault();
+            let cookiesUser = Cookies.getJSON("User");
+            console.log("Cookies user:", cookiesUser);
+            const username = cookiesUser.username;
+            resendCode(username).then((result) => {
+                console.log("Result from resend code:", result);
+                // Show alert?
+            }).catch((error) => {
+                console.error("Failed to resend code:", error);
+                showError("#registererror", error.statusText);
+            })
+        });
 
         $("#register-form").submit(event => {
             console.log("Registering new user...");
@@ -431,7 +434,6 @@
         });
 
         //#endregion
-
     </script>
     <!--Scripts ends-->
 </body>

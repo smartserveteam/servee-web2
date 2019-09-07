@@ -93,7 +93,7 @@
         <div class="list-details-section section-padding add_list pad-top-90">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="mainHeader">
                         <ul class="nav nav-tabs list-details-tab">
                             <li class="nav-item active">
                                 <a data-toggle="tab" href="#general_info">General Information</a>
@@ -102,51 +102,53 @@
                         <div class="tab-content mar-tb-30 add_list_content">
                             <div class="tab-pane fade show active" id="general_info">
                                 <h4> <i class="ion-ios-information"></i> General Information</h4>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-                                            <input type="text" id="firstName" class="form-control filter-input" placeholder="Your first name">
+                                <form action="" id="saveForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" id="firstName" name="firstName" required class="form-control filter-input" placeholder="Your first name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" id="address" name="address" required class="form-control filter-input" placeholder="Your address">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" id="address" class="form-control filter-input" placeholder="Your address">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input id="lastName" name="lastName" type="text" required class="form-control filter-input" placeholder="Your last name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <input id="city" name="city" type="text" required class="form-control filter-input" placeholder="Your city">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Postal Code</label>
+                                                <input id="postalCode" name="postalCode" type="text" required class="form-control filter-input" placeholder="Your postal code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <select id="country" name="country" required class="select2 form-control"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Phone </label>
+                                                <input id="phone" name="phone" type="text" required class="form-control filter-input" placeholder="Your phone number">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <div class="form-group">
+                                                <input class="btn btn-primary" id="save" type="submit" value="Save">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input id="lastName" type="text" class="form-control filter-input" placeholder="Your last name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>City</label>
-                                            <input id="city" type="text" class="form-control filter-input" placeholder="Your city">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Postal Code</label>
-                                            <input id="postalCode" type="text" class="form-control filter-input" placeholder="Your postal code">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Country</label>
-                                            <select id="country" required class="select2 form-control"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Phone </label>
-                                            <input id="phone" type="text" class="form-control filter-input" placeholder="Your phone number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 text-center">
-                                        <div class="form-group">
-                                            <input class="btn btn-primary" id="save" type="button" value="Save">
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -261,12 +263,20 @@
     <!--Main js-->
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
+    <!-- Form Validation -->
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.min.js"></script>
     <!-- this page's script -->
     <script>
 
         isLoggedIn();
-
         var userId;
+
+        if (getUrlParameter("message") == "incomplete") {
+            console.log("Message detected");
+            var alertDiv = $("<div/>", { class: "alert alert-warning", role: "alert" }).prependTo("#mainHeader");
+            alertDiv.append("Please complete your profile to continue");
+        }
 
         countriesDropdown("#country");
         getLoggedInUser().then((user) => {
@@ -285,7 +295,9 @@
             alert("Failed to retrieve user information:" + error);
         });
 
-        $("#save").on("click", () => {
+        $("#save").on("click", (e) => {
+            e.preventDefault();
+            $("#saveForm").validate();
             saveUser(userId, $("#firstName").val(), $("#lastName").val(), $("#address").val(), $("#city").val(), $("#postalCode").val(), $("#country").val(), $("#phone").val()).then((response) => {
                 console.log("User saved:", response);
                 $(location).attr("href", "user-profile.html");
