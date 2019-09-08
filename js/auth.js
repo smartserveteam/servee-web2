@@ -108,6 +108,42 @@ async function resendCode(username) {
         });
 }
 
+async function recoverPassword(emailAddress) {
+    return await $.ajax({
+        method: "POST",
+        url: `${authApiBasePath}/forgotPassword`,
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify({
+            emailAddress: emailAddress
+        })
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("POST /forgotPassword", data, textStatus, jqXHR);
+            return data;
+        });
+}
+
+async function confirmPassword(emailAddress, verificationCode, newPassword) {
+    return await $.ajax({
+        method: "POST",
+        url: `${authApiBasePath}/confirmPassword`,
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify({
+            emailAddress: emailAddress,
+            verificationCode: verificationCode,
+            newPassword: newPassword
+        })
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("POST /confirmPassword", data, textStatus, jqXHR);
+            return data;
+        });
+}
+
 async function isLoggedIn(redirectToLogin) {
 
     // Check if token is still valid
@@ -216,6 +252,16 @@ function parseJwt(token) {
 
 function getLoggedInUserId() {
     return parseJwt(getIdToken().jwtToken)["sub"];
+}
+
+function check(input, compareValue) {
+    console.log("check called: ", input.value, document.getElementById(compareValue).value);
+    if (input.value != document.getElementById(compareValue).value) {
+        input.setCustomValidity('Password Must be Matching.');
+    } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+    }
 }
 
 //#endregion
