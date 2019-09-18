@@ -3,6 +3,7 @@ const categoriesApiBasePath = "https://g8335hfcy0.execute-api.eu-central-1.amazo
 const locationsApiBasePath = "https://6mo2qzbcag.execute-api.eu-central-1.amazonaws.com/dev"
 const reviewsApiBasePath = "https://2nhq1hidx6.execute-api.eu-central-1.amazonaws.com/dev";
 const quotesApiBasePath = "https://z75j3glj94.execute-api.eu-central-1.amazonaws.com/dev";
+const hardwareApiBasePath = "https://qnb9rnf3h8.execute-api.eu-central-1.amazonaws.com/dev";
 
 //#region Authentication
 
@@ -375,6 +376,36 @@ async function getCategory(categoryId) {
     })
         .done((data, textStatus, jqXHR) => {
             logAjaxSuccess("GET /categories/" + categoryId, data, textStatus, jqXHR);
+            return data.name;
+        });
+}
+
+//#endregion
+
+//#region Hardware
+
+async function getHardwares() {
+    return await $.ajax({
+        method: "GET",
+        url: `${hardwareApiBasePath}/hardware`,
+        dataType: "json",
+        cache: false
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("GET /hardware", data, textStatus, jqXHR);
+            return data;
+        });
+}
+
+async function getHardware(hardwareId) {
+    return await $.ajax({
+        method: "GET",
+        url: `${hardwareApiBasePath}/hardware/${hardwareId}`,
+        dataType: "json",
+        cache: false
+    })
+        .done((data, textStatus, jqXHR) => {
+            logAjaxSuccess("GET /hardware/" + hardwareId, data, textStatus, jqXHR);
             return data.name;
         });
 }

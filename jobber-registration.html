@@ -205,6 +205,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="step-3">
+                                    <div class="payment_receipt--wrapper">
+                                        <div class="payment_receipt--contents">
+                                            <h2 class="atbd_thank_you">Select your hardware</h2>
+                                            <div class="atbd_payment_instructions">
+                                                <p>Select one or more hardware already at your disposal</p>
+                                                <div id="hardware">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -338,7 +350,7 @@
 
         isLoggedIn(true);
 
-        var selectedSkills = [], currentStep = 1;
+        var selectedSkills = [], selectedHardware = [], currentStep = 1;
 
         $(document).ready(function () {
             $('#smartwizard').smartWizard({
@@ -382,8 +394,51 @@
             });
         }
 
+        function getHardwareForSelectedSkills() {
+            // Get hardware based on selected skills
+            $("#hardware").empty();
+            console.log("Getting hardware for", selectedSkills);
+            getCategories().then((categories) => {
+                $.each(selectedSkills, (i, selectedSkill) => {
+                    console.log("Selected skill:", selectedSkill);
+                    $.each(categories, (j, category) => {
+                        // Add hardware to list
+                        $.each(category.hardware, (k, currentHardware) => {
+                            getHardware(currentHardware).then((hardware) => {
+                                let formCheck = $("<div/>", { class: "form-check" }).appendTo("#hardware");
+                                let currentInput = $("<input>", { class: "form-check-input", type: "checkbox", value: hardware.id, id: hardware.id }).appendTo(formCheck);
+                                $("<label/>", { class: "form-check-label", for: hardware.id }).text(hardware.name).appendTo(formCheck);
+
+                                currentInput.click((e) => {
+                                    console.log(e);
+                                    console.log(e.target.id);
+                                    console.log(e.target.checked);
+                                    if (e.currentTarget.checked) {
+                                        // Add to array of selected skills
+                                        selectedHardware.push(e.currentTarget.id);
+                                    } else {
+                                        // Remove from array of selected skills
+                                        selectedHardware = arrayRemove(selectedHardware, e.currentTarget.id);
+                                    }
+                                    if (selectedHardware.length > 0) {
+                                        setNextState(true);
+                                    } else {
+                                        setNextState(false);
+                                    }
+                                    console.log(selectedHardware);
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }
+
         $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection) {
             console.log("Showing step " + stepNumber + ". Direction: " + stepDirection);
+            if (stepNumber == 2 && (stepDirection == "forward" || stepDirection.length == 0)) {
+                getHardwareForSelectedSkills();
+            }
         });
 
         $("#smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection) {
